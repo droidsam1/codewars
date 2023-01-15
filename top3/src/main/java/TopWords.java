@@ -5,7 +5,7 @@ import static java.util.stream.Collectors.toMap;
 
 public class TopWords {
 
-    public static final String ANY_SPECIAL_CHAR = "[!\\W]";
+    public static final String ANY_SPECIAL_CHAR = "[^a-zA-Z']";
 
     public static List<String> top3(String s) {
         if (s.isBlank()) {
