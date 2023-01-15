@@ -9,7 +9,7 @@ public class TopWords {
         if (s.isBlank()) {
             return Collections.emptyList();
         }
-        return Arrays.stream(s.split(",")).map(String::toLowerCase)
+        return Arrays.stream(s.split("[, ]")).map(String::toLowerCase)
                 .map(word -> new AbstractMap.SimpleEntry<>(word, 1))
                 .collect(toMap(AbstractMap.SimpleEntry::getKey, AbstractMap.SimpleEntry::getValue, Integer::sum))
                 .entrySet().stream()
