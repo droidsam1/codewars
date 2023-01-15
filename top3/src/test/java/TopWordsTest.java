@@ -52,6 +52,18 @@ class TopWordsTest {
         assertEquals("b", topWords.get(0));
     }
 
+    @Test
+    void shouldReturnOrderByNumberWhenMoreThanOneWordIsRepeated() {
+
+        var topWords = TopWords.top3("A,B,B,A,b,c");
+
+        assertNotNull(topWords);
+        assertEquals("b", topWords.get(0));
+        assertEquals("a", topWords.get(1));
+        assertEquals("c", topWords.get(2));
+    }
+
+
 // TODO: droidsam to enable late in development
 //    @Test
 //    public void sampleTests() {
