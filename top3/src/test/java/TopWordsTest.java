@@ -74,7 +74,15 @@ class TopWordsTest {
         assertEquals("c", topWords.get(2));
     }
 
+    @Test
+    void specialCharsShouldBeTreatedAsWhiteSpace() {
 
+        var topWords = TopWords.top3("A B{B b,A");
+
+        assertNotNull(topWords);
+        assertEquals("b", topWords.get(0));
+        assertEquals("a", topWords.get(1));
+    }
 
 // TODO: droidsam to enable late in development
 //    @Test
