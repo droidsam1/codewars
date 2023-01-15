@@ -1,5 +1,7 @@
 import org.junit.jupiter.api.Test;
 
+import java.util.stream.Collectors;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class TopWordsTest {
@@ -20,6 +22,15 @@ class TopWordsTest {
 
         assertNotNull(topWords);
         assertEquals(1, topWords.size());
+    }
+
+    @Test
+    void shouldReturnLowerCaseWords() {
+
+        var topWords = TopWords.top3("A");
+
+        assertNotNull(topWords);
+        assertEquals(topWords.stream().map(String::toLowerCase).collect(Collectors.toList()), topWords);
     }
 
 // TODO: droidsam to enable late in development
