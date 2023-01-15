@@ -33,6 +33,15 @@ class TopWordsTest {
         assertEquals(topWords.stream().map(String::toLowerCase).collect(Collectors.toList()), topWords);
     }
 
+    @Test
+    void shouldReturnAlmostThreeWords() {
+
+        var topWords = TopWords.top3("A,B,C,D");
+
+        assertNotNull(topWords);
+        assertEquals(3, topWords.size());
+    }
+
 // TODO: droidsam to enable late in development
 //    @Test
 //    public void sampleTests() {

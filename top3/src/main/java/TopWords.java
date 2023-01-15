@@ -9,6 +9,6 @@ public class TopWords {
         if (s.isBlank()) {
             return Collections.emptyList();
         }
-        return Arrays.stream(s.split("")).map(String::toLowerCase).collect(Collectors.toList());
+        return Arrays.stream(s.split(",")).map(String::toLowerCase).limit(3).collect(Collectors.toList());
     }
 }
