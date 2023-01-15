@@ -12,6 +12,7 @@ public class TopWords {
             return Collections.emptyList();
         }
         return Arrays.stream(s.split(ANY_SPECIAL_CHAR))
+                .filter(word -> !word.matches("^'+$"))
                 .filter(word -> !word.isBlank())
                 .map(String::toLowerCase)
                 .map(word -> new AbstractMap.SimpleEntry<>(word, 1))
