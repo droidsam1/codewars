@@ -84,13 +84,24 @@ class TopWordsTest {
         assertEquals("a", topWords.get(1));
     }
 
-
     @Test
     void wordsCanContainApostrophes() {
 
         var topWords = TopWords.top3("wont won't won't ");
 
         assertNotNull(topWords);
+        assertEquals(2, topWords.size());
+        assertEquals("won't", topWords.get(0));
+        assertEquals("wont", topWords.get(1));
+    }
+
+    @Test
+    void specialCharsShouldNotBeCounted() {
+
+        var topWords = TopWords.top3("  //wont //won't //won't // // // ");
+
+        assertNotNull(topWords);
+        assertEquals(2, topWords.size());
         assertEquals("won't", topWords.get(0));
         assertEquals("wont", topWords.get(1));
     }
