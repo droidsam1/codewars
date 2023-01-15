@@ -1,7 +1,6 @@
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 class TopWordsTest {
 
@@ -12,6 +11,15 @@ class TopWordsTest {
 
         assertNotNull(topWords);
         assertTrue(topWords.isEmpty());
+    }
+
+    @Test
+    void shouldReturnTheOnlyWordWhenInputIsOnlyWord() {
+
+        var topWords = TopWords.top3("A");
+
+        assertNotNull(topWords);
+        assertEquals(1, topWords.size());
     }
 
 // TODO: droidsam to enable late in development
