@@ -42,6 +42,16 @@ class TopWordsTest {
         assertEquals(3, topWords.size());
     }
 
+
+    @Test
+    void shouldReturnInDescendingOrderByNumberOfRepetitions() {
+
+        var topWords = TopWords.top3("A,B,B,C,D");
+
+        assertNotNull(topWords);
+        assertEquals("b", topWords.get(0));
+    }
+
 // TODO: droidsam to enable late in development
 //    @Test
 //    public void sampleTests() {
