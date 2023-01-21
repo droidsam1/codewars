@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -23,15 +22,6 @@ class ObservedPinTest {
                 Arguments.of("7", List.of("7", "8", "4")),
                 Arguments.of("8", List.of("0", "5", "7", "8", "9")),
                 Arguments.of("9", List.of("6", "8", "9")));
-    }
-
-    @Test
-    void shouldReturnTheSameInputDigitWhenInputIsOneDigitOnly() {
-        var input = "1";
-
-        var digits = ObservedPin.getPINs(input);
-
-        assertTrue(digits.contains(input));
     }
 
     @ParameterizedTest
