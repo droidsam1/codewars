@@ -1,5 +1,4 @@
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class ObservedPin {
 
@@ -8,25 +7,15 @@ public class ObservedPin {
     public static List<String> getPINs(String entered) {
 
         if (entered.length() == 1) {
-            return keypadAdjacentMap.get(entered);
+            return new ArrayList<>(keypadAdjacentMap.get(entered));
         }
 
-//        var numbers = entered.split("");
-//        var results = new HashSet<String>();
-//        for (int i = 0; i < numbers.length; i++) {
-//            var possibilities = keypadAdjacentMap.get(numbers[i]);
-//            for (var possibility : possibilities) {
-//                results.add(replaceNumberAtPosition(numbers, i, possibility));
-//            }
-//
-//
-//        }
-//        return new ArrayList<>(results);
         var numbers = entered.split("");
         List<List<String>> combinations = new ArrayList<>();
         for (String originalDigit : numbers) {
             combinations.add(keypadAdjacentMap.get(originalDigit));
         }
+
 
         return new ArrayList<>(permutations(combinations));
     }
@@ -34,11 +23,15 @@ public class ObservedPin {
     private static Set<String> permutations(List<List<String>> possibilities) {
 
         var results = new HashSet<String>();
-        for (int i = 0; i < possibilities.size(); i++) {
-            var currentList = possibilities.get(i);
-            for (var possiblity : currentList) {
-                for (var permutation : possibilities.stream().skip(i).flatMap(Collection::stream).collect(Collectors.toList())) {
-                    results.add(possiblity + permutation);
+        var possibilitiesForDigitAt0 = possibilities.get(0);
+        for (var possibility : possibilitiesForDigitAt0) {
+            for (var possibilityForDigitAt1 : possibilities.get(1)) {
+                if (possibilities.size() > 2) {
+                    for (var possibilityForDigitAt2 : possibilities.get(2)) {
+                        results.add(possibility + possibilityForDigitAt1 + possibilityForDigitAt2);
+                    }
+                } else {
+                    results.add(possibility + possibilityForDigitAt1);
                 }
             }
         }
