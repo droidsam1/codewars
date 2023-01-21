@@ -14,6 +14,7 @@ public class ObservedPin {
         Map<String, List<String>> keypadAdjacentMap = new HashMap<>();
         keypadAdjacentMap.put("0", List.of("0", "8"));
         keypadAdjacentMap.put("1", List.of("1", "2", "4"));
+        keypadAdjacentMap.put("2", List.of("1", "2", "3", "5"));
         keypadAdjacentMap.put("7", List.of("7", "8", "4"));
         keypadAdjacentMap.put("9", List.of("9", "8", "6"));
         return keypadAdjacentMap;
