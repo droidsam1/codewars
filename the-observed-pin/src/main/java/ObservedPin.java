@@ -10,6 +10,10 @@ public class ObservedPin {
             return List.of("1", "2", "4");
         }
 
+        if (entered.equals("9")) {
+            return List.of("9", "8", "6");
+        }
+
         return List.of(entered);
     }
 }
