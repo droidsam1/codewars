@@ -12,7 +12,9 @@ class ObservedPinTest {
 
 
     public static Stream<Arguments> shouldReturnAdjacentDigitsWhenInputIsOneDigitOnly() {
-        return Stream.of(Arguments.of("1", List.of("1", "2", "4")));
+        return Stream.of(Arguments.of("1", List.of("1", "2", "4")), Arguments.of("0", List.of("0", "8"))
+
+        );
     }
 
     @Test
