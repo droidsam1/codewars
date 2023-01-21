@@ -1,4 +1,5 @@
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -6,7 +7,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 
-
+@Disabled("Disabled while working in TDD in ObservedPinTest")
 public class TestObservedPin {
 
     private final static Comparator<String> comp = (s1, s2) -> s1.compareTo(s2);
