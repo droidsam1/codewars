@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -10,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 class ObservedPinTest {
 
 
-    public static Stream<Arguments> shouldReturnAdjacentDigitsWhenInputIsOneDigitOnly() {
+    static Stream<Arguments> shouldReturnAdjacentDigitsWhenInputIsOneDigitOnly() {
         return Stream.of(
                 Arguments.of("0", List.of("0", "8")),
                 Arguments.of("1", List.of("1", "2", "4")),
@@ -32,6 +33,24 @@ class ObservedPinTest {
 
         assertTrue(digits.containsAll(expected));
         assertTrue(expected.containsAll(digits));
+    }
+
+    @Test
+    void shouldReturnCombinationsOfPossibleDigits() {
+
+        var input = "11";
+
+        var digits = ObservedPin.getPINs(input);
+
+        assertTrue(digits.contains("11"));
+        assertTrue(digits.contains("12"));
+        assertTrue(digits.contains("14"));
+        assertTrue(digits.contains("21"));
+        assertTrue(digits.contains("22"));
+        assertTrue(digits.contains("24"));
+        assertTrue(digits.contains("41"));
+        assertTrue(digits.contains("42"));
+        assertTrue(digits.contains("44"));
     }
 
 

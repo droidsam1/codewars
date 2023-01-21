@@ -1,13 +1,48 @@
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 public class ObservedPin {
 
     private static final Map<String, List<String>> keypadAdjacentMap = buildKeypadAdjacentMap();
 
     public static List<String> getPINs(String entered) {
-        return keypadAdjacentMap.get(entered);
+
+        if (entered.length() == 1) {
+            return keypadAdjacentMap.get(entered);
+        }
+
+//        var numbers = entered.split("");
+//        var results = new HashSet<String>();
+//        for (int i = 0; i < numbers.length; i++) {
+//            var possibilities = keypadAdjacentMap.get(numbers[i]);
+//            for (var possibility : possibilities) {
+//                results.add(replaceNumberAtPosition(numbers, i, possibility));
+//            }
+//
+//
+//        }
+//        return new ArrayList<>(results);
+        var numbers = entered.split("");
+        List<List<String>> combinations = new ArrayList<>();
+        for (String originalDigit : numbers) {
+            combinations.add(keypadAdjacentMap.get(originalDigit));
+        }
+
+        return new ArrayList<>(permutations(combinations));
+    }
+
+    private static Set<String> permutations(List<List<String>> possibilities) {
+
+        var results = new HashSet<String>();
+        for (int i = 0; i < possibilities.size(); i++) {
+            var currentList = possibilities.get(i);
+            for (var possiblity : currentList) {
+                for (var permutation : possibilities.stream().skip(i).flatMap(Collection::stream).collect(Collectors.toList())) {
+                    results.add(possiblity + permutation);
+                }
+            }
+        }
+        return results;
     }
 
     private static Map<String, List<String>> buildKeypadAdjacentMap() {
@@ -23,5 +58,15 @@ public class ObservedPin {
         keypadAdjacentMap.put("8", List.of("5", "7", "8", "9", "0"));
         keypadAdjacentMap.put("9", List.of("9", "8", "6"));
         return keypadAdjacentMap;
+    }
+
+    private static String replaceNumberAtPosition(String[] numbers, int position, String number) {
+        StringBuilder stringBuilder = new StringBuilder();
+
+        for (int i = 0; i < numbers.length; i++) {
+            if (i != position) stringBuilder.append(numbers[i]);
+            else stringBuilder.append(number);
+        }
+        return stringBuilder.toString();
     }
 }
