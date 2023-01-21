@@ -11,37 +11,29 @@ public class ObservedPin {
         }
 
         var numbers = entered.split("");
-        List<List<String>> combinations = new ArrayList<>();
+
+        var stack = new LinkedList<List<String>>();
         for (String originalDigit : numbers) {
-            combinations.add(keypadAdjacentMap.get(originalDigit));
+            stack.push(keypadAdjacentMap.get(originalDigit));
         }
 
-
-        return new ArrayList<>(permutations(combinations));
+        while (stack.size() > 1) {
+            var units = stack.pop();
+            var tens = stack.pop();
+            stack.push(permutationOf(units, tens));
+        }
+        return stack.pop();
     }
 
-    private static Set<String> permutations(List<List<String>> possibilities) {
 
-        var results = new HashSet<String>();
-        var possibilitiesForDigitAt0 = possibilities.get(0);
-        for (var possibility : possibilitiesForDigitAt0) {
-            for (var possibilityForDigitAt1 : possibilities.get(1)) {
-                if (possibilities.size() > 2) {
-                    for (var possibilityForDigitAt2 : possibilities.get(2)) {
-                        if (possibilities.size() > 3) {
-                            for (var possibilityForDigitAt3 : possibilities.get(3)) {
-                                results.add(possibility + possibilityForDigitAt1 + possibilityForDigitAt2 + possibilityForDigitAt3);
-                            }
-                        } else {
-                            results.add(possibility + possibilityForDigitAt1 + possibilityForDigitAt2);
-                        }
-                    }
-                } else {
-                    results.add(possibility + possibilityForDigitAt1);
-                }
+    private static List<String> permutationOf(List<String> units, List<String> tens) {
+        Set<String> results = new HashSet<>();
+        for (String numberInTens : tens) {
+            for (String numberInUnits : units) {
+                results.add(numberInTens + numberInUnits);
             }
         }
-        return results;
+        return new ArrayList<>(results);
     }
 
     private static Map<String, List<String>> buildKeypadAdjacentMap() {
