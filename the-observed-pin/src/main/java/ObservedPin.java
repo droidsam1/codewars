@@ -52,14 +52,4 @@ public class ObservedPin {
         keypadAdjacentMap.put("9", List.of("9", "8", "6"));
         return keypadAdjacentMap;
     }
-
-    private static String replaceNumberAtPosition(String[] numbers, int position, String number) {
-        StringBuilder stringBuilder = new StringBuilder();
-
-        for (int i = 0; i < numbers.length; i++) {
-            if (i != position) stringBuilder.append(numbers[i]);
-            else stringBuilder.append(number);
-        }
-        return stringBuilder.toString();
-    }
 }
