@@ -28,7 +28,13 @@ public class ObservedPin {
             for (var possibilityForDigitAt1 : possibilities.get(1)) {
                 if (possibilities.size() > 2) {
                     for (var possibilityForDigitAt2 : possibilities.get(2)) {
-                        results.add(possibility + possibilityForDigitAt1 + possibilityForDigitAt2);
+                        if (possibilities.size() > 3) {
+                            for (var possibilityForDigitAt3 : possibilities.get(3)) {
+                                results.add(possibility + possibilityForDigitAt1 + possibilityForDigitAt2 + possibilityForDigitAt3);
+                            }
+                        } else {
+                            results.add(possibility + possibilityForDigitAt1 + possibilityForDigitAt2);
+                        }
                     }
                 } else {
                     results.add(possibility + possibilityForDigitAt1);

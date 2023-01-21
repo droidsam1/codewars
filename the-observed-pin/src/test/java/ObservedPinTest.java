@@ -26,10 +26,11 @@ class ObservedPinTest {
                 Arguments.of("9", List.of("6", "8", "9")));
     }
 
-    static Stream<Arguments> shouldReturnCombinationsOfTwoPossibleDigits() {
+    static Stream<Arguments> shouldReturnCombinationsOfInputDigits() {
         return Stream.of(//
                 Arguments.of("11", List.of("11", "12", "14", "21", "22", "24", "41", "42", "44")),//
-                Arguments.of("22", List.of("11", "12", "13", "15", "21", "22", "23", "25", "31", "32", "33", "35", "51", "52", "53", "55")));
+                Arguments.of("22", List.of("11", "12", "13", "15", "21", "22", "23", "25", "31", "32", "33", "35", "51", "52", "53", "55")), //
+                Arguments.of("369", List.of("236", "238", "239", "256", "258", "259", "266", "268", "269", "296", "298", "299", "336", "338", "339", "356", "358", "359", "366", "368", "369", "396", "398", "399", "636", "638", "639", "656", "658", "659", "666", "668", "669", "696", "698", "699")));
     }
 
     @ParameterizedTest
@@ -44,11 +45,11 @@ class ObservedPinTest {
 
     @ParameterizedTest
     @MethodSource
-    void shouldReturnCombinationsOfTwoPossibleDigits(String input, List<String> expected) {
+    void shouldReturnCombinationsOfInputDigits(String input, List<String> expected) {
 
         var digits = ObservedPin.getPINs(input);
 
-        assertEquals(expected.stream().sorted().collect(Collectors.toList()), digits.stream().sorted().collect(Collectors.toList()));
+        assertEquals(expected.stream().sorted().collect(Collectors.toList()), digits.stream().sorted().collect(Collectors.toList()), "For observed PIN " + input);
     }
 
 
