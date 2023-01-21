@@ -6,7 +6,6 @@ import org.junit.jupiter.params.provider.MethodSource;
 import java.util.List;
 import java.util.stream.Stream;
 
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ObservedPinTest {
@@ -19,7 +18,8 @@ class ObservedPinTest {
                 Arguments.of("2", List.of("1", "2", "3", "5")),
                 Arguments.of("3", List.of("2", "3", "6")),
                 Arguments.of("4", List.of("1", "4", "7", "5")),
-                Arguments.of("5", List.of("2", "4", "6", "8")),
+                Arguments.of("5", List.of("2", "4", "5", "6", "8")),
+                Arguments.of("6", List.of("3", "5", "6", "9")),
                 Arguments.of("7", List.of("7", "8", "4")),
                 Arguments.of("9", List.of("6", "8", "9")));
     }
