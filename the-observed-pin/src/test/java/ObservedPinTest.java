@@ -19,6 +19,7 @@ class ObservedPinTest {
                 Arguments.of("2", List.of("1", "2", "3", "5")),
                 Arguments.of("3", List.of("2", "3", "6")),
                 Arguments.of("4", List.of("1", "4", "7", "5")),
+                Arguments.of("5", List.of("2", "4", "6", "8")),
                 Arguments.of("7", List.of("7", "8", "4")),
                 Arguments.of("9", List.of("6", "8", "9")));
     }
