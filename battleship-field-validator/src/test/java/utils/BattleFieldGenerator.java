@@ -9,10 +9,14 @@ import static domain.BoatType.BATTLESHIP;
 public class BattleFieldGenerator {
 
     public static final int BOARD_SIZE = 10;
+    private static final int[][] battleFieldFromExample = {{1, 0, 0, 0, 0, 1, 1, 0, 0, 0}, {1, 0, 1, 0, 0, 0, 0, 0, 1, 0}, {1, 0, 1, 0, 1, 1, 1, 0, 1, 0}, {1, 0, 0, 0, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 1, 0}, {0, 0, 0, 0, 1, 1, 1, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 1, 0}, {0, 0, 0, 1, 0, 0, 0, 0, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 1, 0, 0}, {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+
+    public static int[][] validAndCompleteField() {
+        return battleFieldFromExample;
+    }
 
     public static int[][] withOnlyOneBattleship() {
         return generateFieldWithNBattleships(1);
-
     }
 
     public static int[][] withOnlyTwoBattleship() {

@@ -6,9 +6,13 @@ import java.util.Map;
 public class BoatCounter {
 
     public static int getNumberOf(int[][] battleField, BoatType boatType) {
+        return getBoats(battleField).getOrDefault(boatType, 0);
+    }
+
+    public static Map<BoatType, Integer> getBoats(int[][] battleField) {
         var ships = getShipsInRows(battleField);
-        ships.putAll(getShipsInCols(battleField));
-        return ships.getOrDefault(boatType, 0);
+        getShipsInCols(battleField).forEach((k, v) -> ships.merge(k, v, Integer::sum));
+        return ships;
     }
 
     private static Map<BoatType, Integer> getShipsInCols(int[][] battleField) {

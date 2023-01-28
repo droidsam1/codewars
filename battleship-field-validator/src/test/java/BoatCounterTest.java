@@ -1,4 +1,5 @@
 import domain.BoatType;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -27,20 +28,30 @@ class BoatCounterTest {
         var battleField = BattleFieldGenerator.generateFieldWithNBoats(expectedBoats, boatType);
 
         var numberOfBattleships = BoatCounter.getNumberOf(battleField, boatType);
-        System.out.println(Arrays.deepToString(battleField));
+
         assertEquals(expectedBoats, numberOfBattleships);
     }
 
     @ParameterizedTest
     @MethodSource("runTenTimesForEachBoatType")
     void shouldReturnTheNumberOfBoatTypesInColumns(BoatType boatType, int expectedBoats) {
-
         var battleField = BattleFieldGenerator.generateFieldWithNBoatsInCols(expectedBoats, boatType);
-        System.out.println(Arrays.deepToString(battleField));
+
         var numberOfBattleships = BoatCounter.getNumberOf(battleField, boatType);
 
         assertEquals(expectedBoats, numberOfBattleships);
     }
 
+    @Test
+    void shouldCountFieldWithMultipleBoardTypes() {
 
+        var battleField = BattleFieldGenerator.validAndCompleteField();
+
+        var boats = BoatCounter.getBoats(battleField);
+
+        assertEquals(1, boats.getOrDefault(BoatType.BATTLESHIP, 0));
+        assertEquals(2, boats.getOrDefault(BoatType.CRUISER, 0));
+        assertEquals(3, boats.getOrDefault(BoatType.DESTROYER, 0));
+        assertEquals(4, boats.getOrDefault(BoatType.SUBMARINE, 0));
+    }
 }
