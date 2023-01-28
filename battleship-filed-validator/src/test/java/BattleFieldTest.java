@@ -14,4 +14,13 @@ class BattleFieldTest {
         assertFalse(isFieldValid);
     }
 
+    @Test
+    void shouldReturnFalseWhenFieldHasIncorrectDimensions() {
+        var input = new int[10][8];
+
+        var isFieldValid = BattleField.fieldValidator(input);
+
+        assertFalse(isFieldValid);
+    }
+
 }
