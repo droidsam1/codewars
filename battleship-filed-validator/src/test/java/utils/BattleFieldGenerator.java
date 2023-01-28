@@ -4,34 +4,33 @@ import java.util.Random;
 import java.util.stream.IntStream;
 
 public class BattleFieldGenerator {
+
+    public static final int BOARD_SIZE = 10;
+    public static final int BATTLESHIP_SIZE = 4;
+
     public static int[][] withOnlyOneBattleship() {
-        return new int[][]{ {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                            {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+        return generateFieldWithNBattleships(1);
+
     }
 
     public static int[][] withOnlyTwoBattleship() {
-        var field = new int[10][10];
-        var maxBattleshipsInTheField = 2;
+        return generateFieldWithNBattleships(2);
+    }
+
+    private static int[][] generateFieldWithNBattleships(int maxBattleshipsInTheField) {
+        var field = new int[BOARD_SIZE][BOARD_SIZE];
         var numberOfBattleships = 0;
-        for (int i = 0; i < 10; i++) {
+        for (int i = 0; i < BOARD_SIZE; i++) {
             var putABattleshipInThisRow = new Random().nextBoolean();
             if (!putABattleshipInThisRow) {
-                field[i] = IntStream.generate(() -> 0).limit(10).toArray();
+                field[i] = IntStream.generate(() -> 0).limit(BOARD_SIZE).toArray();
                 continue;
             }
             if (numberOfBattleships < maxBattleshipsInTheField) {
                 numberOfBattleships++;
-                var startingPoint = new Random().nextInt(10 - 4);
-                var endingPoint = startingPoint + 4;
-                for (int j = 0; j < 10; j++) {
+                var startingPoint = new Random().nextInt(BOARD_SIZE - BATTLESHIP_SIZE);
+                var endingPoint = startingPoint + BATTLESHIP_SIZE;
+                for (int j = 0; j < BOARD_SIZE; j++) {
                     if (j >= startingPoint && j <= endingPoint) {
                         field[i][j] = 1;
                     } else {
@@ -49,6 +48,6 @@ public class BattleFieldGenerator {
     }
 
     public static int[][] emptyField() {
-        return new int[10][10];
+        return new int[BOARD_SIZE][BOARD_SIZE];
     }
 }
