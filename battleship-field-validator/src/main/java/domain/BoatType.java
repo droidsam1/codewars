@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public enum BoatType {
 
-    BATTLESHIP(4), CRUISER(3), DESTROYER(2);
+    BATTLESHIP(4), CRUISER(3), DESTROYER(2), SUBMARINE(1);
 
     private final int size;
 

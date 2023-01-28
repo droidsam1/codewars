@@ -36,4 +36,8 @@ public class BoatCounter {
     static int getNumberOfDestroyers(int[][] battleField) {
         return getNumberOf(battleField, BoatType.DESTROYER);
     }
+
+    public static int getNumberOfSubmarines(int[][] battleField) {
+        return getNumberOf(battleField, BoatType.SUBMARINE);
+    }
 }

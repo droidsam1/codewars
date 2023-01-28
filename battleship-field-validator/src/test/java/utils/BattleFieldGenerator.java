@@ -67,4 +67,8 @@ public class BattleFieldGenerator {
     public static int[][] generateFieldWithNDestroyers(int expectedDestroyers) {
         return generateFieldWithNBoats(expectedDestroyers, DESTROYER);
     }
+
+    public static int[][] generateFieldWithNSubmarines(int expectedSubmarines) {
+        return generateFieldWithNBoats(expectedSubmarines, SUBMARINE);
+    }
 }
