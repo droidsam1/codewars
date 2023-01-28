@@ -1,3 +1,5 @@
+import domain.BoatType;
+
 import java.util.Arrays;
 
 public class BattleField {
@@ -6,7 +8,7 @@ public class BattleField {
             return false;
         }
 
-        return BoatCounter.getNumberOfBattleships(battleField) == 1;
+        return BoatCounter.getNumberOf(battleField, BoatType.BATTLESHIP) == 1;
     }
 
 }
