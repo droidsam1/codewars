@@ -1,10 +1,12 @@
+import java.util.Arrays;
+
 public class BattleField {
     public static boolean fieldValidator(int[][] battleField) {
-        if (battleField.length != 2 || battleField[0].length != 10 || battleField[1].length != 10) {
+        if (battleField.length != 10 || Arrays.stream(battleField).anyMatch(row -> row.length != 10)) {
             return false;
         }
 
-        return false;
+        return true;
     }
 
     //TODO: this is a scaffolding method, using only while developing
