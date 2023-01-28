@@ -2,7 +2,6 @@ import org.junit.jupiter.api.Test;
 import utils.BattleFieldGenerator;
 
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BattleFieldTest {
 
@@ -23,15 +22,6 @@ class BattleFieldTest {
         var isFieldValid = BattleField.fieldValidator(battleField);
 
         assertFalse(isFieldValid);
-    }
-
-    @Test
-    void shouldContainsOnlyABattleship() {
-        var battleField = BattleFieldGenerator.withOnlyOneBattleship();
-
-        var isFieldValid = BattleField.fieldValidator(battleField);
-
-        assertTrue(isFieldValid);
     }
 
     @Test

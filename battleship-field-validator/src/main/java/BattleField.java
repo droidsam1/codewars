@@ -8,7 +8,14 @@ public class BattleField {
             return false;
         }
 
-        return BoatCounter.getNumberOf(battleField, BoatType.BATTLESHIP) == 1;
+        var boats = BoatCounter.getBoats(battleField);
+
+        var numberOfBattleships = boats.getOrDefault(BoatType.BATTLESHIP, 0);
+        var numberOfCruisers = boats.getOrDefault(BoatType.CRUISER, 0);
+        var numberOfDestroyers = boats.getOrDefault(BoatType.DESTROYER, 0);
+        var numberOfSubmarines = boats.getOrDefault(BoatType.SUBMARINE, 0);
+
+        return numberOfBattleships == 1 && numberOfCruisers == 2 && numberOfDestroyers == 3 && numberOfSubmarines == 4;
     }
 
 }
