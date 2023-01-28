@@ -22,7 +22,8 @@ public class BattleFieldGenerator {
         var numberOfBattleships = 0;
         for (int i = 0; i < BOARD_SIZE; i++) {
             var putABattleshipInThisRow = new Random().nextBoolean();
-            if (!putABattleshipInThisRow) {
+            var maxRowsThatCanBeEmpty = BOARD_SIZE - maxBattleshipsInTheField;
+            if (!putABattleshipInThisRow && i < maxRowsThatCanBeEmpty) {
                 field[i] = IntStream.generate(() -> 0).limit(BOARD_SIZE).toArray();
                 continue;
             }

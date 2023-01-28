@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
 import utils.BattleFieldGenerator;
 
+import java.util.Arrays;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class BoatCounterTest {
@@ -17,6 +19,7 @@ class BoatCounterTest {
     void shouldReturnTwoWhenThereIsTwoBattleship() {
         var battleField = BattleFieldGenerator.withOnlyTwoBattleship();
 
+        System.out.println(Arrays.deepToString(battleField));
         var numberOfBattleships = BoatCounter.getNumberOfBattleships(battleField);
         assertEquals(2, numberOfBattleships);
     }
