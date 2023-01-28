@@ -7,6 +7,7 @@ public class BattleFieldGenerator {
 
     public static final int BOARD_SIZE = 10;
     public static final int BATTLESHIP_SIZE = 4;
+    public static final int CRUISER_SIZE = 2;
 
     public static int[][] withOnlyOneBattleship() {
         return generateFieldWithNBattleships(1);
@@ -18,6 +19,10 @@ public class BattleFieldGenerator {
     }
 
     public static int[][] generateFieldWithNBattleships(int maxBattleshipsInTheField) {
+        return generateFieldWithNSizedBoats(maxBattleshipsInTheField, BATTLESHIP_SIZE);
+    }
+
+    public static int[][] generateFieldWithNSizedBoats(int maxBattleshipsInTheField, int boatSize) {
         var field = new int[BOARD_SIZE][BOARD_SIZE];
         var numberOfBattleships = 0;
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -29,8 +34,8 @@ public class BattleFieldGenerator {
             }
             if (numberOfBattleships < maxBattleshipsInTheField) {
                 numberOfBattleships++;
-                var startingPoint = new Random().nextInt(BOARD_SIZE - BATTLESHIP_SIZE);
-                var endingPoint = startingPoint + BATTLESHIP_SIZE -1;
+                var startingPoint = new Random().nextInt(BOARD_SIZE - boatSize);
+                var endingPoint = startingPoint + boatSize - 1;
                 for (int j = 0; j < BOARD_SIZE; j++) {
                     if (j >= startingPoint && j <= endingPoint) {
                         field[i][j] = 1;
@@ -45,10 +50,14 @@ public class BattleFieldGenerator {
     }
 
     public static int[][] withInvalidDimensions() {
-        return new int[new Random().nextInt(9)][new Random().nextInt(9)];
+        return new int[new Random().nextInt(BOARD_SIZE - 1)][new Random().nextInt(BOARD_SIZE - 1)];
     }
 
     public static int[][] emptyField() {
         return new int[BOARD_SIZE][BOARD_SIZE];
+    }
+
+    public static int[][] generateFieldWithNCruisers(int expectedCruisers) {
+        return generateFieldWithNSizedBoats(expectedCruisers, CRUISER_SIZE);
     }
 }

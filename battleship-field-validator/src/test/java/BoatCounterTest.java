@@ -1,3 +1,4 @@
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import utils.BattleFieldGenerator;
@@ -22,5 +23,16 @@ class BoatCounterTest {
 
         assertEquals(expectedBattleship, numberOfBattleships);
     }
+
+//    @Test
+//    void shouldReturnTheNumberOfCruisers() {
+//        var expectedCruisers = 1;
+//
+//        var battleField = BattleFieldGenerator.generateFieldWithNCruisers(expectedCruisers);
+//
+//        var numberOfBattleships = BoatCounter.getNumberOfBattleships(battleField);
+//
+//        assertEquals(expectedCruisers, numberOfBattleships);
+//    }
 
 }
