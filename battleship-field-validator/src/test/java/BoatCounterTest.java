@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import utils.BattleFieldGenerator;
@@ -11,7 +10,7 @@ import static utils.BattleFieldGenerator.BOARD_SIZE;
 class BoatCounterTest {
 
     private static int[] runTenTimes() {
-        return IntStream.range(0, BOARD_SIZE).toArray();
+        return IntStream.rangeClosed(0, BOARD_SIZE).toArray();
     }
 
     @ParameterizedTest
@@ -24,10 +23,9 @@ class BoatCounterTest {
         assertEquals(expectedBattleship, numberOfBattleships);
     }
 
-    @Test
-    void shouldReturnTheNumberOfCruisers() {
-        var expectedCruisers = 1;
-
+    @ParameterizedTest
+    @MethodSource("runTenTimes")
+    void shouldReturnTheNumberOfCruisers(int expectedCruisers) {
         var battleField = BattleFieldGenerator.generateFieldWithNCruisers(expectedCruisers);
 
         var numberOfBattleships = BoatCounter.getNumberOfCruisers(battleField);
