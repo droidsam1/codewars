@@ -1,9 +1,6 @@
-import java.util.Arrays;
+import domain.BoatType;
 
 public class BoatCounter {
-
-    public static final int BATTLESHIP_SIZE = 4;
-    public static final int CRUISER_SIZE = 2;
 
     static int getNumberOfBattleships(int[][] battleField) {
 
@@ -17,7 +14,7 @@ public class BoatCounter {
 
         }
 
-        return occupiedCells / BATTLESHIP_SIZE;
+        return occupiedCells / BoatType.BATTLESHIP.getSize();
     }
 
     static int getNumberOfCruisers(int[][] battleField) {
@@ -32,6 +29,6 @@ public class BoatCounter {
 
         }
 
-        return occupiedCells / CRUISER_SIZE;
+        return occupiedCells / BoatType.CRUISER.getSize();
     }
 }

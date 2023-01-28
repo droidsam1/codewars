@@ -3,11 +3,12 @@ package utils;
 import java.util.Random;
 import java.util.stream.IntStream;
 
+import static domain.BoatType.BATTLESHIP;
+import static domain.BoatType.CRUISER;
+
 public class BattleFieldGenerator {
 
     public static final int BOARD_SIZE = 10;
-    public static final int BATTLESHIP_SIZE = 4;
-    public static final int CRUISER_SIZE = 2;
 
     public static int[][] withOnlyOneBattleship() {
         return generateFieldWithNBattleships(1);
@@ -19,7 +20,7 @@ public class BattleFieldGenerator {
     }
 
     public static int[][] generateFieldWithNBattleships(int maxBattleshipsInTheField) {
-        return generateFieldWithNSizedBoats(maxBattleshipsInTheField, BATTLESHIP_SIZE);
+        return generateFieldWithNSizedBoats(maxBattleshipsInTheField, BATTLESHIP.getSize());
     }
 
     public static int[][] generateFieldWithNSizedBoats(int maxBattleshipsInTheField, int boatSize) {
@@ -58,6 +59,6 @@ public class BattleFieldGenerator {
     }
 
     public static int[][] generateFieldWithNCruisers(int expectedCruisers) {
-        return generateFieldWithNSizedBoats(expectedCruisers, CRUISER_SIZE);
+        return generateFieldWithNSizedBoats(expectedCruisers, CRUISER.getSize());
     }
 }
