@@ -6,4 +6,10 @@ public class BattleField {
 
         return false;
     }
+
+    //TODO: this is a scaffolding method, using only while developing
+    @Deprecated
+    static int getNumberOfBattleships(int[][] battleField) {
+        return 1;
+    }
 }
