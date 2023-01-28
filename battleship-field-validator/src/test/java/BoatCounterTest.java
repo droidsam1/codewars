@@ -28,9 +28,9 @@ class BoatCounterTest {
     void shouldReturnTheNumberOfCruisers(int expectedCruisers) {
         var battleField = BattleFieldGenerator.generateFieldWithNCruisers(expectedCruisers);
 
-        var numberOfBattleships = BoatCounter.getNumberOfCruisers(battleField);
+        var numberOfCruisers = BoatCounter.getNumberOfCruisers(battleField);
 
-        assertEquals(expectedCruisers, numberOfBattleships);
+        assertEquals(expectedCruisers, numberOfCruisers);
     }
 
     @ParameterizedTest
@@ -38,9 +38,9 @@ class BoatCounterTest {
     void shouldReturnTheNumberOfDestroyers(int expectedDestroyers) {
         var battleField = BattleFieldGenerator.generateFieldWithNDestroyers(expectedDestroyers);
 
-        var numberOfBattleships = BoatCounter.getNumberOfDestroyers(battleField);
+        var numberOfDestroyers = BoatCounter.getNumberOfDestroyers(battleField);
 
-        assertEquals(expectedDestroyers, numberOfBattleships);
+        assertEquals(expectedDestroyers, numberOfDestroyers);
     }
 
 }
