@@ -24,15 +24,15 @@ class BoatCounterTest {
         assertEquals(expectedBattleship, numberOfBattleships);
     }
 
-//    @Test
-//    void shouldReturnTheNumberOfCruisers() {
-//        var expectedCruisers = 1;
-//
-//        var battleField = BattleFieldGenerator.generateFieldWithNCruisers(expectedCruisers);
-//
-//        var numberOfBattleships = BoatCounter.getNumberOfBattleships(battleField);
-//
-//        assertEquals(expectedCruisers, numberOfBattleships);
-//    }
+    @Test
+    void shouldReturnTheNumberOfCruisers() {
+        var expectedCruisers = 1;
+
+        var battleField = BattleFieldGenerator.generateFieldWithNCruisers(expectedCruisers);
+
+        var numberOfBattleships = BoatCounter.getNumberOfCruisers(battleField);
+
+        assertEquals(expectedCruisers, numberOfBattleships);
+    }
 
 }
