@@ -27,8 +27,20 @@ class BoatCounterTest {
         var battleField = BattleFieldGenerator.generateFieldWithNBoats(expectedBoats, boatType);
 
         var numberOfBattleships = BoatCounter.getNumberOf(battleField, boatType);
+        System.out.println(Arrays.deepToString(battleField));
+        assertEquals(expectedBoats, numberOfBattleships);
+    }
+
+    @ParameterizedTest
+    @MethodSource("runTenTimesForEachBoatType")
+    void shouldReturnTheNumberOfBoatTypesInColumns(BoatType boatType, int expectedBoats) {
+
+        var battleField = BattleFieldGenerator.generateFieldWithNBoatsInCols(expectedBoats, boatType);
+        System.out.println(Arrays.deepToString(battleField));
+        var numberOfBattleships = BoatCounter.getNumberOf(battleField, boatType);
 
         assertEquals(expectedBoats, numberOfBattleships);
     }
+
 
 }

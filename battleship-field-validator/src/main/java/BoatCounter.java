@@ -19,7 +19,21 @@ public class BoatCounter {
                     occupiedCellsInThisRow = 0;
                 }
             }
+        }
 
+        for (int i = 0; i < battleField.length; i++) {
+            var occupiedCellsInThisCol = 0;
+            for (int j = 0; j < battleField[i].length; j++) {
+                if (battleField[j][i] == 1) {
+                    occupiedCellsInThisCol++;
+                } else if (occupiedCellsInThisCol == 1) {
+                    occupiedCellsInThisCol = 0;
+                } else if (occupiedCellsInThisCol > 1) {
+                    var boat = BoatType.ofSize(occupiedCellsInThisCol);
+                    boats.put(boat, boats.getOrDefault(boat, 0) + 1);
+                    occupiedCellsInThisCol = 0;
+                }
+            }
         }
         return boats.getOrDefault(boatType, 0);
     }

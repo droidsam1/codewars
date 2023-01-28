@@ -46,6 +46,29 @@ public class BattleFieldGenerator {
         return field;
     }
 
+    public static int[][] generateFieldWithNBoatsInCols(int numberOfBoats, BoatType boatType) {
+        assert (numberOfBoats <= BOARD_SIZE / 2);//ships cannot be in contact, so this impl leaves a row in between
+
+        var boatSize = boatType.getSize();
+        var field = new int[BOARD_SIZE][BOARD_SIZE];
+        var numberOfBattleships = 0;
+        for (int i = 0; i < BOARD_SIZE; i++) {
+            var putABattleshipInThisCol = i % 2 == 0; //leave a row between ships
+            if (putABattleshipInThisCol && numberOfBattleships < numberOfBoats) {
+                numberOfBattleships++;
+                var startingPoint = new Random().nextInt(BOARD_SIZE - boatSize);
+                var endingPoint = startingPoint + boatSize - 1;
+                for (int j = 0; j < BOARD_SIZE; j++) {
+                    if (j >= startingPoint && j <= endingPoint) {
+                        field[j][i] = 1;
+                    }
+                }
+            }
+
+        }
+        return field;
+    }
+
     public static int[][] withInvalidDimensions() {
         return new int[new Random().nextInt(BOARD_SIZE - 1)][new Random().nextInt(BOARD_SIZE - 1)];
     }
