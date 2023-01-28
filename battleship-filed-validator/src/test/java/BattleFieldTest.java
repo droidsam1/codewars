@@ -8,7 +8,7 @@ class BattleFieldTest {
 
     @Test
     void shouldReturnFalseWhenEmptyField() {
-        var battleField = new int[10][10];
+        var battleField = BattleFieldGenerator.emptyField();
 
         var isFieldValid = BattleField.fieldValidator(battleField);
 
@@ -17,7 +17,7 @@ class BattleFieldTest {
 
     @Test
     void shouldReturnFalseWhenFieldHasIncorrectDimensions() {
-        var battleField = new int[10][8];
+        var battleField = BattleFieldGenerator.withInvalidDimensions();
 
         var isFieldValid = BattleField.fieldValidator(battleField);
 
@@ -26,16 +26,7 @@ class BattleFieldTest {
 
     @Test
     void shouldContainsOnlyABattleship() {
-        var battleField = new int[][] {{1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0},
-                                       {0, 0, 0, 0, 0, 0, 0, 0, 0, 0}};
+        var battleField = BattleFieldGenerator.getBattleFieldWithOnlyOneBattleship();
 
         var numberOfBattleships = BattleField.getNumberOfBattleships(battleField);
 
