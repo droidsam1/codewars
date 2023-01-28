@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class BattleFieldGenerator {
     static int[][] getBattleFieldWithOnlyOneBattleship() {
         return new int[][]{ {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
@@ -13,7 +15,7 @@ public class BattleFieldGenerator {
     }
 
     static int[][] withInvalidDimensions() {
-        return new int[10][8];
+        return new int[new Random().nextInt(9)][new Random().nextInt(9)];
     }
 
     static int[][] emptyField() {
