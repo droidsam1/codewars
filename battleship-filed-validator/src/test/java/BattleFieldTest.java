@@ -34,5 +34,16 @@ class BattleFieldTest {
         assertTrue(isFieldValid);
     }
 
+    @Test
+    void shouldFailIfContainsMoreThanOneBattleship() {
+        var battleField = BattleFieldGenerator.withOnlyTwoBattleship();
+
+        var numberOfBattleships = BattleField.getNumberOfBattleships(battleField);
+        assertEquals(2, numberOfBattleships);
+
+        var isFieldValid = BattleField.fieldValidator(battleField);
+        assertFalse(isFieldValid);
+    }
+
 
 }
