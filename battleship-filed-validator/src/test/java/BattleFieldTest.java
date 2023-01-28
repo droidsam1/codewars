@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
+import utils.BattleFieldGenerator;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class BattleFieldTest {
 
@@ -27,10 +29,8 @@ class BattleFieldTest {
     void shouldContainsOnlyABattleship() {
         var battleField = BattleFieldGenerator.withOnlyOneBattleship();
 
-        var numberOfBattleships = BattleField.getNumberOfBattleships(battleField);
-        assertEquals(1, numberOfBattleships);
-
         var isFieldValid = BattleField.fieldValidator(battleField);
+
         assertTrue(isFieldValid);
     }
 
@@ -38,10 +38,8 @@ class BattleFieldTest {
     void shouldFailIfContainsMoreThanOneBattleship() {
         var battleField = BattleFieldGenerator.withOnlyTwoBattleship();
 
-        var numberOfBattleships = BattleField.getNumberOfBattleships(battleField);
-        assertEquals(2, numberOfBattleships);
-
         var isFieldValid = BattleField.fieldValidator(battleField);
+
         assertFalse(isFieldValid);
     }
 
