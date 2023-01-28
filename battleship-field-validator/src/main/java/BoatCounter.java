@@ -14,7 +14,6 @@ public class BoatCounter {
 
         }
 
-        var battleshipSize = BATTLESHIP_SIZE;
-        return occupiedCells / battleshipSize;
+        return occupiedCells / BATTLESHIP_SIZE;
     }
 }

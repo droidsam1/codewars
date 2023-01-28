@@ -17,7 +17,7 @@ public class BattleFieldGenerator {
         return generateFieldWithNBattleships(2);
     }
 
-    private static int[][] generateFieldWithNBattleships(int maxBattleshipsInTheField) {
+    public static int[][] generateFieldWithNBattleships(int maxBattleshipsInTheField) {
         var field = new int[BOARD_SIZE][BOARD_SIZE];
         var numberOfBattleships = 0;
         for (int i = 0; i < BOARD_SIZE; i++) {
@@ -30,7 +30,7 @@ public class BattleFieldGenerator {
             if (numberOfBattleships < maxBattleshipsInTheField) {
                 numberOfBattleships++;
                 var startingPoint = new Random().nextInt(BOARD_SIZE - BATTLESHIP_SIZE);
-                var endingPoint = startingPoint + BATTLESHIP_SIZE;
+                var endingPoint = startingPoint + BATTLESHIP_SIZE -1;
                 for (int j = 0; j < BOARD_SIZE; j++) {
                     if (j >= startingPoint && j <= endingPoint) {
                         field[i][j] = 1;

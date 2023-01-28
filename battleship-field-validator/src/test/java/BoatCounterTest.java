@@ -1,28 +1,26 @@
-import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import utils.BattleFieldGenerator;
 
-import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static utils.BattleFieldGenerator.BOARD_SIZE;
 
 class BoatCounterTest {
 
-    @Test
-    void shouldReturnOneWhenThereIsOnlyOneBattleship() {
-        var battleField = BattleFieldGenerator.withOnlyOneBattleship();
-
-        var numberOfBattleships = BoatCounter.getNumberOfBattleships(battleField);
-        assertEquals(1, numberOfBattleships);
+    private static int[] runTenTimes() {
+        return IntStream.range(0, BOARD_SIZE).toArray();
     }
 
-    @Test
-    void shouldReturnTwoWhenThereIsTwoBattleship() {
-        var battleField = BattleFieldGenerator.withOnlyTwoBattleship();
+    @ParameterizedTest
+    @MethodSource("runTenTimes")
+    void shouldReturnTheNumberOfBattleship(int expectedBattleship) {
+        var battleField = BattleFieldGenerator.generateFieldWithNBattleships(expectedBattleship);
 
-        System.out.println(Arrays.deepToString(battleField));
         var numberOfBattleships = BoatCounter.getNumberOfBattleships(battleField);
-        assertEquals(2, numberOfBattleships);
-    }
 
+        assertEquals(expectedBattleship, numberOfBattleships);
+    }
 
 }
