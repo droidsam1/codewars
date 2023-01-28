@@ -14,7 +14,11 @@ import static utils.BattleFieldGenerator.BOARD_SIZE;
 class BoatCounterTest {
 
     private static Stream<? extends Arguments> runTenTimesForEachBoatType() {
-        return Arrays.stream(BoatType.values()).flatMap(boatType -> IntStream.rangeClosed(0, BOARD_SIZE).mapToObj(i -> Arguments.of(boatType, i)));
+        return Arrays.stream(BoatType.values()).flatMap(boatType -> generateTenExpectedNumber(boatType));
+    }
+
+    private static Stream<Arguments> generateTenExpectedNumber(BoatType boatType) {
+        return IntStream.rangeClosed(0, BOARD_SIZE).mapToObj(i -> Arguments.of(boatType, i));
     }
 
     @ParameterizedTest
@@ -23,7 +27,6 @@ class BoatCounterTest {
         var battleField = BattleFieldGenerator.generateFieldWithNBoats(expectedBoats, boatType);
 
         var numberOfBattleships = BoatCounter.getNumberOf(battleField, boatType);
-
 
         assertEquals(expectedBoats, numberOfBattleships);
     }
