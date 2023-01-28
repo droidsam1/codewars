@@ -13,7 +13,7 @@ public class BoatCounter {
         return getNumberOf(battleField, BoatType.CRUISER);
     }
 
-    private static int getNumberOf(int[][] battleField, BoatType boatType) {
+    static int getNumberOf(int[][] battleField, BoatType boatType) {
 
         Map<BoatType, Integer> boats = new HashMap<>();
         for (int i = 0; i < battleField.length; i++) {
