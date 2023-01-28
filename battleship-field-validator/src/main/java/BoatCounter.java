@@ -1,4 +1,7 @@
 public class BoatCounter {
+
+    public static final int BATTLESHIP_SIZE = 4;
+
     static int getNumberOfBattleships(int[][] battleField) {
 
         var occupiedCells = 0;
@@ -11,7 +14,7 @@ public class BoatCounter {
 
         }
 
-        var battleshipSize = 4;
+        var battleshipSize = BATTLESHIP_SIZE;
         return occupiedCells / battleshipSize;
     }
 }
