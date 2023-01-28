@@ -1,5 +1,7 @@
 package utils;
 
+import domain.BoatType;
+
 import java.util.Random;
 import java.util.stream.IntStream;
 
@@ -19,21 +21,22 @@ public class BattleFieldGenerator {
         return generateFieldWithNBattleships(2);
     }
 
-    public static int[][] generateFieldWithNBattleships(int maxBattleshipsInTheField) {
-        return generateFieldWithNSizedBoats(maxBattleshipsInTheField, BATTLESHIP.getSize());
+    public static int[][] generateFieldWithNBattleships(int numberOfBattleships) {
+        return generateFieldWithNBoats(numberOfBattleships, BATTLESHIP);
     }
 
-    public static int[][] generateFieldWithNSizedBoats(int maxBattleshipsInTheField, int boatSize) {
+    public static int[][] generateFieldWithNBoats(int numberOfBoats, BoatType boatType) {
+        var boatSize = boatType.getSize();
         var field = new int[BOARD_SIZE][BOARD_SIZE];
         var numberOfBattleships = 0;
         for (int i = 0; i < BOARD_SIZE; i++) {
             var putABattleshipInThisRow = new Random().nextBoolean();
-            var maxRowsThatCanBeEmpty = BOARD_SIZE - maxBattleshipsInTheField;
+            var maxRowsThatCanBeEmpty = BOARD_SIZE - numberOfBoats;
             if (!putABattleshipInThisRow && i < maxRowsThatCanBeEmpty) {
                 field[i] = IntStream.generate(() -> 0).limit(BOARD_SIZE).toArray();
                 continue;
             }
-            if (numberOfBattleships < maxBattleshipsInTheField) {
+            if (numberOfBattleships < numberOfBoats) {
                 numberOfBattleships++;
                 var startingPoint = new Random().nextInt(BOARD_SIZE - boatSize);
                 var endingPoint = startingPoint + boatSize - 1;
@@ -59,6 +62,6 @@ public class BattleFieldGenerator {
     }
 
     public static int[][] generateFieldWithNCruisers(int expectedCruisers) {
-        return generateFieldWithNSizedBoats(expectedCruisers, CRUISER.getSize());
+        return generateFieldWithNBoats(expectedCruisers, CRUISER);
     }
 }
