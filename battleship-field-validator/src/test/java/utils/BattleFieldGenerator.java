@@ -4,7 +4,7 @@ import domain.BoatType;
 
 import java.util.Random;
 
-import static domain.BoatType.*;
+import static domain.BoatType.BATTLESHIP;
 
 public class BattleFieldGenerator {
 
@@ -24,12 +24,13 @@ public class BattleFieldGenerator {
     }
 
     public static int[][] generateFieldWithNBoats(int numberOfBoats, BoatType boatType) {
+        assert (numberOfBoats <= BOARD_SIZE / 2);//ships cannot be in contact, so this impl leaves a row in between
+
         var boatSize = boatType.getSize();
         var field = new int[BOARD_SIZE][BOARD_SIZE];
         var numberOfBattleships = 0;
         for (int i = 0; i < BOARD_SIZE; i++) {
-            var maxRowsThatCanBeEmpty = BOARD_SIZE - numberOfBoats;
-            var putABattleshipInThisRow = new Random().nextBoolean() || i >= maxRowsThatCanBeEmpty;
+            var putABattleshipInThisRow = i % 2 == 0; //leave a row between ships
             if (putABattleshipInThisRow && numberOfBattleships < numberOfBoats) {
                 numberOfBattleships++;
                 var startingPoint = new Random().nextInt(BOARD_SIZE - boatSize);
@@ -53,15 +54,4 @@ public class BattleFieldGenerator {
         return new int[BOARD_SIZE][BOARD_SIZE];
     }
 
-    public static int[][] generateFieldWithNCruisers(int expectedCruisers) {
-        return generateFieldWithNBoats(expectedCruisers, CRUISER);
-    }
-
-    public static int[][] generateFieldWithNDestroyers(int expectedDestroyers) {
-        return generateFieldWithNBoats(expectedDestroyers, DESTROYER);
-    }
-
-    public static int[][] generateFieldWithNSubmarines(int expectedSubmarines) {
-        return generateFieldWithNBoats(expectedSubmarines, SUBMARINE);
-    }
 }

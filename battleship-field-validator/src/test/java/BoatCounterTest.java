@@ -18,7 +18,7 @@ class BoatCounterTest {
     }
 
     private static Stream<Arguments> generateTenExpectedNumber(BoatType boatType) {
-        return IntStream.rangeClosed(0, BOARD_SIZE).mapToObj(i -> Arguments.of(boatType, i));
+        return IntStream.rangeClosed(0, BOARD_SIZE / 2).mapToObj(i -> Arguments.of(boatType, i));
     }
 
     @ParameterizedTest
