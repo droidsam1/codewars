@@ -3,7 +3,6 @@ package utils;
 import domain.BoatType;
 
 import java.util.Random;
-import java.util.stream.IntStream;
 
 import static domain.BoatType.*;
 
@@ -29,21 +28,15 @@ public class BattleFieldGenerator {
         var field = new int[BOARD_SIZE][BOARD_SIZE];
         var numberOfBattleships = 0;
         for (int i = 0; i < BOARD_SIZE; i++) {
-            var putABattleshipInThisRow = new Random().nextBoolean();
             var maxRowsThatCanBeEmpty = BOARD_SIZE - numberOfBoats;
-            if (!putABattleshipInThisRow && i < maxRowsThatCanBeEmpty) {
-                field[i] = IntStream.generate(() -> 0).limit(BOARD_SIZE).toArray();
-                continue;
-            }
-            if (numberOfBattleships < numberOfBoats) {
+            var putABattleshipInThisRow = new Random().nextBoolean() || i >= maxRowsThatCanBeEmpty;
+            if (putABattleshipInThisRow && numberOfBattleships < numberOfBoats) {
                 numberOfBattleships++;
                 var startingPoint = new Random().nextInt(BOARD_SIZE - boatSize);
                 var endingPoint = startingPoint + boatSize - 1;
                 for (int j = 0; j < BOARD_SIZE; j++) {
                     if (j >= startingPoint && j <= endingPoint) {
                         field[i][j] = 1;
-                    } else {
-                        field[i][j] = 0;
                     }
                 }
             }
