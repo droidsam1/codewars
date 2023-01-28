@@ -13,7 +13,7 @@ public class BoatCounter {
         return getNumberOf(battleField, BoatType.CRUISER);
     }
 
-    static int getNumberOf(int[][] battleField, BoatType boatType) {
+    private static int getNumberOf(int[][] battleField, BoatType boatType) {
 
         Map<BoatType, Integer> boats = new HashMap<>();
         for (int i = 0; i < battleField.length; i++) {
@@ -31,5 +31,9 @@ public class BoatCounter {
         }
 
         return boats.getOrDefault(boatType, 0);
+    }
+
+    static int getNumberOfDestroyers(int[][] battleField) {
+        return getNumberOf(battleField, BoatType.DESTROYER);
     }
 }

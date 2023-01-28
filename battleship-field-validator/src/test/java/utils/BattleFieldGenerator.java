@@ -5,8 +5,7 @@ import domain.BoatType;
 import java.util.Random;
 import java.util.stream.IntStream;
 
-import static domain.BoatType.BATTLESHIP;
-import static domain.BoatType.CRUISER;
+import static domain.BoatType.*;
 
 public class BattleFieldGenerator {
 
@@ -63,5 +62,9 @@ public class BattleFieldGenerator {
 
     public static int[][] generateFieldWithNCruisers(int expectedCruisers) {
         return generateFieldWithNBoats(expectedCruisers, CRUISER);
+    }
+
+    public static int[][] generateFieldWithNDestroyers(int expectedDestroyers) {
+        return generateFieldWithNBoats(expectedDestroyers, DESTROYER);
     }
 }

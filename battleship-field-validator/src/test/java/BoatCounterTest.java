@@ -33,4 +33,14 @@ class BoatCounterTest {
         assertEquals(expectedCruisers, numberOfBattleships);
     }
 
+    @ParameterizedTest
+    @MethodSource("runTenTimes")
+    void shouldReturnTheNumberOfDestroyers(int expectedDestroyers) {
+        var battleField = BattleFieldGenerator.generateFieldWithNDestroyers(expectedDestroyers);
+
+        var numberOfBattleships = BoatCounter.getNumberOfDestroyers(battleField);
+
+        assertEquals(expectedDestroyers, numberOfBattleships);
+    }
+
 }
