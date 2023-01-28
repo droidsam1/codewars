@@ -26,7 +26,7 @@ class BattleFieldTest {
 
     @Test
     void shouldContainsOnlyABattleship() {
-        var battleField = BattleFieldGenerator.getBattleFieldWithOnlyOneBattleship();
+        var battleField = BattleFieldGenerator.withOnlyOneBattleship();
 
         var numberOfBattleships = BattleField.getNumberOfBattleships(battleField);
 

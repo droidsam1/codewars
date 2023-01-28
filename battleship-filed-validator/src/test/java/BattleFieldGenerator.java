@@ -1,7 +1,7 @@
 import java.util.Random;
 
 public class BattleFieldGenerator {
-    static int[][] getBattleFieldWithOnlyOneBattleship() {
+    static int[][] withOnlyOneBattleship() {
         return new int[][]{ {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
                             {1, 0, 0, 0, 0, 0, 0, 0, 0, 0},
