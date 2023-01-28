@@ -27,7 +27,8 @@ public class BoatCounter {
                     }
                 } else if (occupiedCellsInThisCol == 1) {
                     occupiedCellsInThisCol = 0;
-                } else if (occupiedCellsInThisCol > 1) {
+                }
+                if (occupiedCellsInThisCol > 1 && (battleField[j][i] == 0 || j == battleField[i].length - 1)) {
                     var ship = BoatType.ofSize(occupiedCellsInThisCol);
                     ships.put(ship, ships.getOrDefault(ship, 0) + 1);
                     occupiedCellsInThisCol = 0;
@@ -46,13 +47,16 @@ public class BoatCounter {
                     if (isSurroundedByWaterUpDown(i, j, battleField)) {
                         occupiedCellsInThisRow++;
                     }
-                } else if (occupiedCellsInThisRow == 1) {
-                    occupiedCellsInThisRow = 0;
-                } else if (occupiedCellsInThisRow != 0) {
+                }
+                if (occupiedCellsInThisRow > 1 && (battleField[i][j] == 0 || j == battleField[j].length - 1)) {
                     var ship = BoatType.ofSize(occupiedCellsInThisRow);
                     ships.put(ship, ships.getOrDefault(ship, 0) + 1);
                     occupiedCellsInThisRow = 0;
                 }
+                if (battleField[i][j] == 0) {
+                    occupiedCellsInThisRow = 0;
+                }
+
             }
         }
         return ships;
@@ -64,9 +68,21 @@ public class BoatCounter {
         var isSurroundedByWater = true;
         if (previousRow >= 0) {
             isSurroundedByWater = battleField[previousRow][j] == 0;
+            if (j + 1 < battleField[i].length) {
+                isSurroundedByWater &= battleField[previousRow][j + 1] == 0;
+            }
+            if (j - 1 >= 0) {
+                isSurroundedByWater &= battleField[previousRow][j - 1] == 0;
+            }
         }
         if (nextRow < battleField[i].length) {
             isSurroundedByWater &= battleField[nextRow][j] == 0;
+            if (j + 1 < battleField[j].length) {
+                isSurroundedByWater &= battleField[nextRow][j + 1] == 0;
+            }
+            if (j - 1 >= 0) {
+                isSurroundedByWater &= battleField[nextRow][j - 1] == 0;
+            }
         }
         return isSurroundedByWater;
     }
@@ -77,9 +93,21 @@ public class BoatCounter {
         var isSurroundedByWater = true;
         if (previousCol >= 0) {
             isSurroundedByWater = battleField[i][previousCol] == 0;
+            if (i + 1 < battleField[i].length) {
+                isSurroundedByWater &= battleField[i + 1][previousCol] == 0;
+            }
+            if (i - 1 >= 0) {
+                isSurroundedByWater &= battleField[i - 1][previousCol] == 0;
+            }
         }
         if (nextCol < battleField[i].length) {
             isSurroundedByWater &= battleField[i][nextCol] == 0;
+            if (i + 1 < battleField[j].length) {
+                isSurroundedByWater &= battleField[i + 1][nextCol] == 0;
+            }
+            if (i - 1 >= 0) {
+                isSurroundedByWater &= battleField[i - 1][nextCol] == 0;
+            }
         }
         return isSurroundedByWater;
     }
