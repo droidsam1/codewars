@@ -1,7 +1,7 @@
 import domain.BoatType;
+import domain.InvalidBoatSize;
 
 import java.util.Arrays;
-import java.util.NoSuchElementException;
 
 public class BattleField {
     public static boolean fieldValidator(int[][] battleField) {
@@ -18,8 +18,7 @@ public class BattleField {
             var numberOfSubmarines = boats.getOrDefault(BoatType.SUBMARINE, 0);
 
             return numberOfBattleships == 1 && numberOfCruisers == 2 && numberOfDestroyers == 3 && numberOfSubmarines == 4;
-        } catch (NoSuchElementException ex) {
-            //Unknown boat detected
+        } catch (InvalidBoatSize ex) {
             return false;
         }
     }

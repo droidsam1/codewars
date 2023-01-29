@@ -13,7 +13,7 @@ public enum BoatType {
     }
 
     public static BoatType ofSize(int boatSize) {
-        return Arrays.stream(BoatType.values()).filter(type -> type.getSize() == boatSize).findFirst().orElseThrow();
+        return Arrays.stream(BoatType.values()).filter(type -> type.getSize() == boatSize).findFirst().orElseThrow(() -> new InvalidBoatSize(boatSize));
     }
 
     public int getSize() {
