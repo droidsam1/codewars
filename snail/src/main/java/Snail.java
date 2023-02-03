@@ -24,7 +24,7 @@ public class Snail {
 
                 //reverse the last line
                 if (i < lastRowIndex - 1) {
-                    for (int j = array[i].length - 1; j >= 0; j--) {
+                    for (int j = lastColumnIndex; j >= i; j--) {
                         result.add(array[lastRowIndex - 1][j]);
                     }
                     lastRowIndex--;

@@ -34,9 +34,16 @@ public class SnailTest {
 
     @Test
     void should3x3MatrixBeSorted() {
-        int[][] array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
-        int[] r = {1, 2, 3, 6, 9, 8, 7, 4, 5};
-        test(array, r);
+        int[][] input = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
+        int[] expectedOutput = {1, 2, 3, 6, 9, 8, 7, 4, 5};
+        test(input, expectedOutput);
+    }
+
+    @Test
+    void should4x4MatrixBeSorted() {
+        int[][] input = {{1, 2, 3, 4}, {5, 6, 7, 8}, {9, 10, 11, 12}, {13, 14, 15, 16}};
+        int[] expectedOutput = {1, 2, 3, 4, 8, 12, 16, 15, 14, 13, 9, 5, 6, 7, 11, 10};
+        test(input, expectedOutput);
     }
 
     private String int2dToString(int[][] a) {
