@@ -1,4 +1,3 @@
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 import java.util.Arrays;
@@ -33,10 +32,8 @@ public class SnailTest {
         test(input, expectedOutput);
     }
 
-
     @Test
-    @Disabled
-    void SnailTest1() {
+    void should3x3MatrixBeSorted() {
         int[][] array = {{1, 2, 3}, {4, 5, 6}, {7, 8, 9}};
         int[] r = {1, 2, 3, 6, 9, 8, 7, 4, 5};
         test(array, r);
