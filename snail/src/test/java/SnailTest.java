@@ -10,12 +10,29 @@ public class SnailTest {
 
 
     @Test
-    void shouldEmptyArrayBeSorted() {
+    void shouldEmptyMatrixBeSorted() {
         int[][] input = {{}};
         int[] expectedOutput = {};
 
         test(input, expectedOutput);
     }
+
+    @Test
+    void should1x1MatrixBeSorted() {
+        int[][] input = {{1}};
+        int[] expectedOutput = {1};
+
+        test(input, expectedOutput);
+    }
+
+    @Test
+    void should2x2MatrixBeSorted() {
+        int[][] input = {{1, 2}, {3, 4}};
+        int[] expectedOutput = {1, 2, 4, 3};
+
+        test(input, expectedOutput);
+    }
+
 
     @Test
     @Disabled
