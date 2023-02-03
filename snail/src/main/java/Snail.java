@@ -12,31 +12,29 @@ public class Snail {
         var result = new int[arraySize * arraySize];
         var resultIndex = 0;
 
-        var lastRowIndex = array.length;
-        var lastColumnIndex = array.length;
-        for (int i = 0; i < array.length - 1; i++) {
-            if (i < lastRowIndex) {
-                for (int j = i; j < lastColumnIndex; j++) {
-                    result[resultIndex++] = (array[i][j]);
-                }
-                //put last column
-                for (int k = i + 1; k < lastColumnIndex - 1; k++) {
-                    result[resultIndex++] = (array[k][lastColumnIndex - 1]);
-                }
-                lastColumnIndex--;
+        var lastNonVisitedRowIndex = arraySize - 1;
+        var lastNonVisitedColumnIndex = arraySize - 1;
 
-                //reverse the last line
-                if (i < lastRowIndex - 1) {
-                    for (int j = lastColumnIndex; j >= i; j--) {
-                        result[resultIndex++] = (array[lastRowIndex - 1][j]);
-                    }
-                    lastRowIndex--;
-                }
+        for (int i = 0; i < arraySize - 1; i++) {
+            //go right
+            for (int j = i; j <= lastNonVisitedColumnIndex; j++) {
+                result[resultIndex++] = array[i][j];
+            }
+            //go down
+            for (int k = i + 1; k <= lastNonVisitedColumnIndex; k++) {
+                result[resultIndex++] = array[k][lastNonVisitedColumnIndex];
+            }
+            lastNonVisitedColumnIndex--;
 
-                //put first row reversed
-                for (int k = lastRowIndex - 1; k > i; k--) {
-                    result[resultIndex++] = (array[k][i]);
-                }
+            //go left
+            for (int j = lastNonVisitedColumnIndex; j >= i && i < lastNonVisitedRowIndex; j--) {
+                result[resultIndex++] = array[lastNonVisitedRowIndex][j];
+            }
+            lastNonVisitedRowIndex--;
+
+            //go up
+            for (int k = lastNonVisitedRowIndex; k > i; k--) {
+                result[resultIndex++] = array[k][i];
             }
         }
 
