@@ -2,14 +2,18 @@ import domain.BoatType;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 public class BoatCounter {
 
     public static Map<BoatType, Integer> getBoats(int[][] battleField) {
-        var ships = getShipsInRows(battleField);
-        getShipsInCols(battleField).forEach((k, v) -> ships.merge(k, v, Integer::sum));
-        getSubmarines(battleField).forEach((k, v) -> ships.merge(k, v, Integer::sum));
-        return ships;
+        return merge(getShipsInRows(battleField), getShipsInCols(battleField), getSubmarines(battleField));
+    }
+
+    @SafeVarargs
+    public static Map<BoatType, Integer> merge(Map<BoatType, Integer>... maps) {
+        return Stream.of(maps).flatMap(map -> map.entrySet().stream()).collect(Collectors.toMap(Map.Entry::getKey, Map.Entry::getValue, Integer::sum));
     }
 
     private static Map<BoatType, Integer> getShipsInCols(int[][] battleField) {
