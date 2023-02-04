@@ -15,7 +15,7 @@ import static utils.BattleFieldGenerator.BOARD_SIZE;
 class BoatCounterTest {
 
     private static Stream<? extends Arguments> runTenTimesForEachBoatType() {
-        return Arrays.stream(BoatType.values()).flatMap(boatType -> generateTenExpectedNumber(boatType));
+        return Arrays.stream(BoatType.values()).flatMap(BoatCounterTest::generateTenExpectedNumber);
     }
 
     private static Stream<Arguments> generateTenExpectedNumber(BoatType boatType) {
@@ -27,9 +27,11 @@ class BoatCounterTest {
     void shouldReturnTheNumberOf(BoatType boatType, int expectedBoats) {
         var battleField = BattleFieldGenerator.generateFieldWithNBoats(expectedBoats, boatType);
 
-        var numberOfBattleships = BoatCounter.getNumberOf(battleField, boatType);
+        var boats = BoatCounter.getBoats(battleField);
 
-        assertEquals(expectedBoats, numberOfBattleships);
+        var numberOfBoatsOfType = boats.getOrDefault(boatType, 0);
+
+        assertEquals(expectedBoats, numberOfBoatsOfType);
     }
 
     @ParameterizedTest
@@ -37,9 +39,11 @@ class BoatCounterTest {
     void shouldReturnTheNumberOfBoatTypesInColumns(BoatType boatType, int expectedBoats) {
         var battleField = BattleFieldGenerator.generateFieldWithNBoatsInCols(expectedBoats, boatType);
 
-        var numberOfBattleships = BoatCounter.getNumberOf(battleField, boatType);
+        var boats = BoatCounter.getBoats(battleField);
 
-        assertEquals(expectedBoats, numberOfBattleships);
+        var numberOfBoatsOfType = boats.getOrDefault(boatType, 0);
+
+        assertEquals(expectedBoats, numberOfBoatsOfType);
     }
 
     @Test
