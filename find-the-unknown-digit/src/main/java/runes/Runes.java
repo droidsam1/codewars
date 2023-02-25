@@ -23,21 +23,21 @@ public class Runes {
         var lefOperand = extractLeftOperand();
         var rightOperand = extractRightOperand();
 
-        if (lefOperand == RUNE_NOT_EXISTS || rightOperand == RUNE_NOT_EXISTS) {
+        if (String.valueOf(RUNE_NOT_EXISTS).equals(lefOperand) || String.valueOf(RUNE_NOT_EXISTS).equals(rightOperand)) {
             return RUNE_NOT_EXISTS;
         }
 
-        return lefOperand + rightOperand;
+        return Integer.parseInt(lefOperand) + Integer.parseInt(rightOperand);
     }
 
-    private static int extractLeftOperand() {
+    private static String extractLeftOperand() {
         var lefOperand = matcher.group(1);
 
         if (isNumberWithLeadingZeroes(lefOperand)) {
-            return RUNE_NOT_EXISTS;
+            return String.valueOf(RUNE_NOT_EXISTS);
         }
 
-        return Integer.parseInt(lefOperand);
+        return lefOperand;
     }
 
     private static boolean isNumberWithLeadingZeroes(String operand) {
@@ -48,11 +48,11 @@ public class Runes {
         return lefOperand.matches("0+");
     }
 
-    private static int extractRightOperand() {
+    private static String extractRightOperand() {
         var rightOperand = matcher.group(3);
         if (isNumberWithLeadingZeroes(rightOperand)) {
-            return RUNE_NOT_EXISTS;
+            return String.valueOf(RUNE_NOT_EXISTS);
         }
-        return Integer.parseInt(rightOperand);
+        return rightOperand;
     }
 }
