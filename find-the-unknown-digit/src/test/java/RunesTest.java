@@ -1,11 +1,20 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
+import org.junit.jupiter.params.provider.MethodSource;
 import runes.Runes;
 import org.junit.jupiter.api.Test;
 
 class RunesTest {
 
+    public static Stream<Arguments> sumOfTwoNumbers() {
+        return Stream.of(Arguments.of("1+1=?", 2)//
+//                , Arguments.of("1+2=?", 3)
+        );
+    }
 
     @Test void shouldReturnMinusOneForUnknownRune() {
         var input = "A";
@@ -15,17 +24,14 @@ class RunesTest {
         assertEquals(-1, sum);
     }
 
-    @Test void shouldSumTwoNumbers() {
-        var input = "1+1=?";
-
+    @ParameterizedTest @MethodSource("sumOfTwoNumbers") void shouldSumTwoNumbers(String input, int expected) {
         var sum = Runes.solveExpression(input);
 
-        assertEquals(2, sum);
-
+        assertEquals(expected, sum);
     }
 
 
-    @Disabled @Test void testSample() {
+    @Disabled("TDD in progress") @Test void testSample() {
         assertEquals(2, Runes.solveExpression("1+1=?"), "Answer for expression '1+1=?' ");
         assertEquals(6, Runes.solveExpression("123*45?=5?088"), "Answer for expression '123*45?=5?088' ");
         assertEquals(0, Runes.solveExpression("-5?*-1=5?"), "Answer for expression '-5?*-1=5?' ");
