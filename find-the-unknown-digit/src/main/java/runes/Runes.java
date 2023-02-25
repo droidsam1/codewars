@@ -24,10 +24,19 @@ public class Runes {
     }
 
     private static int extractLeftOperand() {
-        return Integer.parseInt(matcher.group(1));
+        var lefOperand = matcher.group(1);
+        if (lefOperand.startsWith("0") && !lefOperand.matches("0+")) {
+            return UNKNOWN_RUNE;
+        }
+
+        return Integer.parseInt(lefOperand);
     }
 
     private static int extractRightOperand() {
-        return Integer.parseInt(matcher.group(3));
+        var rightOperand = matcher.group(3);
+        if (rightOperand.startsWith("0") && !rightOperand.matches("0+")) {
+            return UNKNOWN_RUNE;
+        }
+        return Integer.parseInt(rightOperand);
     }
 }

@@ -30,6 +30,14 @@ class RunesTest {
         assertEquals(-1, sum);
     }
 
+    @Test void shouldReturnMinusOneForNumbersWithLeadingZeros() {
+        var input = "00+01=?";
+
+        var sum = Runes.solveExpression(input);
+
+        assertEquals(-1, sum);
+    }
+
     @ParameterizedTest @MethodSource("sumOfTwoNumbers") void shouldSumTwoNumbers(String input, int expected) {
         var sum = Runes.solveExpression(input);
 
