@@ -12,8 +12,13 @@ class RunesTest {
 
     public static Stream<Arguments> sumOfTwoNumbers() {
         return Stream.of(
-                Arguments.of("1+1=?", 2)//
-                , Arguments.of("1+2=?", 3)
+                Arguments.of("1+1=?", 2), //
+                Arguments.of("1+2=?", 3), //
+                Arguments.of("3+3=?", 6), //
+                Arguments.of("10+1=?", 11),//
+                Arguments.of("11+20=?", 31),//
+                Arguments.of("1122+2211=?", 3333),//
+                Arguments.of("0+0=?", 0)//
         );
     }
 

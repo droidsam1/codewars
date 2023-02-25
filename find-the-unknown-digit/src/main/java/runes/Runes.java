@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 public class Runes {
 
     private static final int UNKNOWN_RUNE = -1;
-    private static final Pattern pattern = Pattern.compile("(\\d)([+\\-*])(\\d)=([?\\d])");
+    private static final Pattern pattern = Pattern.compile("(\\d+)([+\\-*])(\\d+)=([?\\d])");
     private static Matcher matcher;
 
 
