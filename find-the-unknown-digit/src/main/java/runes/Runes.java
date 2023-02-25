@@ -3,6 +3,7 @@ package runes;
 import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Stream;
 
 public class Runes {
 
@@ -62,8 +63,12 @@ public class Runes {
         return Arrays.stream(operand).anyMatch(op -> startWithZero(op) && !isZero(op));
     }
 
-    private static boolean isCandidateNumberAlreadyPresent(int i, String... operand) {
-        return Arrays.stream(operand).anyMatch(op -> op.contains(String.valueOf(i)));
+    private static boolean isNumberAlreadyPresentInExpression(int i) {
+        var lefOperand = extractLeftOperand();
+        var rightOperand = extractRightOperand();
+        var total = extractTotal();
+
+        return Stream.of(lefOperand, rightOperand, total).anyMatch(op -> op.contains(String.valueOf(i)));
     }
 
     private static boolean startWithZero(String operand) {
@@ -93,10 +98,7 @@ public class Runes {
             var newRight = rightOperand.replace(UNKNOWN_RUNE, String.valueOf(i));
             var newTotal = total.replace(UNKNOWN_RUNE, String.valueOf(i));
 
-            if (isNumberWithLeadingZeroes(newLeft, newRight, newTotal)) {
-                continue;
-            }
-            if (isCandidateNumberAlreadyPresent(i, lefOperand, rightOperand, total)) {
+            if (isNumberWithLeadingZeroes(newLeft, newRight, newTotal) || isNumberAlreadyPresentInExpression(i)) {
                 continue;
             }
             if (Integer.parseInt(newTotal) == operator.apply(Integer.parseInt(newLeft), Integer.parseInt(newRight))) {
