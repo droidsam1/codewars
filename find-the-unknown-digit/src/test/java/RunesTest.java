@@ -5,12 +5,13 @@ import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.ValueSource;
 import runes.Runes;
 import org.junit.jupiter.api.Test;
 
 class RunesTest {
 
-    public static Stream<Arguments> sumOfTwoNumbers() {
+    static Stream<Arguments> sumOfTwoNumbers() {
         return Stream.of(
                 Arguments.of("1+1=?", 2), //
                 Arguments.of("1+2=?", 3), //
@@ -18,21 +19,14 @@ class RunesTest {
                 Arguments.of("10+1=?", 11),//
                 Arguments.of("11+20=?", 31),//
                 Arguments.of("1122+2211=?", 3333),//
-                Arguments.of("0+0=?", 0)//
+                Arguments.of("0+0=?", 0),//
+                Arguments.of("00+000=?", 0)//
         );
     }
 
-    @Test void shouldReturnMinusOneForUnknownRune() {
-        var input = "A";
 
-        var sum = Runes.solveExpression(input);
-
-        assertEquals(-1, sum);
-    }
-
-    @Test void shouldReturnMinusOneForNumbersWithLeadingZeros() {
-        var input = "00+01=?";
-
+    @ParameterizedTest @ValueSource(strings = {"00+01=?", "1+01=?", "1+A=?", "A"})
+    void shouldReturnMinusOneForUnknownRunes(String input) {
         var sum = Runes.solveExpression(input);
 
         assertEquals(-1, sum);

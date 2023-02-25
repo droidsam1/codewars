@@ -9,7 +9,6 @@ public class Runes {
     private static final Pattern pattern = Pattern.compile("(\\d+)([+\\-*])(\\d+)=([?\\d])");
     private static Matcher matcher;
 
-
     private Runes() {
     }
 
@@ -20,21 +19,37 @@ public class Runes {
             return UNKNOWN_RUNE;
         }
 
-        return extractLeftOperand() + extractRightOperand();
+        var lefOperand = extractLeftOperand();
+        var rightOperand = extractRightOperand();
+
+        if (lefOperand == UNKNOWN_RUNE || rightOperand == UNKNOWN_RUNE) {
+            return UNKNOWN_RUNE;
+        }
+
+        return lefOperand + rightOperand;
     }
 
     private static int extractLeftOperand() {
         var lefOperand = matcher.group(1);
-        if (lefOperand.startsWith("0") && !lefOperand.matches("0+")) {
+
+        if (isNumberWithLeadingZeroes(lefOperand)) {
             return UNKNOWN_RUNE;
         }
 
         return Integer.parseInt(lefOperand);
     }
 
+    private static boolean isNumberWithLeadingZeroes(String operand) {
+        return operand.startsWith("0") && !isZero(operand);
+    }
+
+    private static boolean isZero(String lefOperand) {
+        return lefOperand.matches("0+");
+    }
+
     private static int extractRightOperand() {
         var rightOperand = matcher.group(3);
-        if (rightOperand.startsWith("0") && !rightOperand.matches("0+")) {
+        if (isNumberWithLeadingZeroes(rightOperand)) {
             return UNKNOWN_RUNE;
         }
         return Integer.parseInt(rightOperand);
