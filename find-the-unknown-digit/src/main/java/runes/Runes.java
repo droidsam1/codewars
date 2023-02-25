@@ -1,41 +1,33 @@
 package runes;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Runes {
 
     private static final int UNKNOWN_RUNE = -1;
+    private static final Pattern pattern = Pattern.compile("(\\d)([+\\-*])(\\d)=([?\\d])");
+    private static Matcher matcher;
+
 
     private Runes() {
     }
 
     public static int solveExpression(final String expression) {
-        if (!expression.matches("\\d[+\\-*]\\d=[?\\d]")) {
+        matcher = pattern.matcher(expression);
+
+        if (!matcher.matches()) {
             return UNKNOWN_RUNE;
         }
 
-        return extractLeftOperand(expression) + extractRightOperand(expression);
+        return extractLeftOperand() + extractRightOperand();
     }
 
-    private static int extractLeftOperand(String expression) {
-        var pattern = Pattern.compile("(\\d)([+\\-*])");
-        var matcher = pattern.matcher(expression);
-
-        if (matcher.find()) {
-            return Integer.parseInt(matcher.group(1));
-        }
-
-        return UNKNOWN_RUNE;
+    private static int extractLeftOperand() {
+        return Integer.parseInt(matcher.group(1));
     }
 
-    private static int extractRightOperand(String expression) {
-        var pattern = Pattern.compile("([+\\-*])(\\d)");
-        var matcher = pattern.matcher(expression);
-
-        if (matcher.find()) {
-            return Integer.parseInt(matcher.group(2));
-        }
-
-        return UNKNOWN_RUNE;
+    private static int extractRightOperand() {
+        return Integer.parseInt(matcher.group(3));
     }
 }
