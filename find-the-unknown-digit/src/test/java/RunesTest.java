@@ -1,13 +1,12 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.stream.Stream;
-import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.junit.jupiter.params.provider.ValueSource;
 import runes.Runes;
-import org.junit.jupiter.api.Test;
 
 class RunesTest {
 
@@ -30,7 +29,7 @@ class RunesTest {
 
     static Stream<Arguments> missingNumberInSums() {
         return Stream.of(
-                Arguments.of("1+?=2", 1), //
+                Arguments.of("1+?=3", 2), //
                 Arguments.of("?+?=2", 1), //
                 Arguments.of("?+1=1", 0), //
                 Arguments.of("?+?=?", 0), //
@@ -67,7 +66,7 @@ class RunesTest {
     }
 
 
-    @Disabled("TDD in progress") @Test void testSample() {
+    @Test void testSample() {
         assertEquals(2, Runes.solveExpression("1+1=?"), "Answer for expression '1+1=?' ");
         assertEquals(6, Runes.solveExpression("123*45?=5?088"), "Answer for expression '123*45?=5?088' ");
         assertEquals(0, Runes.solveExpression("-5?*-1=5?"), "Answer for expression '-5?*-1=5?' ");

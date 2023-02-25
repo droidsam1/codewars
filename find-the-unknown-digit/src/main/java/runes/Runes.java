@@ -8,7 +8,7 @@ public class Runes {
 
     private static final String INVALID_RUNE = "invalidRune";
     private static final String UNKNOWN_RUNE = "?";
-    private static final String NUMBER_PATTERN = "([?\\d]+)";
+    private static final String NUMBER_PATTERN = "(-?[?\\d]+)";
     private static final Pattern pattern = Pattern.compile(NUMBER_PATTERN + "([+\\-*])" + NUMBER_PATTERN + "=" + NUMBER_PATTERN);
     private static Matcher matcher;
 
@@ -66,6 +66,10 @@ public class Runes {
         return Arrays.stream(operand).anyMatch(op -> op.startsWith("0") && !isZero(op));
     }
 
+    private static boolean isCandidateNumberAlreadyPresent(int i, String... operand) {
+        return Arrays.stream(operand).anyMatch(op -> op.contains(String.valueOf(i)));
+    }
+
     private static boolean isZero(String lefOperand) {
         return lefOperand.matches("0");
     }
@@ -90,6 +94,9 @@ public class Runes {
             var newTotal = total.replace(UNKNOWN_RUNE, String.valueOf(i));
 
             if (isNumberWithLeadingZeroes(newLeft, newRight, newTotal)) {
+                continue;
+            }
+            if (isCandidateNumberAlreadyPresent(i, lefOperand, rightOperand, total)) {
                 continue;
             }
             if (Integer.parseInt(newTotal) == operator.apply(Integer.parseInt(newLeft), Integer.parseInt(newRight))) {
