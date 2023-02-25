@@ -24,6 +24,15 @@ class RunesTest {
         );
     }
 
+    static Stream<Arguments> missingNumberInSums() {
+        return Stream.of(
+                Arguments.of("1+?=2", 1), //
+                Arguments.of("?+?=2", 1), //
+                Arguments.of("?+1=1", 0), //
+                Arguments.of("?+?=?", 0) //
+        );
+    }
+
 
     @ParameterizedTest @ValueSource(strings = {"00+01=?", "1+01=?", "1+A=?", "A"})
     void shouldReturnMinusOneForUnknownRunes(String input) {
@@ -33,6 +42,14 @@ class RunesTest {
     }
 
     @ParameterizedTest @MethodSource("sumOfTwoNumbers") void shouldSumTwoNumbers(String input, int expected) {
+        var sum = Runes.solveExpression(input);
+
+        assertEquals(expected, sum);
+    }
+
+    @ParameterizedTest @MethodSource("missingNumberInSums") void shouldFindTheMissingNumberInSums(
+            String input, int expected
+    ) {
         var sum = Runes.solveExpression(input);
 
         assertEquals(expected, sum);
