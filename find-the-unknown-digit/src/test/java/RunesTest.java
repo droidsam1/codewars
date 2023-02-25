@@ -23,6 +23,11 @@ class RunesTest {
         );
     }
 
+    static Stream<Arguments> multiplyOfTwoNumbers() {
+        return Stream.of(Arguments.of("1*1=?", 1) //
+        );
+    }
+
     static Stream<Arguments> missingNumberInSums() {
         return Stream.of(
                 Arguments.of("1+?=2", 1), //
@@ -42,6 +47,12 @@ class RunesTest {
     }
 
     @ParameterizedTest @MethodSource("sumOfTwoNumbers") void shouldSumTwoNumbers(String input, int expected) {
+        var sum = Runes.solveExpression(input);
+
+        assertEquals(expected, sum);
+    }
+
+    @ParameterizedTest @MethodSource("multiplyOfTwoNumbers") void shouldMultiplyTwoNumbers(String input, int expected) {
         var sum = Runes.solveExpression(input);
 
         assertEquals(expected, sum);
