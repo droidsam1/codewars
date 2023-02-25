@@ -5,7 +5,7 @@ import java.util.regex.Pattern;
 
 public class Runes {
 
-    private static final int UNKNOWN_RUNE = -1;
+    private static final int RUNE_NOT_EXISTS = -1;
     private static final String NUMBER_PATTERN = "([?\\d]+)";
     private static final Pattern pattern = Pattern.compile(NUMBER_PATTERN + "([+\\-*])" + NUMBER_PATTERN + "=" + NUMBER_PATTERN);
     private static Matcher matcher;
@@ -17,14 +17,14 @@ public class Runes {
         matcher = pattern.matcher(expression);
 
         if (!matcher.matches()) {
-            return UNKNOWN_RUNE;
+            return RUNE_NOT_EXISTS;
         }
 
         var lefOperand = extractLeftOperand();
         var rightOperand = extractRightOperand();
 
-        if (lefOperand == UNKNOWN_RUNE || rightOperand == UNKNOWN_RUNE) {
-            return UNKNOWN_RUNE;
+        if (lefOperand == RUNE_NOT_EXISTS || rightOperand == RUNE_NOT_EXISTS) {
+            return RUNE_NOT_EXISTS;
         }
 
         return lefOperand + rightOperand;
@@ -34,7 +34,7 @@ public class Runes {
         var lefOperand = matcher.group(1);
 
         if (isNumberWithLeadingZeroes(lefOperand)) {
-            return UNKNOWN_RUNE;
+            return RUNE_NOT_EXISTS;
         }
 
         return Integer.parseInt(lefOperand);
@@ -51,7 +51,7 @@ public class Runes {
     private static int extractRightOperand() {
         var rightOperand = matcher.group(3);
         if (isNumberWithLeadingZeroes(rightOperand)) {
-            return UNKNOWN_RUNE;
+            return RUNE_NOT_EXISTS;
         }
         return Integer.parseInt(rightOperand);
     }
