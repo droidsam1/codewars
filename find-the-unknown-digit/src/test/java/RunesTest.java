@@ -53,9 +53,9 @@ class RunesTest {
         assertEquals(expected, sum);
     }
 
-    @ParameterizedTest @MethodSource("missingNumberInSums") void shouldFindTheMissingNumberInSums(
-            String input, int expected
-    ) {
+    @ParameterizedTest
+    @MethodSource("missingNumberInSums")
+    void shouldFindTheMissingNumberInSums(String input, int expected) {
         var sum = Runes.solveExpression(input);
 
         assertEquals(expected, sum);
@@ -71,6 +71,13 @@ class RunesTest {
         assertEquals(2, Runes.solveExpression("?*11=??"), "Answer for expression '?*11=??' ");
         assertEquals(2, Runes.solveExpression("??*1=??"), "Answer for expression '??*1=??' ");
         assertEquals(-1, Runes.solveExpression("??+??=??"), "Answer for expression '??+??=??' ");
+    }
+
+    @Test void testEdgeCase() {
+        assertEquals(8,
+                     Runes.solveExpression("-?56373--9216=-?47157"),
+                     "Answer for expression '-?56373--9216=-?47157' "
+        );
     }
 
 }
