@@ -30,11 +30,7 @@ public class Runes {
                 operator)) {
             return -1;
         }
-        if (lefOperand.contains(UNKNOWN_RUNE) || rightOperand.contains(UNKNOWN_RUNE)) {
-            return tryToSolveUnknownRune();
-        }
-
-        return operator.apply(Integer.parseInt(lefOperand), Integer.parseInt(rightOperand));
+        return tryToSolveUnknownRune();
     }
 
     private static RUNE_OPERATOR extractOperator() {
@@ -63,15 +59,19 @@ public class Runes {
     }
 
     private static boolean isNumberWithLeadingZeroes(String... operand) {
-        return Arrays.stream(operand).anyMatch(op -> op.startsWith("0") && !isZero(op));
+        return Arrays.stream(operand).anyMatch(op -> startWithZero(op) && !isZero(op));
     }
 
     private static boolean isCandidateNumberAlreadyPresent(int i, String... operand) {
         return Arrays.stream(operand).anyMatch(op -> op.contains(String.valueOf(i)));
     }
 
-    private static boolean isZero(String lefOperand) {
-        return lefOperand.matches("0");
+    private static boolean startWithZero(String operand) {
+        return operand.matches("^(-?0).*");
+    }
+
+    private static boolean isZero(String operand) {
+        return operand.matches("0");
     }
 
     private static String extractRightOperand() {
