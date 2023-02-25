@@ -4,7 +4,7 @@ import java.util.Arrays;
 import java.util.function.BinaryOperator;
 
 public enum RUNE_OPERATOR {
-    SUM("+", Integer::sum), PRODUCT("*", (a, b) -> a * b), UNKNOWN("", (a, b) -> 0);
+    SUM("+", Integer::sum), PRODUCT("*", (a, b) -> a * b), SUBTRACTION("-", (a, b) -> a - b), UNKNOWN("", (a, b) -> 0);
     private final String representation;
     private final BinaryOperator<Integer> function;
 

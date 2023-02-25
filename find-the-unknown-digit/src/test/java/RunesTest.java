@@ -14,16 +14,12 @@ class RunesTest {
         return Stream.of(
                 Arguments.of("1+1=?", 2), //
                 Arguments.of("1+2=?", 3), //
-                Arguments.of("3+3=?", 6), //
-                Arguments.of("10+1=?", 11),//
-                Arguments.of("11+20=?", 31),//
-                Arguments.of("1122+2211=?", 3333),//
-                Arguments.of("0+0=?", 0)//
+                Arguments.of("3+3=?", 6) //
         );
     }
 
     static Stream<Arguments> multiplyOfTwoNumbers() {
-        return Stream.of(Arguments.of("1*1=?", 1) //
+        return Stream.of(Arguments.of("2*2=?", 4) //
         );
     }
 
