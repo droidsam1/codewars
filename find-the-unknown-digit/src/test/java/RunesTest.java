@@ -19,8 +19,7 @@ class RunesTest {
                 Arguments.of("10+1=?", 11),//
                 Arguments.of("11+20=?", 31),//
                 Arguments.of("1122+2211=?", 3333),//
-                Arguments.of("0+0=?", 0),//
-                Arguments.of("00+000=?", 0)//
+                Arguments.of("0+0=?", 0)//
         );
     }
 
@@ -29,12 +28,13 @@ class RunesTest {
                 Arguments.of("1+?=2", 1), //
                 Arguments.of("?+?=2", 1), //
                 Arguments.of("?+1=1", 0), //
-                Arguments.of("?+?=?", 0) //
+                Arguments.of("?+?=?", 0), //
+                Arguments.of("??+??=??", -1) //
         );
     }
 
 
-    @ParameterizedTest @ValueSource(strings = {"00+01=?", "1+01=?", "1+A=?", "A"})
+    @ParameterizedTest @ValueSource(strings = {"00+01=?", "00+1=?", "1+01=?", "1+A=?", "A"})
     void shouldReturnMinusOneForUnknownRunes(String input) {
         var sum = Runes.solveExpression(input);
 

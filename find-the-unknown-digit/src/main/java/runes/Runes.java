@@ -1,5 +1,6 @@
 package runes;
 
+import java.util.Arrays;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -54,12 +55,13 @@ public class Runes {
         return lefOperand;
     }
 
-    private static boolean isNumberWithLeadingZeroes(String operand) {
-        return operand.startsWith("0") && !isZero(operand);
+    private static boolean isNumberWithLeadingZeroes(String... operand) {
+        return Arrays.stream(operand).anyMatch(op -> op.startsWith("0") && !isZero(op));
     }
 
+
     private static boolean isZero(String lefOperand) {
-        return lefOperand.matches("0+");
+        return lefOperand.matches("0");
     }
 
     private static String extractRightOperand() {
@@ -76,10 +78,14 @@ public class Runes {
         var total = extractTotal();
 
         for (int i = 0; i < 10; i++) {
-            var newLeft = Integer.parseInt(lefOperand.replace(UNKNOWN_RUNE, String.valueOf(i)));
-            var newRight = Integer.parseInt(rightOperand.replace(UNKNOWN_RUNE, String.valueOf(i)));
-            var newTotal = Integer.parseInt(total.replace(UNKNOWN_RUNE, String.valueOf(i)));
-            if (newTotal == newLeft + newRight) {
+
+            var newLeft = lefOperand.replace(UNKNOWN_RUNE, String.valueOf(i));
+            var newRight = rightOperand.replace(UNKNOWN_RUNE, String.valueOf(i));
+            var newTotal = total.replace(UNKNOWN_RUNE, String.valueOf(i));
+            if (isNumberWithLeadingZeroes(newLeft, newRight, newTotal)) {
+                continue;
+            }
+            if (Integer.parseInt(newTotal) == Integer.parseInt(newLeft) + Integer.parseInt(newRight)) {
                 return i;
             }
         }
