@@ -1,5 +1,7 @@
 package runes;
 
+import java.util.regex.Pattern;
+
 public class Runes {
 
     private static final int UNKNOWN_RUNE = -1;
@@ -12,6 +14,28 @@ public class Runes {
             return UNKNOWN_RUNE;
         }
 
-        return 2;
+        return extractLeftOperand(expression) + extractRightOperand(expression);
+    }
+
+    private static int extractLeftOperand(String expression) {
+        var pattern = Pattern.compile("(\\d)([+\\-*])");
+        var matcher = pattern.matcher(expression);
+
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group(1));
+        }
+
+        return UNKNOWN_RUNE;
+    }
+
+    private static int extractRightOperand(String expression) {
+        var pattern = Pattern.compile("([+\\-*])(\\d)");
+        var matcher = pattern.matcher(expression);
+
+        if (matcher.find()) {
+            return Integer.parseInt(matcher.group(2));
+        }
+
+        return UNKNOWN_RUNE;
     }
 }

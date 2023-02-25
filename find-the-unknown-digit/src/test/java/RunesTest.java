@@ -11,8 +11,9 @@ import org.junit.jupiter.api.Test;
 class RunesTest {
 
     public static Stream<Arguments> sumOfTwoNumbers() {
-        return Stream.of(Arguments.of("1+1=?", 2)//
-//                , Arguments.of("1+2=?", 3)
+        return Stream.of(
+                Arguments.of("1+1=?", 2)//
+                , Arguments.of("1+2=?", 3)
         );
     }
 
