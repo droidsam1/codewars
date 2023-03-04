@@ -8,6 +8,10 @@ import org.junit.jupiter.api.Test;
 
 class MorseCodeDecoderTest {
 
+    @Test void shouldBeAbleToDecodeSimpleLetter() {
+        assertThat(MorseCodeDecoder.decodeMorse(MorseCodeDecoder.decodeBits("1")), is("E"));
+    }
+
     @Disabled @Test void testExampleFromDescription() {
         assertThat(
                 MorseCodeDecoder.decodeMorse(MorseCodeDecoder.decodeBits(
