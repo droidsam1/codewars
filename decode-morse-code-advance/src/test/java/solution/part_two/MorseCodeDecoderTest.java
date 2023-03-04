@@ -2,6 +2,7 @@ package solution.part_two;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.MatcherAssert.assertThat;
+import static solution.examples.EXAMPLES.HEY_JUDE_EXAMPLE;
 import static solution.part_two.MorseCodeDecoder.decodeBits;
 import static solution.part_two.MorseCodeDecoder.decodeMorse;
 
@@ -17,9 +18,10 @@ class MorseCodeDecoderTest {
     }
 
     @Test void shouldBeAbleToDecodeSentenceAtSimpleRate() {
-        assertThat(decodeBits(EXAMPLES.HEY_JUDE.getBinaryString()), is(EXAMPLES.HEY_JUDE.getMorseString()));
-        assertThat(decodeMorse(decodeBits(EXAMPLES.HEY_JUDE.getBinaryString())),
-                   is(EXAMPLES.HEY_JUDE.getEnglishString())
+        assertThat(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString()), is(HEY_JUDE_EXAMPLE.getMorseString()));
+
+        assertThat(decodeMorse(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString())),
+                   is(HEY_JUDE_EXAMPLE.getEnglishString())
         );
     }
 
@@ -31,33 +33,4 @@ class MorseCodeDecoderTest {
         );
     }
 
-    enum EXAMPLES {
-        HEY_JUDE(
-                "10101010001000111010111011100000001011101110111000101011100011101010001",
-                ".... . -.--   .--- ..- -.. .",
-                "HEY JUDE"
-        );
-
-        private final String binaryString;
-        private final String morseString;
-        private final String englishString;
-
-        EXAMPLES(String binaryString, String morseString, String englishString) {
-            this.binaryString = binaryString;
-            this.morseString = morseString;
-            this.englishString = englishString;
-        }
-
-        public String getBinaryString() {
-            return binaryString;
-        }
-
-        public String getMorseString() {
-            return morseString;
-        }
-
-        public String getEnglishString() {
-            return englishString;
-        }
-    }
 }
