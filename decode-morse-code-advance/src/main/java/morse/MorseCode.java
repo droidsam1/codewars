@@ -1,256 +1,101 @@
 package morse;
 
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.stream.Collectors;
+
 public class MorseCode {
 
+    private static final Map<String, String> morseCodeMap = buildMorseCodeMap();
 
     private MorseCode() {
-
     }
 
     public static String get(String morseCode) {
-        return decode(morseCode).toUpperCase();
+        return morseCodeMap.get(morseCode.toUpperCase());
     }
 
-    private static String encode(String toEncode) {
-        String morse = toEncode;
 
-        if (toEncode.equalsIgnoreCase("a")) {
-            morse = ".-";
-        }
-        if (toEncode.equalsIgnoreCase("b")) {
-            morse = "-...";
-        }
-        if (toEncode.equalsIgnoreCase("c")) {
-            morse = "-.-.";
-        }
-        if (toEncode.equalsIgnoreCase("d")) {
-            morse = "-..";
-        }
-        if (toEncode.equalsIgnoreCase("e")) {
-            morse = ".";
-        }
-        if (toEncode.equalsIgnoreCase("f")) {
-            morse = "..-.";
-        }
-        if (toEncode.equalsIgnoreCase("g")) {
-            morse = "--.";
-        }
-        if (toEncode.equalsIgnoreCase("h")) {
-            morse = "....";
-        }
-        if (toEncode.equalsIgnoreCase("i")) {
-            morse = "..";
-        }
-        if (toEncode.equalsIgnoreCase("j")) {
-            morse = ".---";
-        }
-        if (toEncode.equalsIgnoreCase("k")) {
-            morse = "-.-";
-        }
-        if (toEncode.equalsIgnoreCase("l")) {
-            morse = ".-..";
-        }
-        if (toEncode.equalsIgnoreCase("m")) {
-            morse = "--";
-        }
-        if (toEncode.equalsIgnoreCase("n")) {
-            morse = "-.";
-        }
-        if (toEncode.equalsIgnoreCase("o")) {
-            morse = "---";
-        }
-        if (toEncode.equalsIgnoreCase("p")) {
-            morse = ".--.";
-        }
-        if (toEncode.equalsIgnoreCase("q")) {
-            morse = "--.-";
-        }
-        if (toEncode.equalsIgnoreCase("r")) {
-            morse = ".-.";
-        }
-        if (toEncode.equalsIgnoreCase("s")) {
-            morse = "...";
-        }
-        if (toEncode.equalsIgnoreCase("t")) {
-            morse = "-";
-        }
-        if (toEncode.equalsIgnoreCase("u")) {
-            morse = "..-";
-        }
-        if (toEncode.equalsIgnoreCase("v")) {
-            morse = "...-";
-        }
-        if (toEncode.equalsIgnoreCase("w")) {
-            morse = ".--";
-        }
-        if (toEncode.equalsIgnoreCase("x")) {
-            morse = "-..-";
-        }
-        if (toEncode.equalsIgnoreCase("y")) {
-            morse = "-.--";
-        }
-        if (toEncode.equalsIgnoreCase("z")) {
-            morse = "--..";
-        }
-        if (toEncode.equalsIgnoreCase("0")) {
-            morse = "-----";
-        }
-        if (toEncode.equalsIgnoreCase("1")) {
-            morse = ".----";
-        }
-        if (toEncode.equalsIgnoreCase("2")) {
-            morse = "..---";
-        }
-        if (toEncode.equalsIgnoreCase("3")) {
-            morse = "...--";
-        }
-        if (toEncode.equalsIgnoreCase("4")) {
-            morse = "....-";
-        }
-        if (toEncode.equalsIgnoreCase("5")) {
-            morse = ".....";
-        }
-        if (toEncode.equalsIgnoreCase("6")) {
-            morse = "-....";
-        }
-        if (toEncode.equalsIgnoreCase("7")) {
-            morse = "--...";
-        }
-        if (toEncode.equalsIgnoreCase("8")) {
-            morse = "---..";
-        }
-        if (toEncode.equalsIgnoreCase("9")) {
-            morse = "----.";
-        }
-        if (toEncode.equalsIgnoreCase(".")) {
-            morse = ".-.-";
-        }
-        if (toEncode.equalsIgnoreCase(",")) {
-            morse = "--..--";
-        }
-        if (toEncode.equalsIgnoreCase("?")) {
-            morse = "..--..";
-        }
-
-        return morse;
+    private static Map<String, String> buildMorseCodeMap() {
+        var morseCodeMap = new HashMap<String, String>();
+        morseCodeMap.putAll(MORSE_CODE_ALPHABET.toMorseMap());
+        morseCodeMap.putAll(MORSE_CODE_NUMBERS.toMorseMap());
+        return morseCodeMap;
     }
 
-    private static String decode(String toEncode) {
-        String morse = toEncode;
 
-        if (toEncode.equalsIgnoreCase(".-")) {
-            morse = "a";
-        }
-        if (toEncode.equalsIgnoreCase("-...")) {
-            morse = "b";
-        }
-        if (toEncode.equalsIgnoreCase("-.-.")) {
-            morse = "c";
-        }
-        if (toEncode.equalsIgnoreCase("-..")) {
-            morse = "d";
-        }
-        if (toEncode.equalsIgnoreCase(".")) {
-            morse = "e";
-        }
-        if (toEncode.equalsIgnoreCase("..-.")) {
-            morse = "f";
-        }
-        if (toEncode.equalsIgnoreCase("--.")) {
-            morse = "g";
-        }
-        if (toEncode.equalsIgnoreCase("....")) {
-            morse = "h";
-        }
-        if (toEncode.equalsIgnoreCase("..")) {
-            morse = "i";
-        }
-        if (toEncode.equalsIgnoreCase(".---")) {
-            morse = "j";
-        }
-        if (toEncode.equalsIgnoreCase("-.-")) {
-            morse = "k";
-        }
-        if (toEncode.equalsIgnoreCase(".-..")) {
-            morse = "l";
-        }
-        if (toEncode.equalsIgnoreCase("--")) {
-            morse = "m";
-        }
-        if (toEncode.equalsIgnoreCase("-.")) {
-            morse = "n";
-        }
-        if (toEncode.equalsIgnoreCase("---")) {
-            morse = "o";
-        }
-        if (toEncode.equalsIgnoreCase(".--.")) {
-            morse = "p";
-        }
-        if (toEncode.equalsIgnoreCase("--.-")) {
-            morse = "q";
-        }
-        if (toEncode.equalsIgnoreCase(".-.")) {
-            morse = "r";
-        }
-        if (toEncode.equalsIgnoreCase("...")) {
-            morse = "s";
-        }
-        if (toEncode.equalsIgnoreCase("-")) {
-            morse = "t";
-        }
-        if (toEncode.equalsIgnoreCase("..-")) {
-            morse = "u";
-        }
-        if (toEncode.equalsIgnoreCase("...-")) {
-            morse = "v";
-        }
-        if (toEncode.equalsIgnoreCase(".--")) {
-            morse = "w";
-        }
-        if (toEncode.equalsIgnoreCase("-..-")) {
-            morse = "x";
-        }
-        if (toEncode.equalsIgnoreCase("-.--")) {
-            morse = "y";
-        }
-        if (toEncode.equalsIgnoreCase("--..")) {
-            morse = "z";
-        }
-        if (toEncode.equalsIgnoreCase("-----")) {
-            morse = "0";
-        }
-        if (toEncode.equalsIgnoreCase(".----")) {
-            morse = "1";
-        }
-        if (toEncode.equalsIgnoreCase("..---")) {
-            morse = "2";
-        }
-        if (toEncode.equalsIgnoreCase("...--")) {
-            morse = "3";
-        }
-        if (toEncode.equalsIgnoreCase("....-")) {
-            morse = "4";
-        }
-        if (toEncode.equalsIgnoreCase(".....")) {
-            morse = "5";
-        }
-        if (toEncode.equalsIgnoreCase("-....")) {
-            morse = "6";
-        }
-        if (toEncode.equalsIgnoreCase("--...")) {
-            morse = "7";
-        }
-        if (toEncode.equalsIgnoreCase("---..")) {
-            morse = "8";
-        }
-        if (toEncode.equalsIgnoreCase("----.")) {
-            morse = "9";
-        }
-        if (toEncode.equalsIgnoreCase("|")) {
-            morse = "";
+    protected enum MORSE_CODE_ALPHABET {
+        A(".-", "A"),//
+        B("-...", "B"),//
+        C("-.-.", "C"),//
+        D("-..", "D"),//
+        E(".", "E"),//
+        F("..-.", "F"),//
+        G("--.", "G"),//
+        H("....", "H"),//
+        I("..", "I"),//
+        J(".---", "J"),//
+        K("-.-", "K"),//
+        L(".-..", "L"),//
+        M("--", "M"),//
+        N("-.", "N"),//
+        O("---", "O"),//
+        P(".--.", "P"),//
+        Q("--.-", "Q"),//
+        R(".-.", "R"),//
+        S("...", "S"),//
+        T("-", "T"),//
+        U("..-", "U"),//
+        V("...-", "V"),//
+        W(".--", "W"),//
+        X("-..-", "X"),//
+        Y("-.--", "Y"),//
+        Z("--..", "Z");
+
+
+        private final String morseCode;
+        private final String englishCode;
+
+        MORSE_CODE_ALPHABET(String morseCode, String englishCode) {
+            this.morseCode = morseCode;
+            this.englishCode = englishCode;
         }
 
-        return morse;
+        public static Map<String, String> toMorseMap() {
+            return Arrays.stream(MORSE_CODE_ALPHABET.values())
+                         .collect(Collectors.toMap(morse -> morse.morseCode, morse -> morse.englishCode));
+        }
     }
-    
+
+
+    private enum MORSE_CODE_NUMBERS {
+        ZERO("-----", "0"),//
+        ONE(".----", "1"),//
+        TWO("..---", "2"),//
+        THREE("...--", "3"),//
+        FOUR("....-", "4"),//
+        FIVE(".....", "5"),//
+        SIX("-....", "6"),//
+        SEVEN("--...", "7"),//
+        EIGHT("---..", "8"),//
+        NINE("----.", "9h");//
+
+
+        private final String morseCode;
+        private final String englishCode;
+
+        MORSE_CODE_NUMBERS(String morseCode, String englishCode) {
+            this.morseCode = morseCode;
+            this.englishCode = englishCode;
+        }
+
+        public static Map<String, String> toMorseMap() {
+            return Arrays.stream(MORSE_CODE_NUMBERS.values())
+                         .collect(Collectors.toMap(morseCodeNumbers -> morseCodeNumbers.morseCode,
+                                                   morseCodeNumbers -> morseCodeNumbers.englishCode
+                         ));
+        }
+    }
+
 }

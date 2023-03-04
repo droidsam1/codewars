@@ -7,12 +7,10 @@ import org.junit.jupiter.api.Test;
 
 class MorseCodeDecoderTest {
 
-
     @Test void shouldReturnEnglish() {
 
         var decodedMessage = MorseCodeDecoder.decode(".... . -.--   .--- ..- -.. .");
 
         assertThat(decodedMessage, CoreMatchers.is("HEY JUDE"));
     }
-
 }
