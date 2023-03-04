@@ -1,5 +1,7 @@
 package morse;
 
+import morse.code.MorseCode;
+
 public class MorseCodeDecoder {
 
     public static String decodeBits(String bits) {

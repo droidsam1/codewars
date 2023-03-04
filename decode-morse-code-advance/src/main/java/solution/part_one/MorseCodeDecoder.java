@@ -2,7 +2,7 @@ package solution.part_one;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
-import morse.MorseCode;
+import morse.code.MorseCode;
 
 public class MorseCodeDecoder {
 
