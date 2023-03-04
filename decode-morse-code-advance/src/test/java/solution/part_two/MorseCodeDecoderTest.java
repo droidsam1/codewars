@@ -14,14 +14,18 @@ class MorseCodeDecoderTest {
         assertThat(decodeMorse(decodeBits("1")), is("E"));
         assertThat(decodeMorse(decodeBits("10111")), is("A"));
         assertThat(decodeMorse(decodeBits("101010")), is("S"));
+        assertThat(decodeMorse(decodeBits("111")), is("E"));
+        assertThat(decodeMorse(decodeBits("01110")), is("E"));
+        assertThat(decodeMorse(decodeBits("1110111")), is("M"));
+        assertThat(decodeMorse(decodeBits("10001")), is("EE"));
+        assertThat(decodeMorse(decodeBits("111000000000111")), is("EE"));
     }
 
     @Test void shouldBeAbleToDecodeSentenceAtSimpleRate() {
         assertThat(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString()), is(HEY_JUDE_EXAMPLE.getMorseString()));
 
-        assertThat(
-                decodeMorse(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString())),
-                is(HEY_JUDE_EXAMPLE.getEnglishString())
+        assertThat(decodeMorse(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString())),
+                   is(HEY_JUDE_EXAMPLE.getEnglishString())
         );
     }
 

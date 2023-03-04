@@ -20,7 +20,8 @@ public class MorseCodeDecoder {
                    .replace(spaceBetweenChars, " ")
                    .replace(dash, "-")
                    .replace(dot, ".")
-                   .replace(spaceBetweenSymbols, "");
+                   .replace(spaceBetweenSymbols, "")
+                   .replace("0", "");
     }
 
     public static String decodeMorse(String morseCode) {
