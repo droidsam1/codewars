@@ -13,8 +13,8 @@ class MorseCodeDecoderTest {
 
     @Test void shouldBeAbleToDecodeSimpleLetterAtSimpleRate() {
         assertThat(decodeMorse(decodeBits("1")), is("E"));
-        assertThat(decodeMorse(decodeBits("10")), is("A"));
-        assertThat(decodeMorse(decodeBits("111")), is("S"));
+        assertThat(decodeMorse(decodeBits("10111")), is("A"));
+        assertThat(decodeMorse(decodeBits("101010")), is("S"));
     }
 
     @Test void shouldBeAbleToDecodeSentenceAtSimpleRate() {
