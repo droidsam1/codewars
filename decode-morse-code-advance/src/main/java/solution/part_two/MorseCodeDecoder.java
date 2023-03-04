@@ -3,14 +3,24 @@ package solution.part_two;
 public class MorseCodeDecoder {
 
     private MorseCodeDecoder() {
+
     }
 
     public static String decodeBits(String bits) {
-        return bits.replace("0000000", "   ")
-                   .replace("000", " ")
-                   .replace("111", "-")
-                   .replace("1", ".")
-                   .replace("0", "");
+
+        var samplingRate = MorseDecoderSampleRate.getSamplingRate(bits);
+
+        var spaceBetweenWords = "0000000".repeat(samplingRate);
+        var spaceBetweenChars = "000".repeat(samplingRate);
+        var dash = "111".repeat(samplingRate);
+        var dot = "1".repeat(samplingRate);
+        var spaceBetweenSymbols = "0".repeat(samplingRate);
+
+        return bits.replace(spaceBetweenWords, "   ")
+                   .replace(spaceBetweenChars, " ")
+                   .replace(dash, "-")
+                   .replace(dot, ".")
+                   .replace(spaceBetweenSymbols, "");
     }
 
     public static String decodeMorse(String morseCode) {
