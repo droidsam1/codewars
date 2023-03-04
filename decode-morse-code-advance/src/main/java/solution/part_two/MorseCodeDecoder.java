@@ -1,4 +1,4 @@
-package morse;
+package solution.part_two;
 
 import morse.code.MorseCode;
 
