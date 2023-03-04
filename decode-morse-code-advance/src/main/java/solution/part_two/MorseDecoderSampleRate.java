@@ -1,5 +1,8 @@
 package solution.part_two;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 public class MorseDecoderSampleRate {
 
     private MorseDecoderSampleRate() {
@@ -7,32 +10,12 @@ public class MorseDecoderSampleRate {
     }
 
     public static int getSamplingRate(String bits) {
-        var bitsArray = bits.replaceAll("0+$", "").replaceAll("^0+", "").toCharArray();
-        int minNumZerosBetweenOnes = Integer.MAX_VALUE;
-        int minNumOnesBetweenZeros = Integer.MAX_VALUE;
-
-        var numZeros = 0;
-        var numOnes = 0;
-        for (char bit : bitsArray) {
-
-            if (bit == '0') {
-                numZeros++;
-                if (numOnes > 0 && numZeros < minNumOnesBetweenZeros) {
-                    minNumOnesBetweenZeros = numOnes;
-                }
-                numOnes = 0;
-            } else {
-                numOnes++;
-                if (numZeros > 0 && numZeros < minNumZerosBetweenOnes) {
-                    minNumZerosBetweenOnes = numZeros;
-                }
-                numZeros = 0;
-            }
+        String trimmedBits = bits.replaceAll("(^0+)|(0+$)", "");
+        int rate = Integer.MAX_VALUE;
+        Matcher matcher = Pattern.compile("1+|0+").matcher(trimmedBits);
+        while (matcher.find()) {
+            rate = Math.min(rate, matcher.group().length());
         }
-        if (minNumZerosBetweenOnes == Integer.MAX_VALUE && minNumOnesBetweenZeros == Integer.MAX_VALUE) {
-            return bitsArray.length;
-        }
-
-        return Math.min(minNumZerosBetweenOnes, minNumOnesBetweenZeros);
+        return rate;
     }
 }
