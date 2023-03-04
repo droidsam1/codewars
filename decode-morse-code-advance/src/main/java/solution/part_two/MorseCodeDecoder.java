@@ -1,6 +1,5 @@
 package solution.part_two;
 
-import morse.code.MorseCode;
 
 public class MorseCodeDecoder {
 
@@ -12,6 +11,6 @@ public class MorseCodeDecoder {
     }
 
     public static String decodeMorse(String morseCode) {
-        return MorseCode.get(morseCode);
+        return solution.part_one.MorseCodeDecoder.decode(morseCode);
     }
 }

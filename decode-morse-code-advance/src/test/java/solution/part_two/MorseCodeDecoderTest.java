@@ -18,6 +18,7 @@ class MorseCodeDecoderTest {
 
     @Test void shouldBeAbleToDecodeSentenceAtSimpleRate() {
         assertThat(decodeBits("1111 1 0100   1000 110 011 1"), is(".... . -.--   .--- ..- -.. ."));
+        assertThat(decodeMorse(decodeBits("1111 1 0100   1000 110 011 1")), is("HEY JUDE"));
     }
 
     @Disabled @Test void testExampleFromDescription() {
