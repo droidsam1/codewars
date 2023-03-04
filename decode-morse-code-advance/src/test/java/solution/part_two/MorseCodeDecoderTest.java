@@ -10,6 +10,8 @@ class MorseCodeDecoderTest {
 
     @Test void shouldBeAbleToDecodeSimpleLetter() {
         assertThat(MorseCodeDecoder.decodeMorse(MorseCodeDecoder.decodeBits("1")), is("E"));
+        assertThat(MorseCodeDecoder.decodeMorse(MorseCodeDecoder.decodeBits("10")), is("A"));
+        assertThat(MorseCodeDecoder.decodeMorse(MorseCodeDecoder.decodeBits("111")), is("S"));
     }
 
     @Disabled @Test void testExampleFromDescription() {
