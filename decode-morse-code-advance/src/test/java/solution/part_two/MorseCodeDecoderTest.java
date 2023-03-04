@@ -6,7 +6,6 @@ import static solution.examples.EXAMPLES.HEY_JUDE_EXAMPLE;
 import static solution.part_two.MorseCodeDecoder.decodeBits;
 import static solution.part_two.MorseCodeDecoder.decodeMorse;
 
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class MorseCodeDecoderTest {
@@ -20,12 +19,13 @@ class MorseCodeDecoderTest {
     @Test void shouldBeAbleToDecodeSentenceAtSimpleRate() {
         assertThat(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString()), is(HEY_JUDE_EXAMPLE.getMorseString()));
 
-        assertThat(decodeMorse(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString())),
-                   is(HEY_JUDE_EXAMPLE.getEnglishString())
+        assertThat(
+                decodeMorse(decodeBits(HEY_JUDE_EXAMPLE.getBinaryString())),
+                is(HEY_JUDE_EXAMPLE.getEnglishString())
         );
     }
 
-    @Disabled("Disable while developing with TDD") @Test void testExampleFromDescription() {
+    @Test void testExampleFromDescription() {
         assertThat(
                 decodeMorse(decodeBits(
                         "1100110011001100000011000000111111001100111111001111110000000000000011001111110011111100111111000000110011001111110000001111110011001100000011")),
