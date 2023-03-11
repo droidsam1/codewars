@@ -1,6 +1,7 @@
 package time_formatter;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class TimeFormatter {
 
@@ -10,7 +11,6 @@ public class TimeFormatter {
     }
 
     public static String formatDuration(int seconds) {
-
         var timeUnitStrings = new ArrayList<String>();
         long remainingSeconds = seconds;
         for (var timeUnit : TIME_UNITS.values()) {
@@ -18,10 +18,10 @@ public class TimeFormatter {
             remainingSeconds = remainingSeconds % timeUnit.seconds;
         }
 
-        return formatTime(timeUnitStrings.toArray(new String[]{}));
+        return formatTime(timeUnitStrings);
     }
 
-    private static String formatTime(String... timeUnits) {
+    private static String formatTime(List<String> timeUnits) {
         var formattedString = new StringBuilder();
         for (var timeUnit : timeUnits) {
             if (!timeUnit.isEmpty()) {
@@ -37,22 +37,6 @@ public class TimeFormatter {
         }
 
         return formattedString.toString();
-    }
-
-    private static String getDays(int seconds) {
-        return format(seconds / TIME_UNITS.DAY.seconds, TIME_UNITS.DAY.name);
-    }
-
-    private static String getHours(int seconds) {
-        return format(seconds / TIME_UNITS.HOUR.seconds, TIME_UNITS.HOUR.name);
-    }
-
-    private static String getMinutes(int seconds) {
-        return format(seconds / TIME_UNITS.MINUTE.seconds, TIME_UNITS.MINUTE.name);
-    }
-
-    private static String getSeconds(int seconds) {
-        return format(seconds / TIME_UNITS.SECONDS.seconds, TIME_UNITS.SECONDS.name);
     }
 
     private static String format(long seconds, String unitOfTime) {
