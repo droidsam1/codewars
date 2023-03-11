@@ -33,9 +33,13 @@ public class TimeFormatter {
 
         if (!remainingSeconds.isEmpty()) {
             if (formattedString.length() != 0) {
-                formattedString.append(" and ");
+                formattedString.append(", ");
             }
             formattedString.append(remainingSeconds);
+        }
+
+        if (formattedString.indexOf(", ") > 0) {
+            formattedString.replace(formattedString.lastIndexOf(", "), formattedString.lastIndexOf(", ") + 2, " and ");
         }
 
         return formattedString.toString();

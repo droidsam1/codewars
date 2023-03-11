@@ -2,12 +2,23 @@ package time_formatter;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
 
 class TimeFormatterTest {
+
+    private static Stream<Arguments> hoursMinutesAndSeconds() {
+        return Stream.of(//
+                         Arguments.of(3661, "1 hour, 1 minute and 1 second"),//
+                         Arguments.of(3601, "1 hour and 1 second"),//
+                         Arguments.of(3720, "1 hour and 2 minutes")
+        );
+    }
 
     @Test void shouldFormatWhenZeroSeconds() {
         var input = 0;
@@ -53,6 +64,14 @@ class TimeFormatterTest {
     void shouldFormatHours(String input, String expected) {
 
         var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));
+
+        assertEquals(expected, formattedString);
+    }
+
+    @ParameterizedTest @MethodSource("hoursMinutesAndSeconds")//
+    void shouldFormatHoursMinutesAndSeconds(int input, String expected) {
+
+        var formattedString = TimeFormatter.formatDuration(input);
 
         assertEquals(expected, formattedString);
     }
