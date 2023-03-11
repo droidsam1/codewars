@@ -14,11 +14,12 @@ public class TimeFormatter {
 
     public static String formatDuration(int seconds) {
 
-        var hours = getHours(seconds);
+        var days = getDays(seconds);
+        var hours = getHours(seconds % 86400);
         var minutes = getMinutes(seconds % SECONDS_IN_AN_HOUR);
         var remainingSeconds = getSeconds(seconds % SECONDS_IN_A_MINUTE);
 
-        return formatTime(hours, minutes, remainingSeconds);
+        return formatTime(days, hours, minutes, remainingSeconds);
     }
 
     private static String formatTime(String... timeUnits) {
@@ -37,6 +38,10 @@ public class TimeFormatter {
         }
 
         return formattedString.toString();
+    }
+
+    private static String getDays(int seconds) {
+        return format(seconds / 86400, "day");
     }
 
     private static String getHours(int seconds) {
