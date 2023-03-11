@@ -9,13 +9,22 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class TimeFormatterTest {
 
-    @ParameterizedTest @CsvSource(value = {"1, 1 second", "2, 2 seconds"})
+    @ParameterizedTest @CsvSource(value = {"1, 1 second", "2, 2 seconds"})//
     void shouldFormatSeconds(String input, String expected) {
 
         var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));
 
         assertEquals(expected, formattedString);
     }
+
+    @Test void shouldFormatWhenZeroSeconds() {
+        var input = 0;
+
+        var formattedString = TimeFormatter.formatDuration(input);
+
+        assertEquals("", formattedString);
+    }
+
 
     @Test @Disabled("while developing with TDD") void exampleTests() {
         assertEquals("1 second", TimeFormatter.formatDuration(1));

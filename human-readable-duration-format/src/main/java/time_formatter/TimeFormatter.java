@@ -6,6 +6,10 @@ public class TimeFormatter {
     }
 
     public static String formatDuration(int seconds) {
+        if (seconds == 0) {
+            return "";
+        }
+
         if (seconds == 1) {
             return String.format("%s second", seconds);
         }
