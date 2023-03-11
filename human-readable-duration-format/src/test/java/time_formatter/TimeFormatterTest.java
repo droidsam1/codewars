@@ -7,6 +7,15 @@ import org.junit.jupiter.api.Test;
 
 class TimeFormatterTest {
 
+    @Test void shouldFormatSeconds() {
+        var input = 1;
+
+        var formattedString = TimeFormatter.formatDuration(input);
+
+        assertEquals("1 second", formattedString);
+
+    }
+
     @Test @Disabled("while developing with TDD") void exampleTests() {
         assertEquals("1 second", TimeFormatter.formatDuration(1));
         assertEquals("1 minute and 2 seconds", TimeFormatter.formatDuration(62));
