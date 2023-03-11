@@ -1,6 +1,8 @@
 package time_formatter;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.List;
 
 public class TimeFormatter {
@@ -13,13 +15,22 @@ public class TimeFormatter {
     public static String formatDuration(int seconds) {
         var timeUnitStrings = new ArrayList<String>();
         long remainingSeconds = seconds;
-        for (var timeUnit : TIME_UNITS.values()) {
+        for (var timeUnit : getAllTimeUnitsSorted()) {
             timeUnitStrings.add(format(remainingSeconds / timeUnit.seconds, timeUnit.name));
             remainingSeconds = remainingSeconds % timeUnit.seconds;
         }
 
         return formatTime(timeUnitStrings);
     }
+
+    private static List<TIME_UNITS> getAllTimeUnitsSorted() {
+        return Arrays.stream(TIME_UNITS.values()).sorted(fromYearsToSecondsComparator()).toList();
+    }
+
+    private static Comparator<TIME_UNITS> fromYearsToSecondsComparator() {
+        return Comparator.comparing((TIME_UNITS p) -> p.seconds).reversed();
+    }
+
 
     private static String formatTime(List<String> timeUnits) {
         var formattedString = new StringBuilder();
