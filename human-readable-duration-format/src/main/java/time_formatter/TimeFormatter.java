@@ -8,6 +8,8 @@ public class TimeFormatter {
     private static final String TIME_UNIT_FORMAT = "%s %s";
     private static final String HOUR = "hour";
     private static final int SECONDS_IN_AN_HOUR = 3600;
+    private static final int SECONDS_IN_ONE_DAY = 86400;
+    private static final String DAY = "day";
 
     private TimeFormatter() {
     }
@@ -15,7 +17,7 @@ public class TimeFormatter {
     public static String formatDuration(int seconds) {
 
         var days = getDays(seconds);
-        var hours = getHours(seconds % 86400);
+        var hours = getHours(seconds % SECONDS_IN_ONE_DAY);
         var minutes = getMinutes(seconds % SECONDS_IN_AN_HOUR);
         var remainingSeconds = getSeconds(seconds % SECONDS_IN_A_MINUTE);
 
@@ -41,7 +43,7 @@ public class TimeFormatter {
     }
 
     private static String getDays(int seconds) {
-        return format(seconds / 86400, "day");
+        return format(seconds / SECONDS_IN_ONE_DAY, DAY);
     }
 
     private static String getHours(int seconds) {
