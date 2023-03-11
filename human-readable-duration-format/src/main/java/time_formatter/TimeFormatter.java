@@ -6,26 +6,30 @@ public class TimeFormatter {
     private static final String SECOND = "second";
     private static final int SECONDS_IN_A_MINUTE = 60;
     private static final String TIME_UNIT_FORMAT = "%s %s";
+    private static final String HOUR = "hour";
+    private static final int SECONDS_IN_AN_HOUR = 3600;
 
     private TimeFormatter() {
     }
 
     public static String formatDuration(int seconds) {
         if (seconds >= SECONDS_IN_A_MINUTE) {
-            return String.format("%s %s %s", getHours(seconds), getMinutes(seconds), getSeconds(seconds)).trim();
+            return String.format(
+                    "%s %s %s",
+                    getHours(seconds),
+                    getMinutes(seconds % SECONDS_IN_AN_HOUR),
+                    getSeconds(seconds % SECONDS_IN_A_MINUTE)
+            ).trim();
         }
         return getSeconds(seconds);
     }
 
     private static String getHours(int seconds) {
-        return format(seconds / (3600), "hour");
+        return format(seconds / SECONDS_IN_AN_HOUR, HOUR);
     }
 
     private static String getMinutes(int seconds) {
-        if (seconds < 3600) {
-            return format(seconds / SECONDS_IN_A_MINUTE, MINUTE);
-        }
-        return "";
+        return format(seconds / SECONDS_IN_A_MINUTE, MINUTE);
     }
 
     private static String getSeconds(int seconds) {
