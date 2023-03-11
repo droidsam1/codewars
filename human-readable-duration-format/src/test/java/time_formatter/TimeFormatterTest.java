@@ -9,8 +9,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 
 class TimeFormatterTest {
 
-    @ParameterizedTest
-    @CsvSource(value = "1, 1 second")
+    @ParameterizedTest @CsvSource(value = {"1, 1 second", "2, 2 seconds"})
     void shouldFormatSeconds(String input, String expected) {
 
         var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));
