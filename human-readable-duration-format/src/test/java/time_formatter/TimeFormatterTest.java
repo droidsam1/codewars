@@ -4,16 +4,18 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 
 class TimeFormatterTest {
 
-    @Test void shouldFormatSeconds() {
-        var input = 1;
+    @ParameterizedTest
+    @CsvSource(value = "1, 1 second")
+    void shouldFormatSeconds(String input, String expected) {
 
-        var formattedString = TimeFormatter.formatDuration(input);
+        var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));
 
-        assertEquals("1 second", formattedString);
-
+        assertEquals(expected, formattedString);
     }
 
     @Test @Disabled("while developing with TDD") void exampleTests() {
