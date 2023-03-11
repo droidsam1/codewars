@@ -18,24 +18,18 @@ public class TimeFormatter {
         var minutes = getMinutes(seconds % SECONDS_IN_AN_HOUR);
         var remainingSeconds = getSeconds(seconds % SECONDS_IN_A_MINUTE);
 
-        StringBuilder formattedString = new StringBuilder();
+        return formatTime(hours, minutes, remainingSeconds);
+    }
 
-        if (!hours.isEmpty()) {
-            formattedString.append(hours);
-        }
-
-        if (!minutes.isEmpty()) {
-            if (formattedString.length() != 0) {
-                formattedString.append(", ");
+    private static String formatTime(String... timeUnits) {
+        var formattedString = new StringBuilder();
+        for (var timeUnit : timeUnits) {
+            if (!timeUnit.isEmpty()) {
+                if (formattedString.length() != 0) {
+                    formattedString.append(", ");
+                }
+                formattedString.append(timeUnit);
             }
-            formattedString.append(minutes);
-        }
-
-        if (!remainingSeconds.isEmpty()) {
-            if (formattedString.length() != 0) {
-                formattedString.append(", ");
-            }
-            formattedString.append(remainingSeconds);
         }
 
         if (formattedString.indexOf(", ") > 0) {
