@@ -2,22 +2,26 @@ package time_formatter;
 
 public class TimeFormatter {
 
+    private static final String MINUTE = "minute";
+    private static final String SECOND = "second";
+    private static final int SECONDS_IN_A_MINUTE = 60;
+
     private TimeFormatter() {
     }
 
     public static String formatDuration(int seconds) {
-        if (seconds >= 60) {
-            return String.format("%s %s", getMinutes(seconds), getSeconds(seconds % 60)).trim();
+        if (seconds >= SECONDS_IN_A_MINUTE) {
+            return String.format("%s %s", getMinutes(seconds), getSeconds(seconds % SECONDS_IN_A_MINUTE)).trim();
         }
         return getSeconds(seconds);
     }
 
     private static String getMinutes(int seconds) {
-        if (seconds / 60 == 1) {
-            return String.format("%s minute", seconds / 60);
+        if (seconds / SECONDS_IN_A_MINUTE == 1) {
+            return String.format("%s " + MINUTE, seconds / SECONDS_IN_A_MINUTE);
         }
-        if (seconds / 60 > 1) {
-            return String.format("%s minutes", seconds / 60);
+        if (seconds / SECONDS_IN_A_MINUTE > 1) {
+            return String.format("%s " + MINUTE + "s", seconds / SECONDS_IN_A_MINUTE);
         }
         return "";
     }
@@ -28,8 +32,8 @@ public class TimeFormatter {
         }
 
         if (seconds == 1) {
-            return String.format("%s second", seconds);
+            return String.format("%s " + SECOND, seconds);
         }
-        return String.format("%s seconds", seconds);
+        return String.format("%s " + SECOND + "s", seconds);
     }
 }
