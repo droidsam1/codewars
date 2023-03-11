@@ -13,15 +13,32 @@ public class TimeFormatter {
     }
 
     public static String formatDuration(int seconds) {
-        if (seconds >= SECONDS_IN_A_MINUTE) {
-            return String.format(
-                    "%s %s %s",
-                    getHours(seconds),
-                    getMinutes(seconds % SECONDS_IN_AN_HOUR),
-                    getSeconds(seconds % SECONDS_IN_A_MINUTE)
-            ).trim();
+
+        var hours = getHours(seconds);
+        var minutes = getMinutes(seconds % SECONDS_IN_AN_HOUR);
+        var remainingSeconds = getSeconds(seconds % SECONDS_IN_A_MINUTE);
+
+        StringBuilder formattedString = new StringBuilder();
+
+        if (!hours.isEmpty()) {
+            formattedString.append(hours);
         }
-        return getSeconds(seconds);
+
+        if (!minutes.isEmpty()) {
+            if (formattedString.length() != 0) {
+                formattedString.append(", ");
+            }
+            formattedString.append(minutes);
+        }
+
+        if (!remainingSeconds.isEmpty()) {
+            if (formattedString.length() != 0) {
+                formattedString.append(" and ");
+            }
+            formattedString.append(remainingSeconds);
+        }
+
+        return formattedString.toString();
     }
 
     private static String getHours(int seconds) {
