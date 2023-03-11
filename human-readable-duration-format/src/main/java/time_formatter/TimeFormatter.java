@@ -1,27 +1,24 @@
 package time_formatter;
 
+import java.util.ArrayList;
+
 public class TimeFormatter {
 
-    private static final String MINUTE = "minute";
-    private static final String SECOND = "second";
-    private static final int SECONDS_IN_A_MINUTE = 60;
     private static final String TIME_UNIT_FORMAT = "%s %s";
-    private static final String HOUR = "hour";
-    private static final int SECONDS_IN_AN_HOUR = 3600;
-    private static final int SECONDS_IN_ONE_DAY = 86400;
-    private static final String DAY = "day";
 
     private TimeFormatter() {
     }
 
     public static String formatDuration(int seconds) {
 
-        var days = getDays(seconds);
-        var hours = getHours(seconds % SECONDS_IN_ONE_DAY);
-        var minutes = getMinutes(seconds % SECONDS_IN_AN_HOUR);
-        var remainingSeconds = getSeconds(seconds % SECONDS_IN_A_MINUTE);
+        var timeUnitStrings = new ArrayList<String>();
+        long remainingSeconds = seconds;
+        for (var timeUnit : TIME_UNITS.values()) {
+            timeUnitStrings.add(format(remainingSeconds / timeUnit.seconds, timeUnit.name));
+            remainingSeconds = remainingSeconds % timeUnit.seconds;
+        }
 
-        return formatTime(days, hours, minutes, remainingSeconds);
+        return formatTime(timeUnitStrings.toArray(new String[]{}));
     }
 
     private static String formatTime(String... timeUnits) {
@@ -76,7 +73,6 @@ public class TimeFormatter {
         private final long seconds;
 
         TIME_UNITS(String name, int seconds) {
-
             this.name = name;
             this.seconds = seconds;
         }
