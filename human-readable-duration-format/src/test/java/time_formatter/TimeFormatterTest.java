@@ -49,6 +49,14 @@ class TimeFormatterTest {
         assertEquals(expected, formattedString);
     }
 
+    @ParameterizedTest @CsvSource(value = {"3600, 1 hour", "7200, 2 hours"})//
+    void shouldFormatHours(String input, String expected) {
+
+        var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));
+
+        assertEquals(expected, formattedString);
+    }
+
 
     @Test @Disabled("while developing with TDD") void exampleTests() {
         assertEquals("1 second", TimeFormatter.formatDuration(1));

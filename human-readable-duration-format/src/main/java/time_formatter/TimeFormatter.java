@@ -12,13 +12,20 @@ public class TimeFormatter {
 
     public static String formatDuration(int seconds) {
         if (seconds >= SECONDS_IN_A_MINUTE) {
-            return String.format(TIME_UNIT_FORMAT, getMinutes(seconds), getSeconds(seconds)).trim();
+            return String.format("%s %s %s", getHours(seconds), getMinutes(seconds), getSeconds(seconds)).trim();
         }
         return getSeconds(seconds);
     }
 
+    private static String getHours(int seconds) {
+        return format(seconds / (3600), "hour");
+    }
+
     private static String getMinutes(int seconds) {
-        return format(seconds / SECONDS_IN_A_MINUTE, MINUTE);
+        if (seconds < 3600) {
+            return format(seconds / SECONDS_IN_A_MINUTE, MINUTE);
+        }
+        return "";
     }
 
     private static String getSeconds(int seconds) {
