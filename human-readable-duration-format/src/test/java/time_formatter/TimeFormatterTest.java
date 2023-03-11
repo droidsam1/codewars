@@ -33,7 +33,7 @@ class TimeFormatterTest {
         assertEquals("", formattedString);
     }
 
-    @ParameterizedTest @CsvSource(value = {"60, 1 minute"})//
+    @ParameterizedTest @CsvSource(value = {"60, 1 minute", "120, 2 minutes"})//
     void shouldFormatMinutes(String input, String expected) {
 
         var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));

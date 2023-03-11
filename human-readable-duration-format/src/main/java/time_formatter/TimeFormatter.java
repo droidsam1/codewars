@@ -7,9 +7,15 @@ public class TimeFormatter {
 
     public static String formatDuration(int seconds) {
         if (seconds == 60) {
-            return String.format("%s minute", seconds/60);
+            return String.format("%s minute", seconds / 60);
         }
+        if (seconds > 60) {
+            return String.format("%s minutes", seconds / 60);
+        }
+        return getSeconds(seconds);
+    }
 
+    private static String getSeconds(int seconds) {
         if (seconds == 0) {
             return "";
         }
