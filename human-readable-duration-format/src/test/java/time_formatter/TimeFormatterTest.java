@@ -25,7 +25,7 @@ class TimeFormatterTest {
 
         var formattedString = TimeFormatter.formatDuration(input);
 
-        assertEquals("", formattedString);
+        assertEquals("now", formattedString);
     }
 
     @ParameterizedTest @CsvSource(value = {"1, 1 second", "2, 2 seconds", "59, 59 seconds"})//
@@ -36,13 +36,6 @@ class TimeFormatterTest {
         assertEquals(expected, formattedString);
     }
 
-    @Test void shouldFormatWhenZeroMinutes() {
-        var input = 0;
-
-        var formattedString = TimeFormatter.formatDuration(input);
-
-        assertEquals("", formattedString);
-    }
 
     @ParameterizedTest @CsvSource(value = {"60, 1 minute", "120, 2 minutes"})//
     void shouldFormatMinutes(String input, String expected) {

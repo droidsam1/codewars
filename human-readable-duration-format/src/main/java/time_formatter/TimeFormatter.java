@@ -13,6 +13,9 @@ public class TimeFormatter {
     }
 
     public static String formatDuration(int seconds) {
+        if(seconds == 0){
+            return "now";
+        }
         var timeUnitStrings = new ArrayList<String>();
         long remainingSeconds = seconds;
         for (var timeUnit : getAllTimeUnitsSorted()) {
