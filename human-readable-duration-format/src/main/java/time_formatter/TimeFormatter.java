@@ -51,7 +51,7 @@ public class TimeFormatter {
     }
 
     enum TIME_UNITS {
-        DAY("day", 86400), HOUR("hour", 3600), MINUTE("minute", 60), SECONDS("second", 1);
+        YEAR("year", 31_536_000), DAY("day", 86400), HOUR("hour", 3600), MINUTE("minute", 60), SECONDS("second", 1);
 
         private final String name;
         private final long seconds;

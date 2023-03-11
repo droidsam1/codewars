@@ -15,7 +15,8 @@ class TimeFormatterTest {
         return Stream.of(//
                          Arguments.of(3661, "1 hour, 1 minute and 1 second"),//
                          Arguments.of(3601, "1 hour and 1 second"),//
-                         Arguments.of(3720, "1 hour and 2 minutes")
+                         Arguments.of(3720, "1 hour and 2 minutes"),//
+                         Arguments.of(3722, "1 hour, 2 minutes and 2 seconds")
         );
     }
 
@@ -77,6 +78,14 @@ class TimeFormatterTest {
 
     @ParameterizedTest @CsvSource(value = {"86400, 1 day"})//
     void shouldFormatDays(String input, String expected) {
+
+        var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));
+
+        assertEquals(expected, formattedString);
+    }
+
+    @ParameterizedTest @CsvSource(value = {"31536000, 1 year", "63072000, 2 years"})//
+    void shouldFormatYears(String input, String expected) {
 
         var formattedString = TimeFormatter.formatDuration(Integer.parseInt(input));
 
