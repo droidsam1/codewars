@@ -25,6 +25,15 @@ class KataTest {
         verify(expected, result);
     }
 
+    @Test void shouldReturnTheClosestTwoPoints() {
+        var inputPoints = List.of(new Point(3, 3), new Point(1, 1), new Point(1, 2));
+        var expected = List.of(new Point(1, 2), new Point(1, 1));
+
+        var result = Kata.closestPair(inputPoints);
+
+        verify(expected, result);
+    }
+
 
     @Test @Disabled("while developing with TDD") void test01_Example() {
 
