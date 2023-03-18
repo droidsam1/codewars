@@ -16,6 +16,11 @@ public class Kata {
     private Kata() {
     }
 
+    /*
+        More info about solution:
+        * https://personal.utdallas.edu/~ka.teo/pub/closest_pair_slides_KT.pdf
+        * https://www.youtube.com/watch?v=6u_hWxbOc7E
+     */
     public static List<Point> closestPair(List<Point> points) {
         var sortedPointsByX = points.stream().sorted(Comparator.comparingDouble(o -> o.x)).toList();
         return new ArrayList<>(closestPairOfPoints(sortedPointsByX).asListOfPoints());
