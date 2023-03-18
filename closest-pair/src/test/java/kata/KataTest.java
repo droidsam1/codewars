@@ -16,6 +16,16 @@ import org.junit.jupiter.api.TestMethodOrder;
 @TestMethodOrder(MethodOrderer.MethodName.class)
 class KataTest {
 
+    @Test void shouldReturnTwoPoints() {
+        var inputPoints = List.of(new Point(2, 2), new Point(1, 1));
+        var expected = List.of(new Point(2, 2), new Point(1, 1));
+
+        var result = Kata.closestPair(inputPoints);
+
+        verify(expected, result);
+    }
+
+
     @Test @Disabled("while developing with TDD") void test01_Example() {
 
         List<Point> points = Arrays.asList(
@@ -61,16 +71,16 @@ class KataTest {
     }
 
     private void verify(List<Point> expected, List<Point> actual) {
-        Comparator<Point> comparer = Comparator.comparingDouble(p -> p.x);
+        Comparator<Point> comparator = Comparator.comparingDouble(p -> p.x);
 
         assertNotNull(actual, "Returned array cannot be null.");
         assertEquals(2, actual.size(), "Expected exactly two points.");
         assertFalse(actual.get(0) == null || actual.get(1) == null, "Returned points must not be null.");
 
-        expected.sort(comparer);
-        actual.sort(comparer);
-        boolean eq = expected.get(0).x == actual.get(0).x && expected.get(0).y == actual.get(0).y && expected.get(1).x == actual.get(
-                1).x && expected.get(1).y == actual.get(1).y;
+        var expectedSorted = expected.stream().sorted(comparator).toList();
+        var actualSorted = actual.stream().sorted(comparator).toList();
+        boolean eq = expectedSorted.get(0).x == actualSorted.get(0).x && expectedSorted.get(0).y == actualSorted.get(0).y && expectedSorted.get(
+                1).x == actualSorted.get(1).x && expectedSorted.get(1).y == actualSorted.get(1).y;
         assertTrue(eq, String.format("Expected: %s, Actual: %s", expected, actual));
     }
 }
