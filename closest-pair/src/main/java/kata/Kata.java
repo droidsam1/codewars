@@ -132,7 +132,7 @@ public class Kata {
         }
 
         private static double calculateDistance(Point one, Point another) {
-            return sqrt(pow(abs(one.x - another.x), 2) + pow(abs(one.y - another.y), 2));
+            return sqrt(pow(one.x - another.x, 2) + pow(one.y - another.y, 2));
         }
 
         public List<Point> asListOfPoints() {
