@@ -8,7 +8,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
-import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.MethodOrderer;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestMethodOrder;
@@ -35,7 +34,7 @@ class KataTest {
     }
 
 
-    @Test @Disabled("while developing with TDD") void test01_Example() {
+    @Test void test01_Example() {
 
         List<Point> points = Arrays.asList(
                 new Point(2, 2), //A
@@ -52,7 +51,7 @@ class KataTest {
         verify(expected, result);
     }
 
-    @Test @Disabled("while developing with TDD") void test02_TwoPoints() {
+    @Test void test02_TwoPoints() {
 
         List<Point> points = Arrays.asList(new Point(2, 2), new Point(6, 3));
 
@@ -61,7 +60,7 @@ class KataTest {
         verify(expected, result);
     }
 
-    @Test @Disabled("while developing with TDD") void test03_DuplicatedPoint() {
+    @Test void test03_DuplicatedPoint() {
 
         List<Point> points = Arrays.asList(
                 new Point(2, 2), //A

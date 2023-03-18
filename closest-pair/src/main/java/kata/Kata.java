@@ -22,7 +22,7 @@ public class Kata {
             }
         }
 
-        return result;
+        return new ArrayList<>(result);
     }
 
     private static double distance(Point one, Point another) {
