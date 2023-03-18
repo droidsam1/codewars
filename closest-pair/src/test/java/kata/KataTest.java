@@ -77,11 +77,10 @@ class KataTest {
         assertEquals(2, actual.size(), "Expected exactly two points.");
         assertFalse(actual.get(0) == null || actual.get(1) == null, "Returned points must not be null.");
 
-        var expectedSorted = expected.stream().sorted(comparator).toList();
-        var actualSorted = actual.stream().sorted(comparator).toList();
-        boolean eq = expectedSorted.get(0).x == actualSorted.get(0).x && expectedSorted.get(0).y == actualSorted.get(0).y && expectedSorted.get(
-                1).x == actualSorted.get(1).x && expectedSorted.get(1).y == actualSorted.get(1).y;
-        assertTrue(eq, String.format("Expected: %s, Actual: %s", expected, actual));
+        assertTrue(
+                expected.size() == actual.size() && expected.containsAll(actual) && actual.containsAll(expected),
+                String.format("Expected: %s, Actual: %s", expected, actual)
+        );
     }
 }
 
