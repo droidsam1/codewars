@@ -3,11 +3,11 @@ package sudoku;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static sudoku.examples.SudokuExamples.FULL_9X9_EXAMPLE;
 
 import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
-import sudoku.examples.SudokuExamples.FULL_9X9_EXAMPLE;
 
 class HardSudokuSolverTests {
 
