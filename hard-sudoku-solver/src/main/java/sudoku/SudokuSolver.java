@@ -18,6 +18,12 @@ public class SudokuSolver {
                     var candidatesForCell = new SudokuHelper(grid).findCandidatesForCellInItsOwnSubgrid(i, j);
                     if (candidatesForCell.length == 1) {
                         grid[i][j] = candidatesForCell[0];
+                    }else{
+                        var candidatesPerRowAndCol = new SudokuHelper(grid).candidates(i,j);
+                        if(candidatesPerRowAndCol.length == 1){
+                            grid[i][j] = candidatesPerRowAndCol[0];
+                        }
+
                     }
                 }
             }
