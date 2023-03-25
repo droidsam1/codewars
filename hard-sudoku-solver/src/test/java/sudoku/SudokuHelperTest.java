@@ -21,14 +21,23 @@ class SudokuHelperTest {
                         {4, 0, 5},//
                         {6, 8, 2}, //
                         {1, 9, 7},//
-                }, new int[]{1, 2, 3, 6, 7,}, new Cell(0, 1))
-
+                }, new int[]{1, 2, 3, 6, 7}, new Cell(0, 1)),//
+                Arguments.of(new int[][]{
+                        {4, 3, 5},//
+                        {6, 0, 2}, //
+                        {1, 9, 7},//
+                }, new int[]{1, 4, 5, 7, 8}, new Cell(1, 1)), //
+                Arguments.of(new int[][]{
+                        {4, 3, 5},//
+                        {6, 8, 2}, //
+                        {1, 9, 0},//
+                }, new int[]{3, 4, 6, 7, 8}, new Cell(2, 2))
         );
 
     }
 
-    @ParameterizedTest
-    @MethodSource("candidatesPerRowAndCol")
+    @ParameterizedTest//
+    @MethodSource("candidatesPerRowAndCol")//
     void shouldFindCandidatesForMissingCell(int[][] grid, int[] candidates, Cell missingCell) {
         var sudokuSolver = new SudokuHelper(grid);
 
