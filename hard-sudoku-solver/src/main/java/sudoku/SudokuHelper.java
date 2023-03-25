@@ -16,14 +16,14 @@ public class SudokuHelper {
         this.grid = grid;
     }
 
-    public int[] candidatesInRowColumn(final int row) {
+    public int[] candidatesInRowColumn(final int row, final int col) {
         var presentNumbersRow = new HashSet<Integer>();
         for (int i = 0; i < grid.length; i++) {
             presentNumbersRow.add(grid[row][i]);
-            presentNumbersRow.add(grid[i][row]);
+            presentNumbersRow.add(grid[i][col]);
         }
 
-        return toArray(difference(IntStream.rangeClosed(0, 9).boxed().collect(toSet()), presentNumbersRow));
+        return toArray(difference(IntStream.rangeClosed(1, 9).boxed().collect(toSet()), presentNumbersRow));
     }
 
     public int[] findCandidatesInGrid() {

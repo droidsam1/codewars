@@ -11,21 +11,28 @@ import org.junit.jupiter.params.provider.MethodSource;
 class SudokuHelperTest {
 
     public static Stream<Arguments> candidatesPerRowAndCol() {
-        return Stream.of(Arguments.of(new int[][]{
-                                 {0, 3, 5},//
-                                 {6, 8, 2}, //
-                                 {1, 9, 7},//
-                         }, new int[]{2, 4, 7, 8, 9})
+        return Stream.of(
+                Arguments.of(new int[][]{
+                        {0, 3, 5},//
+                        {6, 8, 2}, //
+                        {1, 9, 7},//
+                }, new int[]{2, 4, 7, 8, 9}, new Cell(0, 0)),//
+                Arguments.of(new int[][]{
+                        {4, 0, 5},//
+                        {6, 8, 2}, //
+                        {1, 9, 7},//
+                }, new int[]{1, 2, 3, 6, 7,}, new Cell(0, 1))
 
         );
 
     }
 
-    @ParameterizedTest @MethodSource("candidatesPerRowAndCol")
-    void shouldFindCandidatesForMissingCellInRowAndCol(int[][] grid, int[] candidates) {
+    @ParameterizedTest
+    @MethodSource("candidatesPerRowAndCol")
+    void shouldFindCandidatesForMissingCell(int[][] grid, int[] candidates, Cell missingCell) {
         var sudokuSolver = new SudokuHelper(grid);
 
-        assertArrayEquals(candidates, sudokuSolver.candidatesInRowColumn(0));
+        assertArrayEquals(candidates, sudokuSolver.candidatesInRowColumn(missingCell.row, missingCell.col));
     }
 
     @Test void shouldFindCandidatesForMissingCellInTheGrid() {
@@ -41,5 +48,15 @@ class SudokuHelperTest {
         assertArrayEquals(expectedCandidatesForMissingCell, sudokuSolver.findCandidatesInGrid());
     }
 
+    private static class Cell {
+
+        int row;
+        int col;
+
+        public Cell(int row, int col) {
+            this.row = row;
+            this.col = col;
+        }
+    }
 
 }
