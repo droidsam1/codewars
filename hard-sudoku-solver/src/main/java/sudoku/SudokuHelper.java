@@ -23,6 +23,16 @@ public class SudokuHelper {
         return toArray(difference(IntStream.rangeClosed(0, 9).boxed().collect(Collectors.toSet()), presentNumbers));
     }
 
+    public int[] candidatesInColumn(final int row) {
+        var presentNumbers = new HashSet<Integer>();
+        for (int i = 0; i < grid.length; i++) {
+            presentNumbers.add(grid[i][row]);
+        }
+
+        return toArray(difference(IntStream.rangeClosed(0, 9).boxed().collect(Collectors.toSet()), presentNumbers));
+    }
+
+
     private int[] toArray(Collection<Integer> collection) {
         return collection.stream().mapToInt(i -> i).toArray();
     }
