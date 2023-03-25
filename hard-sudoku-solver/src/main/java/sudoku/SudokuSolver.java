@@ -21,6 +21,11 @@ public class SudokuSolver {
             if (row.length != 9) {
                 throw new IllegalArgumentException("Invalid grid size");
             }
+            for (var cell : row) {
+                if (cell < 0 || cell > 9) {
+                    throw new IllegalArgumentException("Invalid grid size");
+                }
+            }
         }
     }
 
