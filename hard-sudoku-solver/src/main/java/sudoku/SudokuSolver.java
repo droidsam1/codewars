@@ -12,7 +12,7 @@ public class SudokuSolver {
 
     public int[][] solve() {
         validateGridIs9x9();
-        return null;
+        return grid;
     }
 
     private void validateGridIs9x9() {
