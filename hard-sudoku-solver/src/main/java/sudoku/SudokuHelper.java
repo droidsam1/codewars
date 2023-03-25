@@ -6,6 +6,7 @@ import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
+import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class SudokuHelper {
@@ -14,6 +15,20 @@ public class SudokuHelper {
 
     public SudokuHelper(int[][] grid) {
         this.grid = grid;
+    }
+
+    public int[] candidates(final int row, final int col) {
+        var candidatesSubGrid = findCandidatesInSubGrid(row, col);
+        if (candidatesSubGrid.size() <= 1) {
+            return toArray(candidatesSubGrid);
+        }
+        var candidatesInRowOrColumn = findCandidatesBasedOnRowAndColumn(row, col);
+
+        return toArray(intersection(candidatesSubGrid, candidatesInRowOrColumn));
+    }
+
+    private <T> Set<T> intersection(Set<T> setOne, Set<T> setTwo) {
+        return setOne.stream().filter(setTwo::contains).collect(Collectors.toSet());
     }
 
     public int[] candidatesInRowColumn(final int row, final int col) {
