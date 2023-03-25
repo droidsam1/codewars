@@ -1,10 +1,5 @@
 package sudoku;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.Set;
-import java.util.stream.IntStream;
-
 public class SudokuSolver {
 
     private static final String INVALID_GRID_SIZE = "Invalid grid size";
@@ -17,6 +12,17 @@ public class SudokuSolver {
 
     public int[][] solve() {
         validateGridIs9x9();
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (grid[i][j] == 0) {
+                    var candidatesForCell = new SudokuHelper(grid).findCandidatesForCellInItsOwnSubgrid(i, j);
+                    if (candidatesForCell.length == 1) {
+                        grid[i][j] = candidatesForCell[0];
+                    }
+                }
+            }
+        }
+
         return grid;
     }
 

@@ -67,9 +67,7 @@ class HardSudokuSolverTests {
         assertArrayEquals(solution, sudokuSolver.solve());
     }
 
-    @Test
-    @Disabled("while developing auxiliary class SudokuHelper")
-    void shouldSolveTheEasiestPossibleSudoku() {
+    @Test void shouldSolveTheEasiestPossibleSudoku() {
         var onlyOneMissingCellInput = new int[][]{
                 {0, 3, 5, 2, 6, 9, 7, 8, 1},
                 {6, 8, 2, 5, 7, 1, 4, 9, 3},
