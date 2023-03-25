@@ -4,6 +4,7 @@ package sudoku;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
@@ -12,6 +13,20 @@ class HardSudokuSolverTests {
 
     @Test void shouldFailWhenGridIsEmpty() {
         var invalidGrid = new int[][]{};
+        var sudokuSolver = new SudokuSolver(invalidGrid);
+
+        assertThrows(IllegalArgumentException.class, sudokuSolver::solve);
+    }
+
+    @Test void shouldFailWhenGridIsNull() {
+        var sudokuSolver = new SudokuSolver(null);
+
+        assertThrows(IllegalArgumentException.class, sudokuSolver::solve);
+    }
+
+    @Test void shouldFailWhenGridIsNotA9x9() {
+        var gridSize = new Random().nextInt(9);
+        var invalidGrid = new int[gridSize][gridSize];
         var sudokuSolver = new SudokuSolver(invalidGrid);
 
         assertThrows(IllegalArgumentException.class, sudokuSolver::solve);

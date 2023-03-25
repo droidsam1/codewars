@@ -9,7 +9,7 @@ public class SudokuSolver {
     }
 
     public int[][] solve() {
-        if (grid == null || grid.length == 0) {
+        if (grid == null || grid.length == 0 || grid.length != 9 && grid[0].length != 9) {
             throw new IllegalArgumentException("Invalid grid size");
         }
         return null;
