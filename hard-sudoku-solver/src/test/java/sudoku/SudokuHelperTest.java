@@ -5,8 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import org.junit.jupiter.api.Test;
 
 class SudokuHelperTest {
-    
-    @Test void shouldFindCandidatesMissingCell() {
+
+    @Test void shouldFindCandidatesForMissingCellInRowAndCol() {
         var onlyOneMissingCellInput = new int[][]{
                 {0, 3, 5},//
                 {6, 8, 2}, //
@@ -18,5 +18,19 @@ class SudokuHelperTest {
 
         assertArrayEquals(expectedCandidatesForMissingCell, sudokuSolver.candidatesInRowColumn(0));
     }
+
+    @Test void shouldFindCandidatesForMissingCellInTheGrid() {
+        var onlyOneMissingCellInput = new int[][]{
+                {0, 3, 5},//
+                {6, 8, 2}, //
+                {1, 9, 7},//
+        };
+        var expectedCandidatesForMissingCell = new int[]{4};
+
+        var sudokuSolver = new SudokuHelper(onlyOneMissingCellInput);
+
+        assertArrayEquals(expectedCandidatesForMissingCell, sudokuSolver.findCandidatesInGrid());
+    }
+
 
 }

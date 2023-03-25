@@ -1,9 +1,11 @@
 package sudoku;
 
+import static java.util.stream.Collectors.toSet;
+
+import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 public class SudokuHelper {
@@ -21,7 +23,13 @@ public class SudokuHelper {
             presentNumbersRow.add(grid[i][row]);
         }
 
-        return toArray(difference(IntStream.rangeClosed(0, 9).boxed().collect(Collectors.toSet()), presentNumbersRow));
+        return toArray(difference(IntStream.rangeClosed(0, 9).boxed().collect(toSet()), presentNumbersRow));
+    }
+
+    public int[] findCandidatesInGrid() {
+        var alreadyPresentNumbers = Arrays.stream(grid).flatMapToInt(Arrays::stream).boxed().collect(toSet());
+
+        return toArray(difference(IntStream.rangeClosed(0, 9).boxed().collect(toSet()), alreadyPresentNumbers));
     }
 
     private int[] toArray(Collection<Integer> collection) {
