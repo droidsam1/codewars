@@ -29,14 +29,29 @@ public class SudokuExamples {
             var example = Arrays.stream(SOLUTION).map(int[]::clone).toArray(int[][]::new);
 
             var random = new Random();
-
-            var x = random.nextInt(9);
-            var y = random.nextInt(9);
             var invalidValue = random.nextInt(10) + 10;
-            example[x][y] = invalidValue;
+            replaceRandomCellWithValue(example, invalidValue);
 
             return example;
         }
+
+        public static int[][] withNMissingCells(int numberOfMissingCells) {
+            var example = Arrays.stream(SOLUTION).map(int[]::clone).toArray(int[][]::new);
+            
+            for (int i = 0; i < numberOfMissingCells; i++) {
+                replaceRandomCellWithValue(example, 0);
+            }
+
+            return example;
+        }
+
+        private static void replaceRandomCellWithValue(int[][] grid, int newValue) {
+            var random = new Random();
+            var x = random.nextInt(9);
+            var y = random.nextInt(9);
+            grid[x][y] = newValue;
+        }
+
 
         public static int[][] getSolution() {
             return SOLUTION;
