@@ -40,7 +40,7 @@ class HardSudokuSolverTests {
     }
 
     @Test void shouldSolveAnAlreadySolvedSudoku() {
-        var solution = FULL_9X9_EXAMPLE.getSolution();
+        var solution = FULL_9X9_EXAMPLE.solution();
 
         var sudokuSolver = new SudokuSolver(solution);
 
@@ -50,7 +50,7 @@ class HardSudokuSolverTests {
     @Test void shouldSolveTheEasiestPossibleSudoku() {
         var onlyOneMissingCellInput = FULL_9X9_EXAMPLE.withNMissingCells(1);
 
-        var solution = FULL_9X9_EXAMPLE.getSolution();
+        var solution = FULL_9X9_EXAMPLE.solution();
 
         var sudokuSolver = new SudokuSolver(onlyOneMissingCellInput);
 
@@ -60,7 +60,7 @@ class HardSudokuSolverTests {
     @Test void shouldSolveSudokuWithTwoMissingCells() {
         var onlyTwoMissingCellInput = FULL_9X9_EXAMPLE.withNMissingCells(2);
 
-        var solution = FULL_9X9_EXAMPLE.getSolution();
+        var solution = FULL_9X9_EXAMPLE.solution();
 
         var sudokuSolver = new SudokuSolver(onlyTwoMissingCellInput);
 

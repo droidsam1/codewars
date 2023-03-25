@@ -3,13 +3,7 @@ package sudoku.examples;
 import java.util.Arrays;
 import java.util.Random;
 
-public class SudokuExample {
-
-    private final int[][] solution;
-
-    public SudokuExample(int[][] solution) {
-        this.solution = solution;
-    }
+public record SudokuExample(int[][] solution) {
 
     private static void replaceRandomCellWithValue(int[][] grid, int newValue) {
         var random = new Random();
@@ -36,10 +30,6 @@ public class SudokuExample {
         }
 
         return example;
-    }
-
-    public int[][] getSolution() {
-        return solution;
     }
 
 }
