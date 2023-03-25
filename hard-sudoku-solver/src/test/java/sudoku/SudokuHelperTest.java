@@ -9,7 +9,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 
 class SudokuHelperTest {
 
-    public static Stream<Arguments> candidatesPerRowAndCol() {
+    private static Stream<Arguments> candidatesPerRowAndCol() {
         return Stream.of(
                 Arguments.of(new int[][]{
                         {0, 3, 5},//
@@ -36,7 +36,7 @@ class SudokuHelperTest {
     }
 
 
-    public static Stream<Arguments> candidatesForCell() {
+    private static Stream<Arguments> candidatesForCell() {
         return Stream.of(
                 Arguments.of(new int[][]{
                         {0, 3, 5},//
