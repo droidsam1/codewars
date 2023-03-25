@@ -2,12 +2,23 @@ package sudoku;
 
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 
 class HardSudokuSolverTests {
 
-    @Test void sampleTest() {
+
+    @Test void shouldFailWhenGridIsEmpty() {
+        var invalidGrid = new int[][]{};
+        var sudokuSolver = new SudokuSolver(invalidGrid);
+
+        assertThrows(IllegalArgumentException.class, sudokuSolver::solve);
+    }
+
+
+    @Test @Disabled("while developing the solution with TDDs") void sampleTest() {
 
         int[][] puzzle = {
                 {0, 0, 6, 1, 0, 0, 0, 0, 8},

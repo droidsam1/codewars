@@ -2,12 +2,16 @@ package sudoku;
 
 public class SudokuSolver {
 
+    private final int[][] grid;
+
     public SudokuSolver(int[][] grid) {
-        // Your code here!
+        this.grid = grid;
     }
 
     public int[][] solve() {
-        // Your code here too!
+        if (grid == null || grid.length == 0) {
+            throw new IllegalArgumentException("Invalid grid size");
+        }
         return null;
     }
 }
