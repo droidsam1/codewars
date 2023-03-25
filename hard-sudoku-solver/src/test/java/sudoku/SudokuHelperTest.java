@@ -42,22 +42,22 @@ class SudokuHelperTest {
                         {0, 3, 5},//
                         {6, 8, 2}, //
                         {1, 9, 7},//
-                }, new int[]{4}),//
+                }, new int[]{4}, new Cell(0, 0)),//
                 Arguments.of(new int[][]{
                         {4, 0, 5},//
                         {6, 8, 2}, //
                         {1, 9, 7},//
-                }, new int[]{3}),//
+                }, new int[]{3}, new Cell(0, 1)),//
                 Arguments.of(new int[][]{
                         {4, 3, 5},//
                         {6, 0, 2}, //
                         {1, 9, 7},//
-                }, new int[]{8}), //
+                }, new int[]{8}, new Cell(1, 1)), //
                 Arguments.of(new int[][]{
                         {4, 3, 5},//
                         {6, 8, 2}, //
                         {1, 9, 0},//
-                }, new int[]{7})
+                }, new int[]{7}, new Cell(2, 2))
         );
 
     }
@@ -73,11 +73,11 @@ class SudokuHelperTest {
 
     @ParameterizedTest//
     @MethodSource("candidatesForCell")//
-    void shouldFindCandidatesForMissingCellInTheGrid(int[][] grid, int[] candidates) {
+    void shouldFindCandidatesForMissingCellInTheGrid(int[][] grid, int[] candidates, Cell missingCell) {
 
         var sudokuSolver = new SudokuHelper(grid);
 
-        assertArrayEquals(candidates, sudokuSolver.findCandidatesInGrid());
+        assertArrayEquals(candidates, sudokuSolver.findCandidatesInGrid(missingCell.row, missingCell.col));
     }
 
     private static class Cell {

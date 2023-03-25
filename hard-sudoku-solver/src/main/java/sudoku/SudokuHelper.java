@@ -2,7 +2,6 @@ package sudoku;
 
 import static java.util.stream.Collectors.toSet;
 
-import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashSet;
 import java.util.Set;
@@ -26,8 +25,18 @@ public class SudokuHelper {
         return toArray(difference(IntStream.rangeClosed(1, 9).boxed().collect(toSet()), presentNumbersRow));
     }
 
-    public int[] findCandidatesInGrid() {
-        var alreadyPresentNumbers = Arrays.stream(grid).flatMapToInt(Arrays::stream).boxed().collect(toSet());
+    public int[] findCandidatesInGrid(int row, int col) {
+        return findCandidatesForCellInItsOwnSubgrid(row, col);
+    }
+
+    private int[] findCandidatesForCellInItsOwnSubgrid(int row, int col) {
+        var alreadyPresentNumbers = new HashSet<Integer>();
+
+        for (int i = (row / 3) * 3; i < (row / 3) * 3 + 3; i++) {
+            for (int j = (col / 3) * 3; j < ((col / 3) * 3) + 3; j++) {
+                alreadyPresentNumbers.add(grid[i][j]);
+            }
+        }
 
         return toArray(difference(IntStream.rangeClosed(0, 9).boxed().collect(toSet()), alreadyPresentNumbers));
     }
