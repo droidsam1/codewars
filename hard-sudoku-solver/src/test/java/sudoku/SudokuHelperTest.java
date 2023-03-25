@@ -77,7 +77,10 @@ class SudokuHelperTest {
 
         var sudokuSolver = new SudokuHelper(grid);
 
-        assertArrayEquals(candidates, sudokuSolver.findCandidatesInGrid(missingCell.row, missingCell.col));
+        var foundCandidates = sudokuSolver.findCandidatesForCellInItsOwnSubgrid(missingCell.row, missingCell.col);
+
+        assertArrayEquals(candidates, foundCandidates);
+
     }
 
     private static class Cell {

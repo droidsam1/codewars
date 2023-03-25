@@ -25,11 +25,7 @@ public class SudokuHelper {
         return toArray(difference(IntStream.rangeClosed(1, 9).boxed().collect(toSet()), presentNumbersRow));
     }
 
-    public int[] findCandidatesInGrid(int row, int col) {
-        return findCandidatesForCellInItsOwnSubgrid(row, col);
-    }
-
-    private int[] findCandidatesForCellInItsOwnSubgrid(int row, int col) {
+    public int[] findCandidatesForCellInItsOwnSubgrid(int row, int col) {
         var alreadyPresentNumbers = new HashSet<Integer>();
 
         for (int i = (row / 3) * 3; i < (row / 3) * 3 + 3; i++) {
