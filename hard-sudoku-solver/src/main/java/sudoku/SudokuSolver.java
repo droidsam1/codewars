@@ -1,5 +1,10 @@
 package sudoku;
 
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.stream.IntStream;
+
 public class SudokuSolver {
 
     private static final String INVALID_GRID_SIZE = "Invalid grid size";
