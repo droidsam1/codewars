@@ -5,10 +5,6 @@ import java.util.Random;
 
 public record SudokuExample(int[][] solution, int[][] puzzle) {
 
-    public SudokuExample(int[][] solution) {
-        this(solution, null);
-    }
-
     private static void replaceRandomCellWithValue(int[][] grid, int newValue) {
         var random = new Random();
         var x = random.nextInt(9);
