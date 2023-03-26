@@ -3,12 +3,12 @@ package sudoku;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static sudoku.examples.SudokuExamples.FULL_9X9_EXAMPLE;
 
 import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
+import sudoku.examples.SudokuExamples.EASY_PUZZLES;
 
 class HardSudokuSolverTests {
 
@@ -34,14 +34,14 @@ class HardSudokuSolverTests {
     }
 
     @Test void shouldFailGridContainsCellWithValuesNotInRange() {
-        var invalidGrid = FULL_9X9_EXAMPLE.withInvalidValue();
+        var invalidGrid = EASY_PUZZLES.EASY_EXAMPLE_1.withInvalidValue();
         var sudokuSolver = new SudokuSolver(invalidGrid);
 
         assertThrows(IllegalArgumentException.class, sudokuSolver::solve);
     }
 
     @Test void shouldSolveAnAlreadySolvedSudoku() {
-        var solution = FULL_9X9_EXAMPLE.solution();
+        var solution = EASY_PUZZLES.EASY_EXAMPLE_1.solution();
 
         var sudokuSolver = new SudokuSolver(solution);
 
@@ -49,9 +49,9 @@ class HardSudokuSolverTests {
     }
 
     @Test void shouldSolveTheEasiestPossibleSudoku() {
-        var onlyOneMissingCellInput = FULL_9X9_EXAMPLE.withNMissingCells(1);
+        var onlyOneMissingCellInput = EASY_PUZZLES.EASY_EXAMPLE_1.withNMissingCells(1);
 
-        var solution = FULL_9X9_EXAMPLE.solution();
+        var solution = EASY_PUZZLES.EASY_EXAMPLE_1.solution();
 
         var sudokuSolver = new SudokuSolver(onlyOneMissingCellInput);
 
@@ -59,9 +59,9 @@ class HardSudokuSolverTests {
     }
 
     @Test void shouldSolveSudokuWithTwoMissingCells() {
-        var onlyTwoMissingCellInput = FULL_9X9_EXAMPLE.withNMissingCells(2);
+        var onlyTwoMissingCellInput = EASY_PUZZLES.EASY_EXAMPLE_1.withNMissingCells(2);
 
-        var solution = FULL_9X9_EXAMPLE.solution();
+        var solution = EASY_PUZZLES.EASY_EXAMPLE_1.solution();
 
         var sudokuSolver = new SudokuSolver(onlyTwoMissingCellInput);
 
@@ -69,16 +69,28 @@ class HardSudokuSolverTests {
     }
 
     @Test void shouldSolveSudokuWithTwoMissingCellsInSameSubgrid() {
-        var onlyTwoMissingCellInput = FULL_9X9_EXAMPLE.withTwoMissingTwoCellsInSameSubgrid();
+        var onlyTwoMissingCellInput = EASY_PUZZLES.EASY_EXAMPLE_1.withTwoMissingTwoCellsInSameSubgrid();
 
-        var solution = FULL_9X9_EXAMPLE.solution();
+        var solution = EASY_PUZZLES.EASY_EXAMPLE_1.solution();
 
         var sudokuSolver = new SudokuSolver(onlyTwoMissingCellInput);
 
-        assertArrayEquals(
-                solution,
-                sudokuSolver.solve(),
-                () -> String.format("The grid was : %s", Arrays.deepToString(onlyTwoMissingCellInput))
+        assertArrayEquals(solution,
+                          sudokuSolver.solve(),
+                          () -> String.format("The grid was : %s", Arrays.deepToString(onlyTwoMissingCellInput))
+        );
+    }
+
+    @Test void shouldSolveEasySudoku() {
+        var puzzle = EASY_PUZZLES.EASY_EXAMPLE_1.puzzle();
+
+        var solution = EASY_PUZZLES.EASY_EXAMPLE_1.solution();
+
+        var sudokuSolver = new SudokuSolver(puzzle);
+
+        assertArrayEquals(solution,
+                          sudokuSolver.solve(),
+                          () -> String.format("The grid was : %s", Arrays.deepToString(puzzle))
         );
     }
 
