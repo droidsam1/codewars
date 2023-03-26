@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static sudoku.examples.SudokuExamples.FULL_9X9_EXAMPLE;
 
+import java.util.Arrays;
 import java.util.Random;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -65,6 +66,20 @@ class HardSudokuSolverTests {
         var sudokuSolver = new SudokuSolver(onlyTwoMissingCellInput);
 
         assertArrayEquals(solution, sudokuSolver.solve());
+    }
+
+    @Test void shouldSolveSudokuWithTwoMissingCellsInSameSubgrid() {
+        var onlyTwoMissingCellInput = FULL_9X9_EXAMPLE.withTwoMissingTwoCellsInSameSubgrid();
+
+        var solution = FULL_9X9_EXAMPLE.solution();
+
+        var sudokuSolver = new SudokuSolver(onlyTwoMissingCellInput);
+
+        assertArrayEquals(
+                solution,
+                sudokuSolver.solve(),
+                () -> String.format("The grid was : %s", Arrays.deepToString(onlyTwoMissingCellInput))
+        );
     }
 
 

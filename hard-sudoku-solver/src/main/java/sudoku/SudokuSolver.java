@@ -12,21 +12,29 @@ public class SudokuSolver {
 
     public int[][] solve() {
         validateGridIs9x9();
+
+        var numberOfZeros = 0;
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (grid[i][j] == 0) {
+                    numberOfZeros++;
                     var candidatesForCell = new SudokuHelper(grid).findCandidatesForCellInItsOwnSubgrid(i, j);
                     if (candidatesForCell.length == 1) {
                         grid[i][j] = candidatesForCell[0];
-                    }else{
-                        var candidatesPerRowAndCol = new SudokuHelper(grid).candidates(i,j);
-                        if(candidatesPerRowAndCol.length == 1){
+                        numberOfZeros--;
+                    } else {
+                        var candidatesPerRowAndCol = new SudokuHelper(grid).candidates(i, j);
+                        if (candidatesPerRowAndCol.length == 1) {
                             grid[i][j] = candidatesPerRowAndCol[0];
+                            numberOfZeros--;
                         }
 
                     }
                 }
             }
+        }
+        if (numberOfZeros > 0) {
+            solve();
         }
 
         return grid;

@@ -12,6 +12,29 @@ public record SudokuExample(int[][] solution) {
         grid[x][y] = newValue;
     }
 
+    public int[][] withTwoMissingTwoCellsInSameSubgrid() {
+        var example = Arrays.stream(solution).map(int[]::clone).toArray(int[][]::new);
+        var random = new Random();
+        var row = 0;
+        var col = 0;
+        var anotherRow = random.nextInt(2);
+        while (anotherRow == row) {
+            anotherRow = random.nextInt(2);
+        }
+        var anotherCandidateInSameCol = example[anotherRow][col];
+        example[anotherRow][col] = 0;
+
+        for (int i = 0; i < example[row].length; i++) {
+            var anotherCandidateInSameRow = example[row][i];
+            if (anotherCandidateInSameRow == anotherCandidateInSameCol) {
+                example[row][i] = 0;
+            }
+        }
+        example[row][col] = 0;
+
+        return example;
+    }
+
     public int[][] withInvalidValue() {
         var example = Arrays.stream(solution).map(int[]::clone).toArray(int[][]::new);
 
