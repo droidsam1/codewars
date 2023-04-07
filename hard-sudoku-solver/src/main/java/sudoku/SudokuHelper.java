@@ -19,6 +19,7 @@ public class SudokuHelper {
     public SudokuHelper(int[][] grid) {
         this.grid = grid;
         this.candidatesGrid = buildCandidatesGrid();
+        processNakedPairs();
     }
 
     private int[][][] buildCandidatesGrid() {
@@ -31,8 +32,15 @@ public class SudokuHelper {
         return candidates;
     }
 
+    private void processNakedPairs(){
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                nakedPairsInSubgrid(i, j);
+            }
+        }
+    }
 
-    public int[] getCandidatesFor(final int row, final int col) {
+    private int[] getCandidatesFor(final int row, final int col) {
         if (grid[row][col] != 0) {
             return new int[]{grid[row][col]};
         }
@@ -47,7 +55,6 @@ public class SudokuHelper {
     }
 
     public int[] candidates(final int row, final int col) {
-        nakedPairsInSubgrid(row, col);
         return candidatesGrid[row][col];
     }
 
@@ -81,7 +88,7 @@ public class SudokuHelper {
                                                  .toArray();
                 }
             }
-        
+
         }
     }
 

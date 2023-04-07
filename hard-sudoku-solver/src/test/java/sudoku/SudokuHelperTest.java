@@ -2,6 +2,7 @@ package sudoku;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_2_PUZZLE;
+import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_3_PUZZLE;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
@@ -66,6 +67,15 @@ class SudokuHelperTest {
 
     }
 
+    private static Stream<Arguments> candidatesUsingNakedPairs() {
+        return Stream.of(
+                Arguments.of(INTERMEDIATE_EXAMPLE_2_PUZZLE, new int[]{6}, new Cell(8, 1)),//
+                Arguments.of(INTERMEDIATE_EXAMPLE_3_PUZZLE, new int[]{4}, new Cell(7, 7)),//
+                Arguments.of(INTERMEDIATE_EXAMPLE_3_PUZZLE, new int[]{6}, new Cell(8, 2))//
+        );
+
+    }
+
     @ParameterizedTest//
     @MethodSource("candidatesPerRowAndCol")
     void shouldFindCandidatesForMissingCell(int[][] grid, int[] candidates, Cell missingCell) {
@@ -98,14 +108,14 @@ class SudokuHelperTest {
         assertArrayEquals(expectedCandidates, foundCandidates);
     }
 
-    @Test
-    void shouldFindCandidateForMissingCellUsingDisjointSubsets() {
-        var sudokuSolver = new SudokuHelper(INTERMEDIATE_EXAMPLE_2_PUZZLE);
-        var expectedCandidates = new int[]{6};
+    @ParameterizedTest//
+    @MethodSource("candidatesUsingNakedPairs")
+    void shouldFindCandidatesUsingDisjointSubsetsSubgrid(int[][] grid, int[] candidates, Cell missingCell) {
+        var sudokuSolver = new SudokuHelper(grid);
 
-        var foundCandidates = sudokuSolver.candidates(8, 1);
+        var foundCandidates = sudokuSolver.candidates(missingCell.row(), missingCell.col());
 
-        assertArrayEquals(expectedCandidates, foundCandidates);
+        assertArrayEquals(candidates, foundCandidates);
     }
 
 
