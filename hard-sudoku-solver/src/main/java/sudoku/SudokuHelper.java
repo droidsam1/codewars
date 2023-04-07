@@ -2,7 +2,9 @@ package sudoku;
 
 import static java.util.stream.Collectors.toSet;
 
+import java.util.Arrays;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.function.Predicate;
@@ -31,7 +33,7 @@ public class SudokuHelper {
 
 
     public int[] getCandidatesFor(final int row, final int col) {
-        if(grid[row][col] != 0){
+        if (grid[row][col] != 0) {
             return new int[]{grid[row][col]};
         }
 
@@ -45,7 +47,42 @@ public class SudokuHelper {
     }
 
     public int[] candidates(final int row, final int col) {
+        nakedPairsInSubgrid(row, col);
         return candidatesGrid[row][col];
+    }
+
+    public void nakedPairsInSubgrid(final int row, final int col) {
+        var nakedPairs = new HashMap<NakedPair, Integer>();
+
+        for (int i = (row / 3) * 3; i < (row / 3) * 3 + 3; i++) {
+            for (int j = (col / 3) * 3; j < ((col / 3) * 3) + 3; j++) {
+                var candidatesForCell = candidatesGrid[i][j];
+                if (candidatesForCell.length == 2) {
+                    var nakedPair = new NakedPair(candidatesForCell[0], candidatesForCell[1]);
+                    nakedPairs.put(nakedPair, nakedPairs.getOrDefault(nakedPair, 0) + 1);
+                }
+            }
+        }
+        for (var entry : nakedPairs.entrySet()) {
+            if (entry.getValue() == 2) {
+                removeNakedPairFromOthersCandidatesInSubgrid(row, col, entry.getKey());
+            }
+        }
+
+    }
+
+    private void removeNakedPairFromOthersCandidatesInSubgrid(final int row, final int col, NakedPair nakedPair) {
+        for (int i = (row / 3) * 3; i < (row / 3) * 3 + 3; i++) {
+            for (int j = (col / 3) * 3; j < ((col / 3) * 3) + 3; j++) {
+                var candidatesForCell = candidatesGrid[i][j];
+                if (candidatesForCell.length >= 2 && (candidatesForCell[0] != nakedPair.candidate() || candidatesForCell[1] != nakedPair.anotherCandidate())) {
+                    candidatesGrid[i][j] = Arrays.stream(candidatesForCell)
+                                                 .filter(value -> value != nakedPair.candidate() && value != nakedPair.anotherCandidate())
+                                                 .toArray();
+                }
+            }
+        
+        }
     }
 
 
@@ -92,6 +129,10 @@ public class SudokuHelper {
         Set<T> result = new HashSet<>(setOne);
         setTwo.stream().filter(Predicate.not(result::add)).forEach(result::remove);
         return result;
+    }
+
+    private record NakedPair(int candidate, int anotherCandidate) {
+
     }
 
 }

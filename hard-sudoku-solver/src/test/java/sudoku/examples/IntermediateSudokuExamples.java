@@ -30,6 +30,18 @@ public class IntermediateSudokuExamples {
             {7, 4, 5, 3, 1, 6, 8, 9, 2}
     };
 
+    public static final int[][] INTERMEDIATE_EXAMPLE_2_PUZZLE = new int[][]{
+            {4, 0, 0, 8, 0, 9, 1, 0, 0},
+            {0, 0, 7, 0, 0, 0, 0, 9, 0},
+            {9, 5, 0, 0, 2, 0, 0, 0, 7},
+            {1, 0, 0, 0, 9, 0, 0, 0, 3},
+            {3, 9, 2, 4, 0, 7, 8, 0, 0},
+            {6, 0, 0, 0, 3, 0, 0, 0, 9},
+            {7, 2, 0, 0, 8, 0, 0, 6, 0},
+            {0, 1, 0, 0, 0, 0, 2, 0, 0},
+            {0, 0, 3, 1, 0, 2, 0, 0, 4}
+    };
+
     private IntermediateSudokuExamples() {
     }
 

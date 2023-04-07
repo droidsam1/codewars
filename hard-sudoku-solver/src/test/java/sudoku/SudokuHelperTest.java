@@ -1,6 +1,7 @@
 package sudoku;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_2_PUZZLE;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
@@ -93,6 +94,16 @@ class SudokuHelperTest {
         var expectedCandidates = new int[]{2};
 
         var foundCandidates = sudokuSolver.candidates(7, 0);
+
+        assertArrayEquals(expectedCandidates, foundCandidates);
+    }
+
+    @Test
+    void shouldFindCandidateForMissingCellUsingDisjointSubsets() {
+        var sudokuSolver = new SudokuHelper(INTERMEDIATE_EXAMPLE_2_PUZZLE);
+        var expectedCandidates = new int[]{6};
+
+        var foundCandidates = sudokuSolver.candidates(8, 1);
 
         assertArrayEquals(expectedCandidates, foundCandidates);
     }
