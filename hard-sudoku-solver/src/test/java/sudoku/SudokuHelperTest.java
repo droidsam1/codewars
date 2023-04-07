@@ -3,9 +3,12 @@ package sudoku;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import java.util.stream.Stream;
+import org.junit.jupiter.api.Disabled;
+import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.MethodSource;
+import sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLES;
 
 class SudokuHelperTest {
 
@@ -63,35 +66,36 @@ class SudokuHelperTest {
     }
 
     @ParameterizedTest//
-    @MethodSource("candidatesPerRowAndCol")//
+    @MethodSource("candidatesPerRowAndCol")
     void shouldFindCandidatesForMissingCell(int[][] grid, int[] candidates, Cell missingCell) {
         var sudokuSolver = new SudokuHelper(grid);
 
-        assertArrayEquals(candidates, sudokuSolver.candidatesInRowColumn(missingCell.row, missingCell.col));
+        assertArrayEquals(candidates, sudokuSolver.candidatesInRowColumn(missingCell.row(), missingCell.col()));
     }
 
 
     @ParameterizedTest//
-    @MethodSource("candidatesForCell")//
+    @MethodSource("candidatesForCell")
     void shouldFindCandidatesForMissingCellInTheGrid(int[][] grid, int[] candidates, Cell missingCell) {
 
         var sudokuSolver = new SudokuHelper(grid);
 
-        var foundCandidates = sudokuSolver.candidates(missingCell.row, missingCell.col);
+        var foundCandidates = sudokuSolver.candidates(missingCell.row(), missingCell.col());
 
         assertArrayEquals(candidates, foundCandidates);
 
     }
 
-    private static class Cell {
+    @Test
+    @Disabled("while developing the naked pairs technique: https://www.thonky.com/sudoku/naked-pairs-triples-quads")
+    void shouldFindCandidateForMissingCellInferringFromASetCoverInconsistency() {
+        var sudokuSolver = new SudokuHelper(INTERMEDIATE_EXAMPLES.INTERMEDIATE_EXAMPLE_1.getPuzzle());
+        var expectedCandidates = new int[]{2};
 
-        int row;
-        int col;
+        var foundCandidates = sudokuSolver.candidates(7, 0);
 
-        public Cell(int row, int col) {
-            this.row = row;
-            this.col = col;
-        }
+        assertArrayEquals(expectedCandidates, foundCandidates);
     }
+
 
 }

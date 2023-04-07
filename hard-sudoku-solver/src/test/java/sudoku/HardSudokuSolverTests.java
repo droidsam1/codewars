@@ -11,6 +11,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.EnumSource;
 import sudoku.examples.EasySudokuExamples.EASY_EXAMPLES;
+import sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLES;
 
 class HardSudokuSolverTests {
 
@@ -86,6 +87,22 @@ class HardSudokuSolverTests {
     @ParameterizedTest//
     @EnumSource(EASY_EXAMPLES.class)//
     void shouldSolveEasySudoku(EASY_EXAMPLES example) {
+        var puzzle = example.getPuzzle();
+
+        var solution = example.getSolution();
+
+        var sudokuSolver = new SudokuSolver(puzzle);
+
+        assertArrayEquals(solution,
+                          sudokuSolver.solve(),
+                          () -> String.format("The grid was : %s", Arrays.deepToString(puzzle))
+        );
+    }
+
+    @ParameterizedTest//
+    @EnumSource(INTERMEDIATE_EXAMPLES.class)//
+    @Disabled("disabled while developing outside-in")
+    void shouldSolveIntermediateSudoku(INTERMEDIATE_EXAMPLES example) {
         var puzzle = example.getPuzzle();
 
         var solution = example.getSolution();

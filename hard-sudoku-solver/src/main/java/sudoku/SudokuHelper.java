@@ -12,12 +12,29 @@ import java.util.stream.IntStream;
 public class SudokuHelper {
 
     private final int[][] grid;
+    private final int[][][] candidatesGrid;
 
     public SudokuHelper(int[][] grid) {
         this.grid = grid;
+        this.candidatesGrid = buildCandidatesGrid();
     }
 
-    public int[] candidates(final int row, final int col) {
+    private int[][][] buildCandidatesGrid() {
+        var candidates = new int[grid.length][grid.length][];
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                candidates[i][j] = getCandidatesFor(i, j);
+            }
+        }
+        return candidates;
+    }
+
+
+    public int[] getCandidatesFor(final int row, final int col) {
+        if(grid[row][col] != 0){
+            return new int[]{grid[row][col]};
+        }
+
         var candidatesSubGrid = findCandidatesInSubGrid(row, col);
         if (candidatesSubGrid.size() <= 1) {
             return toArray(candidatesSubGrid);
@@ -26,6 +43,11 @@ public class SudokuHelper {
 
         return toArray(intersection(candidatesSubGrid, candidatesInRowOrColumn));
     }
+
+    public int[] candidates(final int row, final int col) {
+        return candidatesGrid[row][col];
+    }
+
 
     private <T> Set<T> intersection(Set<T> setOne, Set<T> setTwo) {
         return setOne.stream().filter(setTwo::contains).collect(Collectors.toSet());
