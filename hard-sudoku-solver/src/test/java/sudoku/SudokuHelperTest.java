@@ -1,9 +1,10 @@
 package sudoku;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static sudoku.examples.IntermediateSudokuExamples.HIDDEN_SINGLES_COLUMN_EXAMPLE;
 import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_2_PUZZLE;
 import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_3_PUZZLE;
-import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_4_PUZZLE;
+import static sudoku.examples.IntermediateSudokuExamples.HIDDEN_SINGLES_ROW_EXAMPLE;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
@@ -121,10 +122,20 @@ class SudokuHelperTest {
 
     @Test
     void shouldFindCandidateUsingHiddenSinglesInRows() {
-        var sudokuSolver = new SudokuHelper(INTERMEDIATE_EXAMPLE_4_PUZZLE);
+        var sudokuSolver = new SudokuHelper(HIDDEN_SINGLES_ROW_EXAMPLE);
         var expectedCandidates = new int[]{7};
 
         var foundCandidates = sudokuSolver.candidates(0, 0);
+
+        assertArrayEquals(expectedCandidates, foundCandidates);
+    }
+
+    @Test
+    void shouldFindCandidateUsingHiddenSinglesInCols() {
+        var sudokuSolver = new SudokuHelper(HIDDEN_SINGLES_COLUMN_EXAMPLE);
+        var expectedCandidates = new int[]{6};
+
+        var foundCandidates = sudokuSolver.candidates(4, 0);
 
         assertArrayEquals(expectedCandidates, foundCandidates);
     }

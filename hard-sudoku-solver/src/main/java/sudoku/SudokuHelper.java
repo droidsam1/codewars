@@ -2,7 +2,6 @@ package sudoku;
 
 import static java.util.stream.Collectors.toSet;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -61,28 +60,36 @@ public class SudokuHelper {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 if (candidatesGrid[i][j].length > 1) {
-                    processHiddenSinglesInRows(i, j);
+                    processHiddenSinglesInRowsAndCols(i, j);
                 }
             }
         }
     }
 
-    private void processHiddenSinglesInRows(final int row, final int col) {
+    private void processHiddenSinglesInRowsAndCols(final int row, final int col) {
         var candidatesInTheRow = new HashSet<Integer>();
+        var candidatesInTheCol = new HashSet<Integer>();
         for (int i = 0; i < candidatesGrid.length; i++) {
             if (i != col) {
                 candidatesInTheRow.addAll(Arrays.stream(candidatesGrid[row][i]).boxed().toList());
             }
+            if (i != row) {
+                candidatesInTheCol.addAll(Arrays.stream(candidatesGrid[i][col]).boxed().toList());
+            }
         }
 
-        var result = new ArrayList<>(Arrays.stream(candidatesGrid[row][col]).boxed().toList());
-        result.removeAll(candidatesInTheRow);
-        if (result.size() == 1) {
-            candidatesGrid[row][col]  = new int[]{result.get(0)};
+        var result = Arrays.stream(candidatesGrid[row][col]).boxed().toList();
+        var newCandidates = result.stream().filter(i -> !candidatesInTheRow.contains(i)).toList();
+        if (newCandidates.size() == 1) {
+            candidatesGrid[row][col] = new int[]{newCandidates.get(0)};
+        } else {
+            newCandidates = result.stream().filter(i -> !candidatesInTheCol.contains(i)).toList();
+            if (newCandidates.size() == 1) {
+                candidatesGrid[row][col] = new int[]{newCandidates.get(0)};
+            }
         }
-
-
     }
+
 
     public int[] candidates(final int row, final int col) {
         return candidatesGrid[row][col];
