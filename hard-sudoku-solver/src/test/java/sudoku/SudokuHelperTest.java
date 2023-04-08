@@ -79,6 +79,16 @@ class SudokuHelperTest {
 
     }
 
+
+    private static Stream<Arguments> candidatesUsingHiddenSingles() {
+        return Stream.of(
+                Arguments.of(HIDDEN_SINGLES_ROW_EXAMPLE, new int[]{7}, new Cell(0, 0)),//
+                Arguments.of(HIDDEN_SINGLES_COLUMN_EXAMPLE, new int[]{6}, new Cell(4, 0)),//
+                Arguments.of(HIDDEN_SINGLES_SUBGRID_EXAMPLE, new int[]{4}, new Cell(2, 2))//
+        );
+
+    }
+
     @ParameterizedTest//
     @MethodSource("candidatesPerRowAndCol")
     void shouldFindCandidatesForMissingCell(int[][] grid, int[] candidates, Cell missingCell) {
@@ -121,35 +131,15 @@ class SudokuHelperTest {
         assertArrayEquals(candidates, foundCandidates);
     }
 
-    @Test
-    void shouldFindCandidateUsingHiddenSinglesInRows() {
-        var sudokuSolver = new SudokuHelper(HIDDEN_SINGLES_ROW_EXAMPLE);
-        var expectedCandidates = new int[]{7};
 
-        var foundCandidates = sudokuSolver.candidates(0, 0);
+    @ParameterizedTest//
+    @MethodSource("candidatesUsingHiddenSingles")
+    void shouldFindCandidateUsingHiddenSingles(int[][] grid, int[] candidates, Cell missingCell) {
+        var sudokuSolver = new SudokuHelper(grid);
 
-        assertArrayEquals(expectedCandidates, foundCandidates);
+        var foundCandidates = sudokuSolver.candidates(missingCell.row(), missingCell.col());
+
+        assertArrayEquals(candidates, foundCandidates);
     }
-
-    @Test
-    void shouldFindCandidateUsingHiddenSinglesInCols() {
-        var sudokuSolver = new SudokuHelper(HIDDEN_SINGLES_COLUMN_EXAMPLE);
-        var expectedCandidates = new int[]{6};
-
-        var foundCandidates = sudokuSolver.candidates(4, 0);
-
-        assertArrayEquals(expectedCandidates, foundCandidates);
-    }
-
-    @Test
-    void shouldFindCandidateUsingHiddenSinglesInSubgrid() {
-        var sudokuSolver = new SudokuHelper(HIDDEN_SINGLES_SUBGRID_EXAMPLE);
-        var expectedCandidates = new int[]{4};
-
-        var foundCandidates = sudokuSolver.candidates(2, 2);
-
-        assertArrayEquals(expectedCandidates, foundCandidates);
-    }
-
-
+    
 }
