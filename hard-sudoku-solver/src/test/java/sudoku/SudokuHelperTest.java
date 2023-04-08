@@ -3,6 +3,7 @@ package sudoku;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_2_PUZZLE;
 import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_3_PUZZLE;
+import static sudoku.examples.IntermediateSudokuExamples.INTERMEDIATE_EXAMPLE_4_PUZZLE;
 
 import java.util.stream.Stream;
 import org.junit.jupiter.api.Disabled;
@@ -116,6 +117,16 @@ class SudokuHelperTest {
         var foundCandidates = sudokuSolver.candidates(missingCell.row(), missingCell.col());
 
         assertArrayEquals(candidates, foundCandidates);
+    }
+
+    @Test
+    void shouldFindCandidateUsingHiddenSinglesInRows() {
+        var sudokuSolver = new SudokuHelper(INTERMEDIATE_EXAMPLE_4_PUZZLE);
+        var expectedCandidates = new int[]{7};
+
+        var foundCandidates = sudokuSolver.candidates(0, 0);
+
+        assertArrayEquals(expectedCandidates, foundCandidates);
     }
 
 

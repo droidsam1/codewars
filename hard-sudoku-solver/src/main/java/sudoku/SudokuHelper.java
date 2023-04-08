@@ -2,6 +2,7 @@ package sudoku;
 
 import static java.util.stream.Collectors.toSet;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.HashMap;
@@ -19,7 +20,9 @@ public class SudokuHelper {
     public SudokuHelper(int[][] grid) {
         this.grid = grid;
         this.candidatesGrid = buildCandidatesGrid();
+        processHiddenSingles();
         processNakedPairs();
+
     }
 
     private int[][][] buildCandidatesGrid() {
@@ -32,7 +35,7 @@ public class SudokuHelper {
         return candidates;
     }
 
-    private void processNakedPairs(){
+    private void processNakedPairs() {
         for (int i = 0; i < grid.length; i++) {
             for (int j = 0; j < grid[i].length; j++) {
                 nakedPairsInSubgrid(i, j);
@@ -52,6 +55,33 @@ public class SudokuHelper {
         var candidatesInRowOrColumn = findCandidatesBasedOnRowAndColumn(row, col);
 
         return toArray(intersection(candidatesSubGrid, candidatesInRowOrColumn));
+    }
+
+    private void processHiddenSingles() {
+        for (int i = 0; i < grid.length; i++) {
+            for (int j = 0; j < grid[i].length; j++) {
+                if (candidatesGrid[i][j].length > 1) {
+                    processHiddenSinglesInRows(i, j);
+                }
+            }
+        }
+    }
+
+    private void processHiddenSinglesInRows(final int row, final int col) {
+        var candidatesInTheRow = new HashSet<Integer>();
+        for (int i = 0; i < candidatesGrid.length; i++) {
+            if (i != col) {
+                candidatesInTheRow.addAll(Arrays.stream(candidatesGrid[row][i]).boxed().toList());
+            }
+        }
+
+        var result = new ArrayList<>(Arrays.stream(candidatesGrid[row][col]).boxed().toList());
+        result.removeAll(candidatesInTheRow);
+        if (result.size() == 1) {
+            candidatesGrid[row][col]  = new int[]{result.get(0)};
+        }
+
+
     }
 
     public int[] candidates(final int row, final int col) {
