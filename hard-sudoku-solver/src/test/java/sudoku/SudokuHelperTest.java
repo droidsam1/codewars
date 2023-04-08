@@ -132,7 +132,7 @@ class SudokuHelperTest {
     }
 
 
-    @ParameterizedTest//
+    @ParameterizedTest// technique described in https://www.learn-sudoku.com/hidden-singles.html
     @MethodSource("candidatesUsingHiddenSingles")
     void shouldFindCandidateUsingHiddenSingles(int[][] grid, int[] candidates, Cell missingCell) {
         var sudokuSolver = new SudokuHelper(grid);
@@ -141,5 +141,5 @@ class SudokuHelperTest {
 
         assertArrayEquals(candidates, foundCandidates);
     }
-    
+
 }
