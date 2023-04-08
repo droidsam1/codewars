@@ -61,6 +61,7 @@ public class SudokuHelper {
             for (int j = 0; j < grid[i].length; j++) {
                 if (candidatesGrid[i][j].length > 1) {
                     processHiddenSinglesInRowsAndCols(i, j);
+                    processHiddenSinglesInSubgrid(i, j);
                 }
             }
         }
@@ -90,12 +91,31 @@ public class SudokuHelper {
         }
     }
 
+    private void processHiddenSinglesInSubgrid(final int row, final int col) {
+        var candidatesInGrid = new HashSet<Integer>();
+
+        for (int i = (row / 3) * 3; i < (row / 3) * 3 + 3; i++) {
+            for (int j = (col / 3) * 3; j < ((col / 3) * 3) + 3; j++) {
+                if (i != row && j != col) {
+                    var candidatesForCell = candidatesGrid[i][j];
+                    candidatesInGrid.addAll(Arrays.stream(candidatesForCell).boxed().toList());
+                }
+            }
+        }
+
+        var result = Arrays.stream(candidatesGrid[row][col]).boxed().toList();
+        var newCandidates = result.stream().filter(i -> !candidatesInGrid.contains(i)).toList();
+        if (newCandidates.size() == 1) {
+            candidatesGrid[row][col] = new int[]{newCandidates.get(0)};
+        }
+    }
+
 
     public int[] candidates(final int row, final int col) {
         return candidatesGrid[row][col];
     }
 
-    public void nakedPairsInSubgrid(final int row, final int col) {
+    private void nakedPairsInSubgrid(final int row, final int col) {
         var nakedPairs = new HashMap<NakedPair, Integer>();
 
         for (int i = (row / 3) * 3; i < (row / 3) * 3 + 3; i++) {

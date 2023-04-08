@@ -51,6 +51,18 @@ public class IntermediateSudokuExamples {
             {0, 0, 0, 9, 6, 0, 0, 0, 4},
             {0, 0, 0, 6, 0, 0, 3, 0, 0},
     };
+
+    public static final int[][] HIDDEN_SINGLES_SUBGRID_EXAMPLE = new int[][]{
+            {2,7, 8, 0, 0, 0, 0, 0, 0},
+            {0, 0, 6, 0, 0, 0, 0, 0, 4},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {0, 4, 0, 0, 0, 0, 0, 0, 0},
+            {0, 0, 0, 0, 0, 0, 0, 0, 0},
+            {4, 0, 0, 0, 0, 0, 0, 0, 0},
+    };
     private static final int[][] INTERMEDIATE_EXAMPLE_1_PUZZLE = new int[][]{
             {0, 2, 0, 6, 0, 8, 0, 0, 0},
             {5, 8, 0, 0, 0, 9, 7, 0, 0},
